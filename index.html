@@ -5,9 +5,9 @@
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/foundation/4.3.1/css/foundation.min.css" />
 	<link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet" />
 	<link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700' rel='stylesheet' type='text/css'>
-	<link rel="stylesheet" href="page.css" />
+	<link rel="stylesheet" href="/assets/css/page.css" />
 	<title>Laravel Cheat Sheet</title>
-	<script src="/google-code-prettify/run_prettify.js"></script>
+	<script src="/assets/js/google-code-prettify/run_prettify.js"></script>
 </head>
 <body>
 	<nav class="top-bar">
@@ -56,7 +56,8 @@ Route::delete('foo', function(){});
 			<pre class="prettyprint lang-php">Route::get('foo/{bar}', function($bar){})
 	->where('bar', '[0-9]+');
 Route::get('foo/{bar}/{baz}', function($bar, $baz){})
-	->where(array('bar' => '[0-9]+', 'baz' => '[A-Za-z]'))</pre>
+	->where(array('bar' => '[0-9]+', 'baz' => '[A-Za-z]'))
+			</pre>
 
 			<h6>Filters</h6>
 			<pre class="prettyprint lang-php">// Declare a filter to run authentication logic for a route
@@ -86,7 +87,8 @@ Route::group(array('before' => 'auth'), function()
 // Pattern filter
 Route::when('foo/*', 'foo');
 // Pattern filter with HTTP verbs
-Route::when('foo/*', 'foo', array('post'));</pre>
+Route::when('foo/*', 'foo', array('post'));
+			</pre>
 
 			<h6>Named Routes</h6>
 			<pre class="prettyprint lang-php">// Get the name of the current route
@@ -94,22 +96,25 @@ Route::currentRouteName();
 // Name route foo/bar 'foobar'
 Route::get('foo/bar', array('as' => 'foobar', function(){}));
 // Redirect to a named route
-Redirect::route('foobar');</pre>
+Redirect::route('foobar');
+			</pre>
 	
 			<h6>Route Prefixing</h6>
-		<pre class="prettyprint lang-php">// This route group will carry the prefix 'foo'
+			<pre class="prettyprint lang-php">// This route group will carry the prefix 'foo'
 Route::group(array('prefxi' => 'foo'), function()
 {
 	Route::get('bar', function(){});
 	Route::get('baz', function(){});
-})</pre>
+})
+			</pre>
 		
 			<h6>Sub-Domain Routing</h6>
 			<pre class="prettyprint lang-php">// {sub} will be passed to the closure
 Route::group(array('domain' => '{sub}.example.com'), function()
 {
 	Route::get('foo', function($sub){});
-});</pre>
+});
+			</pre>
 		</div>
 		<div class="large-6 columns code-column">
 			<h4>Input</h4>
@@ -122,7 +127,7 @@ Input::all();
 Input::only('foo', 'bar');
 // Disregard 'foo' when getting input
 Input::except('foo');
-</pre>
+			</pre>
 			<h6>Session Input (flash)</h6>
 			<pre class="prettyprint lang-php">// Flash all input to the session
 Input::flash();
@@ -131,7 +136,8 @@ Input::flashOnly('foo', 'bar');
 // Flash all except certain keys to the session
 Input::flashExcept('foo', 'baz');
 // Use old input (usually in a view)
-Input::old('key');</pre>
+Input::old('key');
+			</pre>
 
 			<h6>Files</h6>
 			<pre class="prettyprint lang-php">// Use a file that's been uploaded
@@ -153,10 +159,12 @@ Input::file('name')->move($destinationPath, $fileName);
 			<h4>Cookies</h4>
 			<pre class="prettyprint lang-php">Cookie::get('key');</pre>
 			<pre class="prettyprint lang-php">// Create a cookie that lasts for ever
-Cookie::forever('key', 'value');</pre>
+Cookie::forever('key', 'value');
+			</pre>
 			<pre class="prettyprint lang-php">// Send a cookie with a response
 $response = Response::make('Hello World');			
-$response->withCookie(Cookie::make('name', 'value', $minutes));</pre>
+$response->withCookie(Cookie::make('name', 'value', $minutes));
+			</pre>
 			
 			<h4>Sessions</h4>
 			<pre class="prettyprint lang-php">Session::get('key');
@@ -184,7 +192,7 @@ Request::secure();
 			</pre>
 		</div>
 	</div>
-	<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script> 
-	<script type="text/javascript" src="app.js"></script>
+	<script src="/assets/js/jquery-1.10.2.min.js"></script> 
+	<script type="text/javascript" src="/assets/js/app.js"></script>
 </body>
 </html>
