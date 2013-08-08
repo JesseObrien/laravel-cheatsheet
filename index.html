@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/foundation/4.3.1/css/foundation.min.css" />
+	<link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet" />
+	<link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="page.css" />
+	<title>Laravel Cheat Sheet</title>
+	<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
+</head>
+<body>
+	<div class="row">
+		<div class="large-12 columns">
+			<div class="logo"></div>
+			<h3 class="header"> Cheat Sheet</h3>
+		</div>
+	</div>
+	<div class="row">
+		<div class="large-6 columns code-column">
+			<h4>Routing</h4>
+				<pre class="prettyprint lang-php">// routing to a closure
+Route::get('foo', function(){});</pre>
+				<pre class="prettyprint lang-php">// routing to a controller method
+Route::get('foo', 'ControllerName@function');</pre>
+				<h6>Route Parameters</h6>
+				<pre class="prettyprint lang-php">Route::get('foo/{bar}', function($bar){});</pre>
+				<pre class="prettyprint lang-php">// optional parameter
+Route::get('foo/{bar?}', function($bar = 'bar'){});</pre>
+				<h6>HTTP Verbs</h6>
+				<pre class="prettyprint lang-php">Route::any('foo', function(){});</pre>
+				<pre class="prettyprint lang-php">Route::post('foo', function(){});</pre>
+				<pre class="prettyprint lang-php">Route::patch('foo', function(){});</pre>
+				<pre class="prettyprint lang-php">Route::delete('foo', function(){});</pre>
+				<h6>Secure Route</h6>
+				<pre class="prettyprint lang-php">Route::get('foo', array('https', function(){}));</pre>
+				<h6>Route Constraints</h6>
+				<pre class="prettyprint lang-php">Route::get('foo/{bar}', function($bar){})
+->where('bar', '[0-9]+');</pre>
+				<pre class="prettyprint lang-php">Route::get('foo/{bar}/{baz}', function($bar, $baz){})
+->where(array('bar' => '[0-9]+', 'baz' => '[A-Za-z]'))</pre>
+				<h6>Filters</h6>
+				<pre class="prettyprint lang-php">// Declare a filter to run logic 'before' a route 
+Route::filter('auth', function(){
+	if( ! Auth::check())
+	{
+		return Redirect::to('home');
+	}
+});</pre>
+				<pre class="prettyprint lang-php">Route::get('foo', array('before' => 'auth', function(){}));</pre>
+		</div>
+		<div class="large-6 columns code-column">
+			<h4>Eloquent</h4>
+		</div>
+	</div>
+</body>
+</html>
