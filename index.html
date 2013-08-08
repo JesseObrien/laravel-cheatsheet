@@ -108,29 +108,50 @@ Route::group(array('domain' => '{sub}.example.com'), function()
 		</div>
 		<div class="large-6 columns code-column">
 			<h4>Input</h4>
-			<pre class="prettyprint lang-php">Input::get('key');</pre>
-			<pre class="prettyprint lang-php">// Get a key but supply a default in case the key is null
-Input::get('key', 'default');</pre>
-			<pre class="prettyprint lang-php">Input::has('key');</pre>
-			<pre class="prettyprint lang-php">Input::all();</pre>
-			<pre class="prettyprint lang-php">// Only retrieve 'foo' and 'bar' when getting input
-Input::only('foo', 'bar');</pre>
-			<pre class="prettyprint lang-php">// Disregard 'foo' when getting input
-Input::except('foo');</pre>
+			<pre class="prettyprint lang-php">Input::get('key');
+// Get a key but supply a default in case the key is null
+Input::get('key', 'default');
+Input::has('key');
+Input::all();
+// Only retrieve 'foo' and 'bar' when getting input
+Input::only('foo', 'bar');
+// Disregard 'foo' when getting input
+Input::except('foo');
+</pre>
+			<h6>Session Input (flash)</h6>
 			<pre class="prettyprint lang-php">// Flash all input to the session
-Input::flash();</pre>
-			<pre class="prettyprint lang-php">// Flash only certain keys to the session
-Input::flashOnly('foo', 'bar');</pre>
-			<pre class="prettyprint lang-php">// Flash all except certain keys to the session
-Input::flashExcept('foo', 'baz');</pre>
+Input::flash();
+// Flash only certain keys to the session
+Input::flashOnly('foo', 'bar');
+// Flash all except certain keys to the session
+Input::flashExcept('foo', 'baz');
+// Use old input (usually in a view)
+Input::old('key');</pre>
+
+			<h6>Files</h6>
+			<pre class="prettyprint lang-php">// Use a file that's been uploaded
+Input::file('filename');
+// Determine if a file was uploaded
+Input::hasFile('filename');
+// Access file properties
+Input::file('name')->getRealPath();
+Input::file('name')->getClientOriginalName();
+Input::file('name')->getSize();
+Input::file('name')->getMimeType();
+// Move an uploaded file
+Input::file('name')->move($destinationPath);
+// Move an uploaded file
+Input::file('name')->move($destinationPath, $fileName);
+			</pre>
+
 
 			<h4>Cookies</h4>
 			<pre class="prettyprint lang-php">Cookie::get('key');</pre>
+			<pre class="prettyprint lang-php">// Create a cookie that lasts for ever
+Cookie::forever('key', 'value');</pre>
 			<pre class="prettyprint lang-php">// Send a cookie with a response
 $response = Response::make('Hello World');			
 $response->withCookie(Cookie::make('name', 'value', $minutes));</pre>
-			<pre class="prettyprint lang-php">// Create a cookie that lasts for ever
-Cookie::forever('key', 'value');</pre>
 		</div>
 
 	</div>

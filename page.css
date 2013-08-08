@@ -1,7 +1,7 @@
 body {background: #f5f5f5; margin-bottom: 40px; font-size: 16px; font-family: 'Ubuntu Mono', monospace;}
 h1,h2,h3,h4,h5,h6 {font-family: 'Ubuntu Mono', monospace; }
 h6 {color: #888;}
-.top-bar {background: #333;position: fixed;}
+.top-bar {background: #333;}
 .top-bar-section li a:not(.button) { background: #333; }
 .top-bar-section li a:not(.button):hover { color: #ddd; }
 .top-bar .name h1 a { color: #fa503a; }
@@ -15,7 +15,7 @@ dl dh {font-size: 90%; color: #888;}
 /**
  * This prettyprint code is shamelessly stolen from the one and only @daylerees http://laravel.com/css/style.css
  */
- pre{font-family: "Ubuntu Mono", monospace;background-color:#333;padding:10px;font-size:90%;color:#e9e4e5;line-height:1.5em;margin:0.5em 0;border: 0;} 
+ pre{font-family: "Ubuntu Mono", monospace;background-color:#333;padding:5px;font-size:90%;color:#e9e4e5;line-height:1.5em;margin:0.2em 0;border: 0;} 
  pre .pln{color:#e9e4e5;}
  pre .str{color:#bcd42a;}
  pre .kwd{color:#4bb1b1;}
