@@ -98,7 +98,7 @@ Redirect::route('foobar');</pre>
 	
 			<h6>Route Prefixing</h6>
 		<pre class="prettyprint lang-php">// This route group will carry the prefix 'foo'
-Route::group(array('prefxi' => 'foo'), function()
+Route::group(array('prefix' => 'foo'), function()
 {
 	Route::get('bar', function(){});
 	Route::get('baz', function(){});
