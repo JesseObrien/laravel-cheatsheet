@@ -10,48 +10,131 @@
 	<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
 </head>
 <body>
-	<div class="row">
-		<div class="large-12 columns">
-			<div class="logo"></div>
-			<h3 class="header"> Cheat Sheet</h3>
-		</div>
-	</div>
+	<nav class="top-bar">
+		<ul class="title-area">
+			<li class="name"><h1><a href="#">Laravel Cheat Sheet</a></h1></li>
+			<li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+		</ul>
+		<section class="top-bar-section">
+			<ul class="left">
+				<li class="comments-toggle"><a href="#"><i class="icon-comments"></i> Toggle Code Comments</a></li>
+			</ul>
+		</section>
+	</nav>
 	<div class="row">
 		<div class="large-6 columns code-column">
 			<h4>Routing</h4>
-				<pre class="prettyprint lang-php">// routing to a closure
+			<pre class="prettyprint lang-php">// routing to a closure
 Route::get('foo', function(){});</pre>
-				<pre class="prettyprint lang-php">// routing to a controller method
+			<pre class="prettyprint lang-php">// routing to a controller method
 Route::get('foo', 'ControllerName@function');</pre>
-				<h6>Route Parameters</h6>
-				<pre class="prettyprint lang-php">Route::get('foo/{bar}', function($bar){});</pre>
-				<pre class="prettyprint lang-php">// optional parameter
+
+			<h6>Triggering Errors</h6>
+			<pre class="prettyprint lang-php">App::abort(404);</pre>
+			<pre class="prettyprint lang-php">throw new NotFoundHttpException;</pre>
+
+			<h6>Route Parameters</h6>
+			<pre class="prettyprint lang-php">Route::get('foo/{bar}', function($bar){});</pre>
+			<pre class="prettyprint lang-php">// optional parameter
 Route::get('foo/{bar?}', function($bar = 'bar'){});</pre>
-				<h6>HTTP Verbs</h6>
-				<pre class="prettyprint lang-php">Route::any('foo', function(){});</pre>
-				<pre class="prettyprint lang-php">Route::post('foo', function(){});</pre>
-				<pre class="prettyprint lang-php">Route::patch('foo', function(){});</pre>
-				<pre class="prettyprint lang-php">Route::delete('foo', function(){});</pre>
-				<h6>Secure Route</h6>
-				<pre class="prettyprint lang-php">Route::get('foo', array('https', function(){}));</pre>
-				<h6>Route Constraints</h6>
-				<pre class="prettyprint lang-php">Route::get('foo/{bar}', function($bar){})
+
+			<h6>HTTP Verbs</h6>
+			<pre class="prettyprint lang-php">Route::any('foo', function(){});</pre>
+			<pre class="prettyprint lang-php">Route::post('foo', function(){});</pre>
+			<pre class="prettyprint lang-php">Route::patch('foo', function(){});</pre>
+			<pre class="prettyprint lang-php">Route::delete('foo', function(){});</pre>
+
+			<h6>Secure Routes</h6>
+			<pre class="prettyprint lang-php">Route::get('foo', array('https', function(){}));</pre>
+
+			<h6>Route Constraints</h6>
+			<pre class="prettyprint lang-php">Route::get('foo/{bar}', function($bar){})
 ->where('bar', '[0-9]+');</pre>
-				<pre class="prettyprint lang-php">Route::get('foo/{bar}/{baz}', function($bar, $baz){})
+			<pre class="prettyprint lang-php">Route::get('foo/{bar}/{baz}', function($bar, $baz){})
 ->where(array('bar' => '[0-9]+', 'baz' => '[A-Za-z]'))</pre>
-				<h6>Filters</h6>
-				<pre class="prettyprint lang-php">// Declare a filter to run logic 'before' a route 
+
+			<h6>Filters</h6>
+			<pre class="prettyprint lang-php">// Declare a filter to run authentication logic for a route
 Route::filter('auth', function(){
 	if( ! Auth::check())
 	{
 		return Redirect::to('home');
 	}
 });</pre>
-				<pre class="prettyprint lang-php">Route::get('foo', array('before' => 'auth', function(){}));</pre>
+			<pre class="prettyprint lang-php">// Alternatively, you can declare a filter class
+class FooFilter {
+	public function filter()
+	{
+
+	}
+}</pre>
+			<pre class="prettyprint lang-php">// Register the class as a filter
+Route::filter('foo', 'FooFilter');</pre>
+			<pre class="prettyprint lang-php">// Apply the filter to route 'foo'
+Route::get('foo', array('before' => 'auth', function(){}));</pre>
+			<pre class="prettyprint lang-php">// Routes in this group are guarded by the 'auth' filter
+Route::group(array('before' => 'auth'), function()
+{
+	Route::get('foo', 'FooController@index');
+	Route::get('foo/bar', 'FooController@bar');
+});</pre>
+			<pre class="prettyprint lang-php">// Pattern filter
+Route::when('foo/*', 'foo');</pre>
+			<pre class="prettyprint lang-php">// Pattern filter with HTTP verbs
+Route::when('foo/*', 'foo', array('post'));</pre>
+
+			<h6>Named Routes</h6>
+			<pre class="prettyprint lang-php">// Get the name of the current route
+Route::currentRouteName();</pre>
+			<pre class="prettyprint lang-php">// Name route foo/bar 'foobar'
+Route::get('foo/bar', array('as' => 'foobar', function(){}));</pre>
+			<pre class="prettyprint lang-php">// Redirect to a named route
+Redirect::route('foobar');</pre>
+	
+			<h6>Route Prefixing</h6>
+		<pre class="prettyprint lang-php">// This route group will carry the prefix 'foo'
+Route::group(array('prefxi' => 'foo'), function()
+{
+	Route::get('bar', function(){});
+	Route::get('baz', function(){});
+})</pre>
+		
+			<h6>Sub-Domain Routing</h6>
+			<pre class="prettyprint lang-php">// {sub} will be passed to the routes in this group
+Route::group(array('domain' => '{sub}.example.com'), function()
+{
+	Route::get('foo', function($sub){});
+});</pre>
 		</div>
 		<div class="large-6 columns code-column">
-			<h4>Eloquent</h4>
+			<h4>Input</h4>
+			<pre class="prettyprint lang-php">Input::get('key');</pre>
+			<pre class="prettyprint lang-php">// Get a key but supply a default in case the key is null
+Input::get('key', 'default');</pre>
+			<pre class="prettyprint lang-php">Input::has('key');</pre>
+			<pre class="prettyprint lang-php">Input::all();</pre>
+			<pre class="prettyprint lang-php">// Only retrieve 'foo' and 'bar' when getting input
+Input::only('foo', 'bar');</pre>
+			<pre class="prettyprint lang-php">// Disregard 'foo' when getting input
+Input::except('foo');</pre>
+			<pre class="prettyprint lang-php">// Flash all input to the session
+Input::flash();</pre>
+			<pre class="prettyprint lang-php">// Flash only certain keys to the session
+Input::flashOnly('foo', 'bar');</pre>
+			<pre class="prettyprint lang-php">// Flash all except certain keys to the session
+Input::flashExcept('foo', 'baz');</pre>
+
+			<h4>Cookies</h4>
+			<pre class="prettyprint lang-php">Cookie::get('key');</pre>
+			<pre class="prettyprint lang-php">// Send a cookie with a response
+$response = Response::make('Hello World');			
+$response->withCookie(Cookie::make('name', 'value', $minutes));</pre>
+			<pre class="prettyprint lang-php">// Create a cookie that lasts for ever
+Cookie::forever('key', 'value');</pre>
 		</div>
+
 	</div>
+	<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script> 
+	<script type="text/javascript" src="app.js"></script>
 </body>
 </html>

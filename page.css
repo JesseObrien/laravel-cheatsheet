@@ -1,14 +1,20 @@
-body {background: #f5f5f5; margin-top: 40px; font-size: 16px; font-family: 'Ubuntu Mono', monospace;}
+body {background: #f5f5f5; margin-bottom: 40px; font-size: 16px; font-family: 'Ubuntu Mono', monospace;}
 h1,h2,h3,h4,h5,h6 {font-family: 'Ubuntu Mono', monospace; }
-h4 {border-bottom: 1px solid #ddd;}
 h6 {color: #888;}
-.header {border-bottom: 2px solid #ddd; text-align: center; color: #fa503a;}
-.logo {background-image: url('logo.png'); height: 30px; width: 103px;}
+.top-bar {background: #333;position: fixed;}
+.top-bar-section li a:not(.button) { background: #333; }
+.top-bar-section li a:not(.button):hover { color: #ddd; }
+.top-bar .name h1 a { color: #fa503a; }
+.logo {background-image: url('logo.png'); height: 30px; width: 103px; margin-top: 5px;}
 dl dd {margin-bottom: 0.25em; white-space: pre;}
 dl dh {font-size: 90%; color: #888;}
 .code-column {background-color: #333; color: #fff;}
 .code-column h6 {color: #ddd; margin-top: 1em; margin-bottom: 0.1em;}
-.code-column h4 {color: #fff;}
+.code-column h4 {color: #fff; margin: 10px 0;}
+
+/**
+ * This prettyprint code is shamelessly stolen from the one and only @daylerees http://laravel.com/css/style.css
+ */
  pre{font-family: "Ubuntu Mono", monospace;background-color:#333;padding:10px;font-size:90%;color:#e9e4e5;line-height:1.5em;margin:0.5em 0;border: 0;} 
  pre .pln{color:#e9e4e5;}
  pre .str{color:#bcd42a;}
