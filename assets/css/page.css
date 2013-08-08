@@ -1,15 +1,12 @@
 body {background: #f5f5f5; margin-bottom: 40px; font-size: 16px; font-family: 'Ubuntu Mono', monospace;}
 h1,h2,h3,h4,h5,h6 {font-family: 'Ubuntu Mono', monospace; }
-h6 {color: #888;}
 .top-bar {background: #333;}
 .top-bar-section li a:not(.button) { background: #333; }
 .top-bar-section li a:not(.button):hover { color: #ddd; }
 .top-bar .name h1 a { color: #fa503a; }
 .logo {background-image: url('logo.png'); height: 30px; width: 103px; margin-top: 5px;}
-dl dd {margin-bottom: 0.25em; white-space: pre;}
-dl dh {font-size: 90%; color: #888;}
 .code-column {background-color: #333; color: #fff;}
-.code-column h6 {color: #ddd; margin-top: 1em; margin-bottom: 0.1em;}
+.code-column h6 {color: #ddd; margin:0.2em 0;}
 .code-column h4 {color: #fff; margin: 10px 0;}
 
 /**
