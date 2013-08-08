@@ -62,7 +62,7 @@ Route::get('foo/{bar}/{baz}', function($bar, $baz){})
 			<h6>Filters</h6>
 			<pre class="prettyprint lang-php">// Declare a filter to run authentication logic for a route
 Route::filter('auth', function(){
-	if( ! Auth::check())
+	if ( ! Auth::check())
 	{
 		return Redirect::to('home');
 	}
@@ -91,12 +91,9 @@ Route::when('foo/*', 'foo', array('post'));
 			</pre>
 
 			<h6>Named Routes</h6>
-			<pre class="prettyprint lang-php">// Get the name of the current route
-Route::currentRouteName();
+			<pre class="prettyprint lang-php">Route::currentRouteName();
 // Name route foo/bar 'foobar'
 Route::get('foo/bar', array('as' => 'foobar', function(){}));
-// Redirect to a named route
-Redirect::route('foobar');
 			</pre>
 	
 			<h6>Route Prefixing</h6>
@@ -114,6 +111,23 @@ Route::group(array('domain' => '{sub}.example.com'), function()
 {
 	Route::get('foo', function($sub){});
 });
+			</pre>
+
+			<h4>Views</h4>
+			<pre class="prettyprint lang-php">View::make('path/to/view');
+View::make('foo/bar')->with('key', 'value');
+View::make('foo/bar', array('key' => 'value'));
+// Share a value across all views
+View::share('key', 'value');
+// Nesting views
+View::make('foo/bar')->nest('name', 'foo/baz', $data);
+// Register a view composer
+View::composer('viewname', function($view){});
+//Register multiple views to a composer
+View::composer(array('view1', 'view2'), function($view){});
+// Register a composer class
+View::composer('viewname', 'FooComposer');
+View::creator('viewname', function($view){});
 			</pre>
 		</div>
 		<div class="large-6 columns code-column">
@@ -157,11 +171,10 @@ Input::file('name')->move($destinationPath, $fileName);
 
 
 			<h4>Cookies</h4>
-			<pre class="prettyprint lang-php">Cookie::get('key');</pre>
-			<pre class="prettyprint lang-php">// Create a cookie that lasts for ever
+			<pre class="prettyprint lang-php">Cookie::get('key');
+// Create a cookie that lasts for ever
 Cookie::forever('key', 'value');
-			</pre>
-			<pre class="prettyprint lang-php">// Send a cookie with a response
+// Send a cookie with a response
 $response = Response::make('Hello World');			
 $response->withCookie(Cookie::make('name', 'value', $minutes));
 			</pre>
@@ -173,6 +186,7 @@ Session::get('key', function(){ return 'default'; });
 Session::put('key', 'value');
 Session::all();
 Session::has('key');
+Session::forget('key');
 Session::flush();
 Session::regenerate();
 Session::flash('key', 'value');
@@ -189,6 +203,39 @@ Request::header('Content-Type');
 Request::server('PATH_INFO');
 Request::ajax();
 Request::secure();
+			</pre>
+
+			<h4>Responses</h4>
+			<pre class="prettyprint lang-php">return Response::make($contents);
+return Response::make($contents, 200);
+return Response::json(array('key' => 'value'));
+return Response::json(array('key' => 'value'))
+	->setCallback(Input::get('callback'));
+return Response::download($filepath);
+return Response::download($filepath, $filename, $headers);
+// Create a response and modify a header value
+$response = Response::make($contents, 200);
+$response->header('Content-Type', 'application/json');
+return $response;
+// Attach a cookie to a response
+return Response::make($content)
+	->withCookie(Cookie::make('key', 'value'));
+			</pre>
+
+			<h4>Redirects</h4>
+			<pre class="prettyprint lang-php">return Redirect::to('foo/bar');
+return Redirect::to('foo/bar')->with('key', 'value');
+return Redirect::to('foo/bar')->withInput(Input::get());
+return Redirect::to('foo/bar')->withInput(Input::except('password'));
+return Redirect::to('foo/bar')->withErrors($validator);
+return Redirect::route('foobar');
+return Redirect::route('foobar', array('value'));
+return Redirect::route('foobar', array('key' => 'value'));
+return Redirect::action('FooController@index');
+return Redirect::action('FooController@baz', array('value'));
+return Redirect::action('FooController@baz', array('key' => 'value'));
+
+
 			</pre>
 		</div>
 	</div>
