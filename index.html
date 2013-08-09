@@ -338,6 +338,17 @@ return Redirect::action('FooController@baz', array('value'));
 return Redirect::action('FooController@baz', array('key' => 'value'));
 			</pre>
 
+			<h4>IoC</h4>
+			<pre class="prettyprint lang-php">App::bind('foo', function($app){ return new Foo; });
+App::make('foo');
+App::make('FooBar'); // If this class exists, it's returned
+App::singleton('foo', function(){ return new Foo; });
+App::instance('foo', new Foo);
+App:bind('FooRepositoryInterface', 'BarRepository');
+App::register('FooServiceProvider');
+App::resolving(function($object){}); // Listen for object resolution
+			</pre>
+
 			<h4>Helpers</h4>
 			<h6>Arrays</h6>
 			<pre class="prettyprint lang-php">array_add($array, 'key', 'value');
