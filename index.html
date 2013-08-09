@@ -56,57 +56,28 @@ Route::get('foo/{bar}/{baz}', function($bar, $baz){})
 			</pre>
 
 			<h6>Filters</h6>
-			<pre class="prettyprint lang-php">// Declare a filter to run authentication logic for a route
-Route::filter('auth', function(){
-	if ( ! Auth::check())
-	{
-		return Redirect::to('home');
-	}
-});
-// Alternatively, you can declare a filter class
-class FooFilter {
-	public function filter()
-	{
-
-	}
-}
-// Register the class as a filter
-Route::filter('foo', 'FooFilter');
-// Apply the filter to route 'foo'
+			<pre class="prettyprint lang-php">Route::filter('auth', function(){}); // Declare an auth filter
+Route::filter('foo', 'FooFilter'); // Register a class as a filter
 Route::get('foo', array('before' => 'auth', function(){}));
 // Routes in this group are guarded by the 'auth' filter
-Route::group(array('before' => 'auth'), function()
-{
-	Route::get('foo', 'FooController@index');
-	Route::get('foo/bar', 'FooController@bar');
-});
-// Pattern filter
-Route::when('foo/*', 'foo');
-// Pattern filter with HTTP verbs
-Route::when('foo/*', 'foo', array('post'));
+Route::group(array('before' => 'auth'), function(){});
+Route::when('foo/*', 'foo'); // Pattern filter
+Route::when('foo/*', 'foo', array('post')); // HTTP verb pattern
 			</pre>
 
 			<h6>Named Routes</h6>
 			<pre class="prettyprint lang-php">Route::currentRouteName();
-// Name route foo/bar 'foobar'
 Route::get('foo/bar', array('as' => 'foobar', function(){}));
 			</pre>
 	
 			<h6>Route Prefixing</h6>
 			<pre class="prettyprint lang-php">// This route group will carry the prefix 'foo'
-Route::group(array('prefix' => 'foo'), function()
-{
-	Route::get('bar', function(){});
-	Route::get('baz', function(){});
-})
+Route::group(array('prefix' => 'foo'), function(){})
 			</pre>
 		
 			<h6>Sub-Domain Routing</h6>
 			<pre class="prettyprint lang-php">// {sub} will be passed to the closure
-Route::group(array('domain' => '{sub}.example.com'), function()
-{
-	Route::get('foo', function($sub){});
-});
+Route::group(array('domain' => '{sub}.example.com'), function(){});
 			</pre>
 
 			<h4>URLs</h4>
@@ -338,56 +309,70 @@ return Redirect::action('FooController@baz', array('key' => 'value'));
 			</pre>
 
 			<h4>Helpers</h4>
-			<pre class="prettyprint lang-php">action($name, $parameters = array(), $absolute = true);
-app('foo');
-app_path('path');
-array_add($array, $key, $value);
+			<h6>Arrays</h6>
+			<pre class="prettyprint lang-php">array_add($array, 'key', 'value');
 array_build($array, function(){});
 array_divide($array);
-array_dot($array, $prepend);
-array_except($array, $keys);
-array_fetch($array, $key);
-array_first($array, function(){}, $default);
-array_flatten($array);
-array_forget($array, $key);
-array_get($array, $key, $default);
-array_only($array, $keys);
-array_pluck($array, $key);
-array_pull($array, $key);
-array_set($array, $key, $value);
+array_dot($array);
+array_except($array, aray('key'));
+array_fetch($array, 'key');
+array_first($array, function($key, $value){}, $default);
+array_flatten($array); // Strips keys from the array
+array_forget($array, 'foo');
+array_forget($array, 'foo.bar'); // Dot notation
+array_get($array, 'foo', 'default');
+array_get($array, 'foo.bar', 'default');
+array_only($array, array('key'));
+array_pluck($array, 'key'); // Return array of key => values
+array_pull($array, 'key'); // Return and remove 'key' from array
+array_set($array, 'key', 'value');
+array_set($array, 'key.subkey', 'value'); // Dot notation
 array_sort($array, function(){});
-head($array);
-last($array);
-asset($path, $secure);
-base_path($path);
+head($array); // First element of an array
+last($array); // Last element of an array
+			</pre>
+			<h6>Paths</h6>
+			<pre class="prettyprint lang-php">app_path();
+public_path();
+base_path(); // App root path
+storage_path();
+			</pre>
+			<h6>Strings</h6>
+			<pre class="prettyprint lang-php">
 camel_case($value);
 class_basename($class);
-csrf_token();
-dd($var, ... , $var10);
-ends_with($haystack, $needle);
-link_to($url, $title, $attributes, $secure);
-link_to_asset($url, $title, $attributes, $secure);
-link_to_route($name, $title, $parameters, $attributes);
-link_to_action($name, $title, $parameters, $attributes);
-object_get($object, $key, $default);
-public_path($path);
-route($route, $parameters, $absolute = true);
-secure_asset($path = '');
+e('&lt;html&gt;'); // Escape a string
+starts_with('Foo bar.', 'Foo');
+ends_with('Foo bar.', 'bar.');
+snake_case('fooBar');
+str_contains('Hello foo bar.', 'foo');
+str_finish('foo/bar', '/'); // Result: foo/bar/
+str_is('foo*', 'foobar');
+str_plural('car');
+str_random(25);
+str_singular('cars');
+studly_case('foo_bar'); // Result: FooBar
+trans('foo.bar');
+trans_choice('foo.bar', $count);
+			</pre>
+			<h6>URLs and Links</h6>
+			<pre class="prettyprint lang-php">action('FooController@method', $parameters);
+link_to('foo/bar', $title, $attributes, $secure);
+link_to_asset('img/foo.jpg', $title, $attributes, $secure);
+link_to_route('route.name', $title, $parameters, $attributes);
+link_to_action('FooController@method', $title, $parameters, $attributes);
+asset('img/photo.jpg', $title, $attributes); // HTML Link
+secure_asset('img/photo.jpg', $title, $attributes); // HTTPS link
 secure_url($path, $parameters);
-snake_case($value, $delimiter = '_');
-storage_path($path = '');
-str_contains($haystack, $needle);
-str_finish($value, $append);
-str_is($pattern, $value);
-str_plural($value, $count = 2);
-str_random($lenth = 16);
-str_singular($value);
-studly_case($value);
-trans($id, array(), $domain = 'messages', $locale = null);
-trans_choice($id, $number, array(), $domain, $locale);
+route($route, $parameters, $absolute = true);
 url($path, $parameters = array(), $secure = null);
-value($value);
-with($object);
+		</pre>
+		<h6>Miscellaneous</h6>
+		<pre class="prettyprint lang-php">
+csrf_token();
+dd($value);
+value(function(){ return 'bar'; });
+with(new Foo)->chainedMethod();
 			</pre>
 		</div>
 	</div>
