@@ -399,6 +399,11 @@ Password::remind($credentials, function($message, $user){});
 			</pre>
 
 			<h6>Encryption</h6>
+			<pre class="prettyprint lang-php">Crypt::encrypt('secretstring');
+Crypt::decrypt($encryptedString);
+Crypt::setMode('ctr');
+Crypt::setCipher($cipher);
+			</pre>
 
 			<h4>Helpers</h4>
 			<h6>Arrays</h6>
