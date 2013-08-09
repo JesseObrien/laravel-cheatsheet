@@ -7,7 +7,6 @@
 	<link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" href="/assets/css/page.css" />
 	<title>Laravel Cheat Sheet</title>
-	<script src="/assets/js/google-code-prettify/run_prettify.js"></script>
 </head>
 <body>
 	<nav class="top-bar">
@@ -25,9 +24,7 @@
 	<div class="row">
 		<div class="large-6 columns code-column">
 			<h4>Routing</h4>
-			<pre class="prettyprint lang-php">// routing to a closure
-Route::get('foo', function(){});
-// routing to a controller method
+			<pre class="prettyprint lang-php">Route::get('foo', function(){});
 Route::get('foo', 'ControllerName@function');
 			</pre>
 
@@ -38,7 +35,6 @@ throw new NotFoundHttpException;
 
 			<h6>Route Parameters</h6>
 			<pre class="prettyprint lang-php">Route::get('foo/{bar}', function($bar){});
-// optional parameter
 Route::get('foo/{bar?}', function($bar = 'bar'){});
 			</pre>
 
@@ -129,12 +125,83 @@ View::composer(array('view1', 'view2'), function($view){});
 View::composer('viewname', 'FooComposer');
 View::creator('viewname', function($view){});
 			</pre>
+			
+			<h4>Forms</h4>
+			<pre class="prettyprint lang-php">Form::open(array('url' => 'foo/bar', 'method' => 'PUT'));
+Form::open(array('route' => 'foo.bar'));
+Form::open(array('route' => 'foo.bar', $parameter));
+Form::open(array('action' => 'FooController@method'));
+Form::open(array('action' => 'FooController@method', $parameter));
+Form::open(array('url' => 'foo/bar', 'files' => true));
+Form::token();
+Form::model($foo, array('route' => 'foo.bar', $foo->bar));
+			</pre>
+
+			<h6>Form Elements</h6>
+			<pre class="prettyprint lang-php">Form::label('id', 'Description');
+Form::label('id', 'Description', array('class' => 'foo'));
+Form::text('name');
+Form::text('name', $value);
+Form::hidden('foo', $value);
+Form::password('password');
+Form::email('name', $value, array());
+Form::file('name', array());
+Form::checkbox('name', 'value');
+Form::radio('name', 'value');
+Form::select('name', array('key' => 'value'));
+Form::select('name', array('key' => 'value'), 'key');
+Form::submit('Submit!');
+Form::macro('fooField', function()
+{
+	return '&lt;input type="custom"/&gt;';
+});
+Form::fooField();
+			</pre>
+
+			<h4>HTML Builder</h4>
+			<pre class="prettyprint lang-php">HTML::macro('name', function(){});
+HTML::entities($value);
+HTML::decode($value);
+HTML::script($url, $attributes);
+HTML::style($url, $attributes);
+HTML::link($url, 'title', $attributes, $secure);
+HTML::secureLink($url, 'title', $attributes);
+HTML::linkAsset($url, 'title', $attributes, $secure);
+HTML::linkSecureAsset($url, 'title', $attributes);
+HTML::linkRoute($name, 'title', $parameters, $attributes);
+HTML::linkAction($action, 'title', $parameters, $attributes);
+HTML::mailto($email, 'title', $attributes);
+HTML::email($email);
+HTML::ol($list, $attributes);
+HTML::ul($list, $attributes);
+HTML::listing($type, $list, $attributes);
+HTML::listingElement($key, $type, $value);
+HTML::nestedListing($key, $type, $value);
+HTML::attributes($attributes);
+HTML::attributeElement($key, $value);
+HTML::obfuscate($value);
+			</pre>
+
+			<h4>Events</h4>
+			<pre class="prettyprint lang-php">Event::fire('foo.bar', array($bar));
+Event::listen('foo.bar', function($bar){});
+Event::listen('foo.*', function($bar){});
+Event::listen('foo.bar', 'FooHandler', 10);
+Event::listen('foo.bar', 'BarHandler', 5);
+Event::listen('foor.bar', function($event){ return false; });
+Event::queue('foo', array($bar));
+Event::flusher('foo', function($bar){});
+Event::flush('foo');
+Event::subscribe(new FooEventHandler);
+			</pre>
+			<h4>Eloquent</h4>
+			<pre class="prettyprint lang-php">
+			</pre>
 		</div>
 		<div class="large-6 columns code-column">
 			<h4>Input</h4>
 			<pre class="prettyprint lang-php">Input::get('key');
-// Get a key but supply a default in case the key is null
-Input::get('key', 'default');
+Input::get('key', 'default'); // Default if the key is missing
 Input::has('key');
 Input::all();
 // Only retrieve 'foo' and 'bar' when getting input
@@ -142,14 +209,12 @@ Input::only('foo', 'bar');
 // Disregard 'foo' when getting input
 Input::except('foo');
 			</pre>
+
 			<h6>Session Input (flash)</h6>
-			<pre class="prettyprint lang-php">// Flash all input to the session
+			<pre class="prettyprint lang-php">// Flash input to the session
 Input::flash();
-// Flash only certain keys to the session
 Input::flashOnly('foo', 'bar');
-// Flash all except certain keys to the session
 Input::flashExcept('foo', 'baz');
-// Use old input (usually in a view)
 Input::old('key');
 			</pre>
 
@@ -169,6 +234,25 @@ Input::file('name')->move($destinationPath);
 Input::file('name')->move($destinationPath, $fileName);
 			</pre>
 
+			<h4>Cache</h4>
+			<pre class="prettyprint lang-php">Cache::put('key', 'value', $minutes);
+Cache::add('key', 'value', $minutes);
+Cache::forever('key', 'value');
+Cache::remember('key', $minutes, function(){ return 'value' });
+Cache::rememberForever('key', function(){ return 'value' });
+Cache::forget('key');
+Cache::has('key');
+Cache::get('key');
+Cache::get('key', 'default');
+Cache::get('key', function(){ return 'default'; });
+Cache::increment('key');
+Cache::increment('key', $amount);
+Cache::decrement('key');
+Cache::decrement('key', $amount);
+Cache::section('group')->put('key', $value);
+Cache::section('group')->get('key');
+Cache::section('group')->flush();
+			</pre>
 
 			<h4>Cookies</h4>
 			<pre class="prettyprint lang-php">Cookie::get('key');
@@ -234,12 +318,64 @@ return Redirect::route('foobar', array('key' => 'value'));
 return Redirect::action('FooController@index');
 return Redirect::action('FooController@baz', array('value'));
 return Redirect::action('FooController@baz', array('key' => 'value'));
+			</pre>
 
-
+			<h4>Helpers</h4>
+			<pre class="prettyprint lang-php">action($name, $parameters = array(), $absolute = true);
+app('foo');
+app_path('path');
+array_add($array, $key, $value);
+array_build($array, function(){});
+array_divide($array);
+array_dot($array, $prepend);
+array_except($array, $keys);
+array_fetch($array, $key);
+array_first($array, function(){}, $default);
+array_flatten($array);
+array_forget($array, $key);
+array_get($array, $key, $default);
+array_only($array, $keys);
+array_pluck($array, $key);
+array_pull($array, $key);
+array_set($array, $key, $value);
+array_sort($array, function(){});
+head($array);
+last($array);
+asset($path, $secure);
+base_path($path);
+camel_case($value);
+class_basename($class);
+csrf_token();
+dd($var, ... , $var10);
+ends_with($haystack, $needle);
+link_to($url, $title, $attributes, $secure);
+link_to_asset($url, $title, $attributes, $secure);
+link_to_route($name, $title, $parameters, $attributes);
+link_to_action($name, $title, $parameters, $attributes);
+object_get($object, $key, $default);
+public_path($path);
+route($route, $parameters, $absolute = true);
+secure_asset($path = '');
+secure_url($path, $parameters);
+snake_case($value, $delimiter = '_');
+storage_path($path = '');
+str_contains($haystack, $needle);
+str_finish($value, $append);
+str_is($pattern, $value);
+str_plural($value, $count = 2);
+str_random($lenth = 16);
+str_singular($value);
+studly_case($value);
+trans($id, array(), $domain = 'messages', $locale = null);
+trans_choice($id, $number, array(), $domain, $locale);
+url($path, $parameters = array(), $secure = null);
+value($value);
+with($object);
 			</pre>
 		</div>
 	</div>
 	<script src="/assets/js/jquery-1.10.2.min.js"></script> 
+	<script src="/assets/js/google-code-prettify/prettify.js"></script>
 	<script type="text/javascript" src="/assets/js/app.js"></script>
 </body>
 </html>
