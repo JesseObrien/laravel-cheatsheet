@@ -183,8 +183,38 @@ Event::flush('foo');
 Event::subscribe(new FooEventHandler);
 			</pre>
 			<h4>Eloquent</h4>
-			<pre class="prettyprint lang-php">
+			<pre class="prettyprint lang-php">Model::create(array('key' => 'value'));
+Model::destroy(1);
+Model::all();
+Model::find(1);
+Model::findOrFail(1); // Trigger an exception
+Model::where('foo', '=', 'bar')->get();
+Model::where('foo', '=', 'bar')->first();
+Model::where('foo', '=', 'bar')->firstOrFail(); // Exception
+Model::where('foo', '=', 'bar')->count();
+Model::where('foo', '=', 'bar')->delete();
+Model::whereRaw('foo = bar and cars = 2', array(20))->get();
+Model::on('connection-name')->find(1);
+Model::with('relation')->get();
 			</pre>
+
+			<h6>Soft Delete</h6>
+			<pre class="prettyprint lang-php">Model::withTrashed()->where('cars', 2)->get();
+Model::withTrashed()->where('cars', 2)->restore();
+Model::where('cars', 2)->forceDelete();
+Model::onlyTrashed()->where('cars', 2)->get();
+			</pre>
+		
+			<h6>Events</h6>
+			<pre class="prettyprint lang-php">Model::creating(function($model){});
+Model::created(function($model){});
+Model::updating(function($model){});
+Model::updated(function($model){});
+Model::saving(function($model){});
+Model::saved(function($model){});
+Model::deleting(function($model){});
+Model::deleted(function($model){});
+Model::observe(new FooObserver);
 		</div>
 		<div class="large-6 columns code-column">
 			<h4>Input</h4>
