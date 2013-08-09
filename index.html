@@ -208,6 +208,7 @@ Event::flusher('foo', function($bar){});
 Event::flush('foo');
 Event::subscribe(new FooEventHandler);
 			</pre>
+
 			<h4>Eloquent</h4>
 			<pre class="prettyprint lang-php">Model::create(array('key' => 'value'));
 Model::destroy(1);
@@ -243,6 +244,7 @@ Model::deleted(function($model){});
 Model::observe(new FooObserver);
 			</pre>
 		
+
 			<h4>Mail</h4>
 			<pre class="prettyprint lang-php">Mail::send('email.view', $data, function($message){});
 Mail::send(array('html.view', 'text.view'), $data, $callback);
@@ -429,6 +431,52 @@ Password::remind($credentials, function($message, $user){});
 Crypt::decrypt($encryptedString);
 Crypt::setMode('ctr');
 Crypt::setCipher($cipher);
+			</pre>
+
+			<h4>Validation</h4>
+			<pre class="prettyprint lang-php">Validator::make(
+	array('key' => 'Foo'), 
+	array('key' => 'required|in:Foo')
+);
+Validator::extend('foo', function($attribute, $value, $params){});
+Validator::extend('foo', 'FooValidator@validate');
+Validator::resolver(function($translator, $data, $rules, $msgs)
+{
+	return new FooValidator($translator, $data, $rules, $msgs);
+});
+			</pre>
+
+			<h6>Rules</h6>
+			<pre class="prettyprint lang-php">accepted
+active_url
+after:YYYY-MM-DD
+before:YYYY-MM-DD
+alpha
+alpha_num
+between:1,10
+confirmed
+date
+date_format:YYYY-MM-DD
+different:fieldname
+email
+exists:table,column
+image
+in:foo,bar,baz
+not_in:foo,bar,baz
+integer
+numeric
+ip
+max:value
+min:value
+mimes:jpeg,png
+regex:[0-9]
+required
+required_if:field,value
+required_with:foo,bar,baz
+required_without:foo,bar,baz
+same:field
+size:value
+
 			</pre>
 
 			<h4>Helpers</h4>
