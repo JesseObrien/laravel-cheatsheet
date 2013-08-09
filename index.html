@@ -215,6 +215,34 @@ Model::saved(function($model){});
 Model::deleting(function($model){});
 Model::deleted(function($model){});
 Model::observe(new FooObserver);
+			</pre>
+		
+			<h4>Mail</h4>
+			<pre class="prettyprint lang-php">Mail::send('email.view', $data, function($message){});
+Mail::send(array('html.view', 'text.view'), $data, $callback);
+Mail::queue('email.view', $data, function($message){});
+Mail::queueOn('queue-name', 'email.view', $data, $callback);
+Mail::later(5, 'email.view', $data, function($message){});
+Mail::pretend(); // Write all email to logs instead of sending
+			</pre>
+
+			<h4>Queues</h4>
+			<pre class="prettyprint lang-php">Queue::push('SendMail', array('message' => $message));
+Queue::push('SendEmail@send', array('message' => $message));
+Queue::push(function($job) use $id {});
+php artisan queue:listen
+php artisan queue:listen connection
+php artisan queue:listen --timeout=60
+php artisan queue:work
+			</pre>
+
+			<h4>Localization</h4>
+			<pre class="prettyprint lang-php">App::setLocale('en');
+Lang::get('messages.welcome');
+Lang::get('messages.welcome', array('foo' => 'Bar'));
+Lang::has('messages.welcome');
+Lang::choice('messages.apples', 10);
+			</pre>
 		</div>
 		<div class="large-6 columns code-column">
 			<h4>Input</h4>
@@ -349,6 +377,29 @@ App::register('FooServiceProvider');
 App::resolving(function($object){}); // Listen for object resolution
 			</pre>
 
+			<h4>Security</h4>
+			<h6>Passwords</h6>
+			<pre class="prettyprint lang-php">Hash::make('secretpassword');
+Hash::check('secretpassword', $hashedPassword);
+Hash::needsRehash($hashedPassword);
+			</pre>
+			<h6>Auth</h6>
+			<pre class="prettyprint lang-php">Auth::check(); // Check if the user is logged in
+Auth::user();
+Auth::attempt(array('email' => $email, 'password' => $password));
+Auth::attempt($credentials, true); // Remember user login
+Auth::once($credentials); // Log in for a single request
+Auth::login(User::find(1));
+Auth::loginUsingId(1);
+Auth::logout();
+Auth::validate($credentials);
+Auth::basic('username');
+Auth::onceBasic();
+Password::remind($credentials, function($message, $user){});
+			</pre>
+
+			<h6>Encryption</h6>
+
 			<h4>Helpers</h4>
 			<h6>Arrays</h6>
 			<pre class="prettyprint lang-php">array_add($array, 'key', 'value');
@@ -401,7 +452,7 @@ trans_choice('foo.bar', $count);
 link_to('foo/bar', $title, $attributes, $secure);
 link_to_asset('img/foo.jpg', $title, $attributes, $secure);
 link_to_route('route.name', $title, $parameters, $attributes);
-link_to_action('FooController@method', $title, $parameters, $attributes);
+link_to_action('FooController@method', $title, $params, $attrs);
 asset('img/photo.jpg', $title, $attributes); // HTML Link
 secure_asset('img/photo.jpg', $title, $attributes); // HTTPS link
 secure_url($path, $parameters);
