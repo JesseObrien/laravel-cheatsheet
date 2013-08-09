@@ -109,6 +109,23 @@ Route::group(array('domain' => '{sub}.example.com'), function()
 });
 			</pre>
 
+			<h4>URLs</h4>
+			<pre class="prettyprint lang-php">URL::full();
+URL::current();
+URL::previous();
+URL::to('foo/bar', $parameters, $secure);
+URL::action('FooController@method', $parameters, $absolute);
+URL::route('foo', $parameters, $absolute);
+URL::secure('foo/bar', $parameters);
+URL::asset('css/foo.css', $secure);
+URL::secureAsset('css/foo.css');
+URL::isValidUrl('http://example.com');
+URL::getRequest();
+URL::setRequest($request);
+URL::getGenerator();
+URL::setGenerator($generator);
+			</pre>
+
 			<h4>Views</h4>
 			<pre class="prettyprint lang-php">View::make('path/to/view');
 View::make('foo/bar')->with('key', 'value');

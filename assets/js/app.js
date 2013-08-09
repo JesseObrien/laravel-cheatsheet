@@ -7,5 +7,6 @@ $('.comments-toggle').on('click', function(event){
 prettyPrint();
 
 // Shine up the HTML:: calls
-var $elements = $("span.pln:contains('HTML')").removeClass('pln').addClass('typ');
+var $html_elements = $("span.pln:contains('HTML')").removeClass('pln').addClass('typ');
+var $url_elements = $("span.pln:contains('URL')").removeClass('pln').addClass('typ');
 
