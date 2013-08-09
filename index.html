@@ -113,7 +113,33 @@ View::composer(array('view1', 'view2'), function($view){});
 View::composer('viewname', 'FooComposer');
 View::creator('viewname', function($view){});
 			</pre>
-			
+		
+			<h4>Blade Templates</h4>
+			<pre class="prettyprint lang-php">@extends('layout.name')
+@section('name') // Begin a section
+@stop // End a section
+@yield('name') // Show a section name in a template
+@include('view.name')
+@include('view.name', array('key' => 'value'));
+@lang('messages.name')
+@choice('messages.name', 1);
+@if
+@else
+@elseif
+@endif
+@unless
+@endunless
+@for
+@endfor
+@foreach
+@endforeach
+@while
+@endwhile
+{{ $var  }} // Echo content
+{{{ $var }}} // Echo escaped content
+{{-- Blade Comment --}}
+			</pre>
+
 			<h4>Forms</h4>
 			<pre class="prettyprint lang-php">Form::open(array('url' => 'foo/bar', 'method' => 'PUT'));
 Form::open(array('route' => 'foo.bar'));
