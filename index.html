@@ -400,7 +400,7 @@ App::make('foo');
 App::make('FooBar'); // If this class exists, it's returned
 App::singleton('foo', function(){ return new Foo; });
 App::instance('foo', new Foo);
-App:bind('FooRepositoryInterface', 'BarRepository');
+App::bind('FooRepositoryInterface', 'BarRepository');
 App::register('FooServiceProvider');
 App::resolving(function($object){}); // Listen for object resolution
 			</pre>
