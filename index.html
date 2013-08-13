@@ -23,7 +23,7 @@
 	</nav>
 	<div class="row">
 		<div class="large-6 columns code-column">
-			<h4>Routing</h4>
+			<h4><a name="routing" href="#routing">Routing</a></h4>
 			<pre class="prettyprint lang-php">Route::get('foo', function(){});
 Route::get('foo', 'ControllerName@function');
 			</pre>
@@ -80,7 +80,7 @@ Route::group(array('prefix' => 'foo'), function(){})
 Route::group(array('domain' => '{sub}.example.com'), function(){});
 			</pre>
 
-			<h4>URLs</h4>
+		<h4><a name="urls" href="#urls">URLs</a></h4>
 			<pre class="prettyprint lang-php">URL::full();
 URL::current();
 URL::previous();
@@ -97,7 +97,7 @@ URL::getGenerator();
 URL::setGenerator($generator);
 			</pre>
 
-			<h4>Views</h4>
+			<h4><a name="views" href="#views">Views</a></h4>
 			<pre class="prettyprint lang-php">View::make('path/to/view');
 View::make('foo/bar')->with('key', 'value');
 View::make('foo/bar', array('key' => 'value'));
@@ -114,7 +114,7 @@ View::composer('viewname', 'FooComposer');
 View::creator('viewname', function($view){});
 			</pre>
 		
-			<h4>Blade Templates</h4>
+			<h4><a name="blade" href="#blade">Blade Templates</a></h4>
 			<pre class="prettyprint lang-php">@extends('layout.name')
 @section('name') // Begin a section
 @stop // End a section
@@ -140,7 +140,7 @@ View::creator('viewname', function($view){});
 {{-- Blade Comment --}}
 			</pre>
 
-			<h4>Forms</h4>
+			<h4><a name="forms" href="#forms">Forms</a></h4>
 			<pre class="prettyprint lang-php">Form::open(array('url' => 'foo/bar', 'method' => 'PUT'));
 Form::open(array('route' => 'foo.bar'));
 Form::open(array('route' => 'foo.bar', $parameter));
@@ -172,7 +172,7 @@ Form::macro('fooField', function()
 Form::fooField();
 			</pre>
 
-			<h4>HTML Builder</h4>
+			<h4><a name="html" href="#html">HTML Builder</a></h4>
 			<pre class="prettyprint lang-php">HTML::macro('name', function(){});
 HTML::entities($value);
 HTML::decode($value);
@@ -196,7 +196,7 @@ HTML::attributeElement($key, $value);
 HTML::obfuscate($value);
 			</pre>
 
-			<h4>Events</h4>
+			<h4><a name="events" href="#events">Events</a></h4>
 			<pre class="prettyprint lang-php">Event::fire('foo.bar', array($bar));
 Event::listen('foo.bar', function($bar){});
 Event::listen('foo.*', function($bar){});
@@ -209,7 +209,7 @@ Event::flush('foo');
 Event::subscribe(new FooEventHandler);
 			</pre>
 
-			<h4>Eloquent</h4>
+			<h4><a name="eloquent" href="#eloquent">Eloquent</a></h4>
 			<pre class="prettyprint lang-php">Model::create(array('key' => 'value'));
 Model::destroy(1);
 Model::all();
@@ -245,7 +245,7 @@ Model::observe(new FooObserver);
 			</pre>
 		
 
-			<h4>Mail</h4>
+			<h4><a name="mail" href="#mail">Mail</a></h4>
 			<pre class="prettyprint lang-php">Mail::send('email.view', $data, function($message){});
 Mail::send(array('html.view', 'text.view'), $data, $callback);
 Mail::queue('email.view', $data, function($message){});
@@ -254,7 +254,7 @@ Mail::later(5, 'email.view', $data, function($message){});
 Mail::pretend(); // Write all email to logs instead of sending
 			</pre>
 
-			<h4>Queues</h4>
+			<h4><a name="queues" hre="#queues">Queues</a></h4>
 			<pre class="prettyprint lang-php">Queue::push('SendMail', array('message' => $message));
 Queue::push('SendEmail@send', array('message' => $message));
 Queue::push(function($job) use $id {});
@@ -264,7 +264,7 @@ php artisan queue:listen --timeout=60
 php artisan queue:work
 			</pre>
 
-			<h4>Localization</h4>
+			<h4><a name="localization" href="#localization">Localization</a></h4>
 			<pre class="prettyprint lang-php">App::setLocale('en');
 Lang::get('messages.welcome');
 Lang::get('messages.welcome', array('foo' => 'Bar'));
@@ -273,7 +273,7 @@ Lang::choice('messages.apples', 10);
 			</pre>
 		</div>
 		<div class="large-6 columns code-column">
-			<h4>Input</h4>
+			<h4><a name="input" href="#input">Input</a></h4>
 			<pre class="prettyprint lang-php">Input::get('key');
 Input::get('key', 'default'); // Default if the key is missing
 Input::has('key');
@@ -308,7 +308,7 @@ Input::file('name')->move($destinationPath);
 Input::file('name')->move($destinationPath, $fileName);
 			</pre>
 
-			<h4>Cache</h4>
+			<h4><a name="cache" href="#cache">Cache</a></h4>
 			<pre class="prettyprint lang-php">Cache::put('key', 'value', $minutes);
 Cache::add('key', 'value', $minutes);
 Cache::forever('key', 'value');
@@ -328,7 +328,7 @@ Cache::section('group')->get('key');
 Cache::section('group')->flush();
 			</pre>
 
-			<h4>Cookies</h4>
+			<h4><a name="cookies" href="#cookies">Cookies</a></h4>
 			<pre class="prettyprint lang-php">Cookie::get('key');
 // Create a cookie that lasts for ever
 Cookie::forever('key', 'value');
@@ -337,7 +337,7 @@ $response = Response::make('Hello World');
 $response->withCookie(Cookie::make('name', 'value', $minutes));
 			</pre>
 			
-			<h4>Sessions</h4>
+			<h4><a name="sessions" href="#sessions">Sessions</a></h4>
 			<pre class="prettyprint lang-php">Session::get('key');
 Session::get('key', 'default');
 Session::get('key', function(){ return 'default'; });
@@ -352,7 +352,7 @@ Session::reflash();
 Session::keep(array('key1', 'key2'));
 			</pre>
 
-			<h4>Requests</h4>
+			<h4><a name="requests" href="#requests">Requests</a></h4>
 			<pre class="prettyprint lang-php">Request::path();
 Request::is('foo/*');
 Request::url();
@@ -363,7 +363,7 @@ Request::ajax();
 Request::secure();
 			</pre>
 
-			<h4>Responses</h4>
+			<h4><a name="responses" href="#responses">Responses</a></h4>
 			<pre class="prettyprint lang-php">return Response::make($contents);
 return Response::make($contents, 200);
 return Response::json(array('key' => 'value'));
@@ -380,7 +380,7 @@ return Response::make($content)
 	->withCookie(Cookie::make('key', 'value'));
 			</pre>
 
-			<h4>Redirects</h4>
+			<h4><a name="redirects" href="#redirects">Redirects</a></h4>
 			<pre class="prettyprint lang-php">return Redirect::to('foo/bar');
 return Redirect::to('foo/bar')->with('key', 'value');
 return Redirect::to('foo/bar')->withInput(Input::get());
@@ -394,7 +394,7 @@ return Redirect::action('FooController@baz', array('value'));
 return Redirect::action('FooController@baz', array('key' => 'value'));
 			</pre>
 
-			<h4>IoC</h4>
+			<h4><a name="ioc" href="#ioc">IoC</a></h4>
 			<pre class="prettyprint lang-php">App::bind('foo', function($app){ return new Foo; });
 App::make('foo');
 App::make('FooBar'); // If this class exists, it's returned
@@ -405,7 +405,7 @@ App::register('FooServiceProvider');
 App::resolving(function($object){}); // Listen for object resolution
 			</pre>
 
-			<h4>Security</h4>
+			<h4><a name="security" href="#security">Security</a></h4>
 			<h6>Passwords</h6>
 			<pre class="prettyprint lang-php">Hash::make('secretpassword');
 Hash::check('secretpassword', $hashedPassword);
@@ -433,7 +433,7 @@ Crypt::setMode('ctr');
 Crypt::setCipher($cipher);
 			</pre>
 
-			<h4>Validation</h4>
+			<h4><a name="validation" href="#validation">Validation</a></h4>
 			<pre class="prettyprint lang-php">Validator::make(
 	array('key' => 'Foo'), 
 	array('key' => 'required|in:Foo')
@@ -479,7 +479,7 @@ size:value
 
 			</pre>
 
-			<h4>Helpers</h4>
+			<h4><a name="helpers" href="#helpers">Helpers</a></h4>
 			<h6>Arrays</h6>
 			<pre class="prettyprint lang-php">array_add($array, 'key', 'value');
 array_build($array, function(){});

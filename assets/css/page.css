@@ -8,6 +8,9 @@ h1,h2,h3,h4,h5,h6 {font-family: 'Ubuntu Mono', monospace; }
 .code-column {background-color: #333; color: #fff;}
 .code-column h6 {color: #ddd; margin:0.2em 0;}
 .code-column h4 {color: #fff; margin: 10px 0;}
+.code-column h4 a { color: #fff; }
+.code-column h4 a:hover { color: #ddd; text-decoration: underline; }
+
 
 /**
  * This prettyprint code is shamelessly stolen from the one and only @daylerees http://laravel.com/css/style.css
@@ -16,7 +19,8 @@ h1,h2,h3,h4,h5,h6 {font-family: 'Ubuntu Mono', monospace; }
  pre .pln{color:#e9e4e5;}
  pre .str{color:#bcd42a;}
  pre .kwd{color:#4bb1b1;}
- pre .com{color:#888888;}
+ pre .com{color:#888888;display:block;}
+ pre .com + .pln { display: none; }
  pre .typ{color:#ef7c61;}
  pre .lit{color:#bcd42a;}
  pre .pun, pre .opn, pre .clo{color:#ffffff;}
