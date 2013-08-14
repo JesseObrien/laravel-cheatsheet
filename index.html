@@ -272,6 +272,38 @@ Lang::get('messages.welcome', array('foo' => 'Bar'));
 Lang::has('messages.welcome');
 Lang::choice('messages.apples', 10);
 			</pre>
+
+			<h4><a name="files" href="#files">Files</a></h4>
+			<pre class="prettyprint lang-php">File::exists('path');
+File::get('path');
+File::getRemote('path');
+File::getRequire('path');
+File::requireOnce('path');
+File::put('path', 'contents');
+File::append('path', 'data');
+File::delete('path');
+File::move('path', 'target');
+File::copy('path', 'target');
+File::extension('path');
+File::type('path');
+File::size('path');
+File::lastModified('path');
+File::isDirectory('directory');
+File::isWritable('path');
+File::isFile('file');
+File::glob($patterns, $flag);
+// Find path names matching a given pattern.
+File::files('directory');
+// Get an array of all files in a directory.
+File::allFiles('directory');
+// Get all of the files from the given directory (recursive).
+File::directories('directory');
+// Get all of the directories within a given directory.
+File::makeDirectory('path',  $mode = 0777, $recursive = false);
+File::copyDirectory('directory', 'destination', $options = null);
+File::deleteDirectory('directory', $preserve = false);
+File::cleanDirectory('directory');
+			</pre>
 		</div>
 		<div class="large-6 columns code-column">
 			<h4><a name="input" href="#input">Input</a></h4>
@@ -535,9 +567,9 @@ link_to_route('route.name', $title, $parameters, $attributes);
 link_to_action('FooController@method', $title, $params, $attrs);
 asset('img/photo.jpg', $title, $attributes); // HTML Link
 secure_asset('img/photo.jpg', $title, $attributes); // HTTPS link
-secure_url($path, $parameters);
+secure_url('path', $parameters);
 route($route, $parameters, $absolute = true);
-url($path, $parameters = array(), $secure = null);
+url('path', $parameters = array(), $secure = null);
 		</pre>
 		<h6>Miscellaneous</h6>
 		<pre class="prettyprint lang-php">
