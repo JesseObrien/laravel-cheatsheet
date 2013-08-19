@@ -31,6 +31,7 @@ Route::get('foo', 'ControllerName@function');
 
 			<h6>Triggering Errors</h6>
 			<pre class="prettyprint lang-php">App::abort(404);
+App::missing(function($exception){});
 throw new NotFoundHttpException;
 			</pre>
 
@@ -42,6 +43,7 @@ Route::get('foo/{bar?}', function($bar = 'bar'){});
 			<h6>HTTP Verbs</h6>
 			<pre class="prettyprint lang-php">Route::any('foo', function(){});
 Route::post('foo', function(){});
+Route::put('foo', function(){});
 Route::patch('foo', function(){});
 Route::delete('foo', function(){});
 			</pre>
