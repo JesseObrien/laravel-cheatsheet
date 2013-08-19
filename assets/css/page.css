@@ -20,7 +20,7 @@ h1,h2,h3,h4,h5,h6 {font-family: 'Ubuntu Mono', monospace; }
  pre .str{color:#bcd42a;}
  pre .kwd{color:#4bb1b1;}
  pre .com{color:#888888;display:block;}
- pre .com + .pln { display: none; }
+ pre .com + .pln {white-space: normal;}
  pre .typ{color:#ef7c61;}
  pre .lit{color:#bcd42a;}
  pre .pun, pre .opn, pre .clo{color:#ffffff;}
