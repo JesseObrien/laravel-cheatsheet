@@ -513,6 +513,31 @@ same:field
 size:value
 
 			</pre>
+			
+			<h4><a name="str" href="#str">Str</a></h4>
+			<pre class="prettyprint lang-php">Str::ascii($value) // Transliterate a UTF-8 value to ASCII.
+Str::camel($value)
+Str::contains($haystack, $needle)
+Str::endsWith($haystack, $needles)
+Str::finish($value, $cap) // Cap a string with a single instance of a given value.
+Str::is($pattern, $value)
+Str::length($value)
+Str::limit($value, $limit = 100, $end = '...')
+Str::lower($value)
+Str::words($value, $words = 100, $end = '...')
+Str::plural($value, $count = 2)
+Str::random($length = 16) // Generate a more truly "random" alpha-numeric string.
+Str::quickRandom($length = 16) // Generate a "random" alpha-numeric string.
+Str::upper($value)
+Str::title($value)
+Str::singular($value)
+Str::slug($title, $separator = '-')
+Str::snake($value, $delimiter = '_')
+Str::startsWith($haystack, $needles)
+Str::studly($value) // Convert a value to studly caps case.
+Str::macro($name, $macro)
+			</pre>
+			
 
 			<h4><a name="helpers" href="#helpers">Helpers</a></h4>
 			<h6>Arrays</h6>
