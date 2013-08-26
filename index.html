@@ -10,20 +10,23 @@
 	<title>Laravel Cheat Sheet</title>
 </head>
 <body>
-	<nav class="top-bar">
-		<ul class="title-area">
-			<li class="name"><h1><a href="#">Laravel Cheat Sheet</a></h1></li>
-			<li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
-		</ul>
-		<section class="top-bar-section">
-			<ul class="left">
-				<li class="comments-toggle"><a href="#"><i class="icon-comments"></i> Toggle Code Comments</a></li>
-				<li><a href="http://github.com/jesseobrien/laravel-cheatsheet"><i class="icon-github"></i> Github</a></li>
+	<div class="fixed">
+		<nav class="top-bar">
+			<ul class="title-area">
+				<li class="name"><h1><a href="#">Laravel Cheat Sheet</a></h1></li>
+				<li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
 			</ul>
-		</section>
-	</nav>
-	<div class="row">
-		<div class="large-6 columns code-column">
+			<section class="top-bar-section">
+				<ul class="left">
+					<li class="comments-toggle"><a href="#"><i class="icon-comments"></i> Toggle Code Comments</a></li>
+					<li><a href="http://github.com/jesseobrien/laravel-cheatsheet"><i class="icon-github"></i> Github</a></li>
+				</ul>
+			</section>
+		</nav>
+	</div>
+
+	<div class="row full-width">
+		<div class="large-4 columns code-column">
 			<h4><a name="routing" href="#routing">Routing</a></h4>
 			<pre class="prettyprint lang-php">Route::get('foo', function(){});
 Route::get('foo', 'ControllerName@function');
@@ -100,104 +103,6 @@ URL::getGenerator();
 URL::setGenerator($generator);
 			</pre>
 
-			<h4><a name="views" href="#views">Views</a></h4>
-			<pre class="prettyprint lang-php">View::make('path/to/view');
-View::make('foo/bar')->with('key', 'value');
-View::make('foo/bar', array('key' => 'value'));
-// Share a value across all views
-View::share('key', 'value');
-// Nesting views
-View::make('foo/bar')->nest('name', 'foo/baz', $data);
-// Register a view composer
-View::composer('viewname', function($view){});
-//Register multiple views to a composer
-View::composer(array('view1', 'view2'), function($view){});
-// Register a composer class
-View::composer('viewname', 'FooComposer');
-View::creator('viewname', function($view){});
-			</pre>
-
-			<h4><a name="blade" href="#blade">Blade Templates</a></h4>
-			<pre class="prettyprint lang-php">@extends('layout.name')
-@section('name') // Begin a section
-@stop // End a section
-@yield('name') // Show a section name in a template
-@include('view.name')
-@include('view.name', array('key' => 'value'));
-@lang('messages.name')
-@choice('messages.name', 1);
-@if
-@else
-@elseif
-@endif
-@unless
-@endunless
-@for
-@endfor
-@foreach
-@endforeach
-@while
-@endwhile
-{{ $var  }} // Echo content
-{{{ $var }}} // Echo escaped content
-{{-- Blade Comment --}}
-			</pre>
-
-			<h4><a name="forms" href="#forms">Forms</a></h4>
-			<pre class="prettyprint lang-php">Form::open(array('url' => 'foo/bar', 'method' => 'PUT'));
-Form::open(array('route' => 'foo.bar'));
-Form::open(array('route' => 'foo.bar', $parameter));
-Form::open(array('action' => 'FooController@method'));
-Form::open(array('action' => 'FooController@method', $parameter));
-Form::open(array('url' => 'foo/bar', 'files' => true));
-Form::token();
-Form::model($foo, array('route' => 'foo.bar', $foo->bar));
-			</pre>
-
-			<h6>Form Elements</h6>
-			<pre class="prettyprint lang-php">Form::label('id', 'Description');
-Form::label('id', 'Description', array('class' => 'foo'));
-Form::text('name');
-Form::text('name', $value);
-Form::hidden('foo', $value);
-Form::password('password');
-Form::email('name', $value, array());
-Form::file('name', array());
-Form::checkbox('name', 'value');
-Form::radio('name', 'value');
-Form::select('name', array('key' => 'value'));
-Form::select('name', array('key' => 'value'), 'key');
-Form::submit('Submit!');
-Form::macro('fooField', function()
-{
-	return '&lt;input type="custom"/&gt;';
-});
-Form::fooField();
-			</pre>
-
-			<h4><a name="html" href="#html">HTML Builder</a></h4>
-			<pre class="prettyprint lang-php">HTML::macro('name', function(){});
-HTML::entities($value);
-HTML::decode($value);
-HTML::script($url, $attributes);
-HTML::style($url, $attributes);
-HTML::link($url, 'title', $attributes, $secure);
-HTML::secureLink($url, 'title', $attributes);
-HTML::linkAsset($url, 'title', $attributes, $secure);
-HTML::linkSecureAsset($url, 'title', $attributes);
-HTML::linkRoute($name, 'title', $parameters, $attributes);
-HTML::linkAction($action, 'title', $parameters, $attributes);
-HTML::mailto($email, 'title', $attributes);
-HTML::email($email);
-HTML::ol($list, $attributes);
-HTML::ul($list, $attributes);
-HTML::listing($type, $list, $attributes);
-HTML::listingElement($key, $type, $value);
-HTML::nestedListing($key, $type, $value);
-HTML::attributes($attributes);
-HTML::attributeElement($key, $value);
-HTML::obfuscate($value);
-			</pre>
 
 			<h4><a name="events" href="#events">Events</a></h4>
 			<pre class="prettyprint lang-php">Event::fire('foo.bar', array($bar));
@@ -307,7 +212,7 @@ File::deleteDirectory('directory', $preserve = false);
 File::cleanDirectory('directory');
 			</pre>
 		</div>
-		<div class="large-6 columns code-column">
+		<div class="large-4 columns code-column">
 			<h4><a name="input" href="#input">Input</a></h4>
 			<pre class="prettyprint lang-php">Input::get('key');
 Input::get('key', 'default'); // Default if the key is missing
@@ -514,7 +419,108 @@ size:value
 
 			</pre>
 			
-			<h4><a name="str" href="#str">Str</a></h4>
+		</div>
+		<div class="large-4 columnsi code-column">
+			<h4><a name="views" href="#views">Views</a></h4>
+			<pre class="prettyprint lang-php">View::make('path/to/view');
+View::make('foo/bar')->with('key', 'value');
+View::make('foo/bar', array('key' => 'value'));
+// Share a value across all views
+View::share('key', 'value');
+// Nesting views
+View::make('foo/bar')->nest('name', 'foo/baz', $data);
+// Register a view composer
+View::composer('viewname', function($view){});
+//Register multiple views to a composer
+View::composer(array('view1', 'view2'), function($view){});
+// Register a composer class
+View::composer('viewname', 'FooComposer');
+View::creator('viewname', function($view){});
+			</pre>
+
+			<h4><a name="blade" href="#blade">Blade Templates</a></h4>
+			<pre class="prettyprint lang-php">@extends('layout.name')
+@section('name') // Begin a section
+@stop // End a section
+@yield('name') // Show a section name in a template
+@include('view.name')
+@include('view.name', array('key' => 'value'));
+@lang('messages.name')
+@choice('messages.name', 1);
+@if
+@else
+@elseif
+@endif
+@unless
+@endunless
+@for
+@endfor
+@foreach
+@endforeach
+@while
+@endwhile
+{{ $var  }} // Echo content
+{{{ $var }}} // Echo escaped content
+{{-- Blade Comment --}}
+			</pre>
+
+			<h4><a name="forms" href="#forms">Forms</a></h4>
+			<pre class="prettyprint lang-php">Form::open(array('url' => 'foo/bar', 'method' => 'PUT'));
+Form::open(array('route' => 'foo.bar'));
+Form::open(array('route' => 'foo.bar', $parameter));
+Form::open(array('action' => 'FooController@method'));
+Form::open(array('action' => 'FooController@method', $parameter));
+Form::open(array('url' => 'foo/bar', 'files' => true));
+Form::token();
+Form::model($foo, array('route' => 'foo.bar', $foo->bar));
+			</pre>
+
+			<h6>Form Elements</h6>
+			<pre class="prettyprint lang-php">Form::label('id', 'Description');
+Form::label('id', 'Description', array('class' => 'foo'));
+Form::text('name');
+Form::text('name', $value);
+Form::hidden('foo', $value);
+Form::password('password');
+Form::email('name', $value, array());
+Form::file('name', array());
+Form::checkbox('name', 'value');
+Form::radio('name', 'value');
+Form::select('name', array('key' => 'value'));
+Form::select('name', array('key' => 'value'), 'key');
+Form::submit('Submit!');
+Form::macro('fooField', function()
+{
+	return '&lt;input type="custom"/&gt;';
+});
+Form::fooField();
+			</pre>
+
+			<h4><a name="html" href="#html">HTML Builder</a></h4>
+			<pre class="prettyprint lang-php">HTML::macro('name', function(){});
+HTML::entities($value);
+HTML::decode($value);
+HTML::script($url, $attributes);
+HTML::style($url, $attributes);
+HTML::link($url, 'title', $attributes, $secure);
+HTML::secureLink($url, 'title', $attributes);
+HTML::linkAsset($url, 'title', $attributes, $secure);
+HTML::linkSecureAsset($url, 'title', $attributes);
+HTML::linkRoute($name, 'title', $parameters, $attributes);
+HTML::linkAction($action, 'title', $parameters, $attributes);
+HTML::mailto($email, 'title', $attributes);
+HTML::email($email);
+HTML::ol($list, $attributes);
+HTML::ul($list, $attributes);
+HTML::listing($type, $list, $attributes);
+HTML::listingElement($key, $type, $value);
+HTML::nestedListing($key, $type, $value);
+HTML::attributes($attributes);
+HTML::attributeElement($key, $value);
+HTML::obfuscate($value);
+			</pre>
+
+			<h4><a name="str" href="#str">Strings</a></h4>
 			<pre class="prettyprint lang-php">Str::ascii($value) // Transliterate a UTF-8 value to ASCII.
 Str::camel($value)
 Str::contains($haystack, $needle)
@@ -605,6 +611,7 @@ dd($value);
 value(function(){ return 'bar'; });
 with(new Foo)->chainedMethod();
 			</pre>
+
 		</div>
 	</div>
 	<script src="/assets/js/jquery-1.10.2.min.js"></script>
