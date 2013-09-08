@@ -231,7 +231,7 @@ Input::except('foo');
 Input::flash();
 Input::flashOnly('foo', 'bar');
 Input::flashExcept('foo', 'baz');
-Input::old('key');
+Input::old('key','default_value');
 			</pre>
 
 			<h6>Files</h6>
@@ -328,6 +328,7 @@ return Redirect::to('foo/bar')->with('key', 'value');
 return Redirect::to('foo/bar')->withInput(Input::get());
 return Redirect::to('foo/bar')->withInput(Input::except('password'));
 return Redirect::to('foo/bar')->withErrors($validator);
+return Redirect::back();
 return Redirect::route('foobar');
 return Redirect::route('foobar', array('value'));
 return Redirect::route('foobar', array('key' => 'value'));
