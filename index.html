@@ -27,6 +27,28 @@
 
 	<div class="row full-width">
 		<div class="large-4 columns code-column">
+		
+		
+			<h4><a name="artisan" href="#routing">Artisan</a></h4>
+			<pre class="prettyprint lang-php">
+				php artisan migrate:make create_users_table
+				php artisan migrate
+				php artisan migrate --env=local
+				php artisan migrate:rollback
+				php artisan migrate:reset
+				php artisan migrate:refresh
+			</pre>
+
+			<h4><a name="composer" href="#routing">Composer</a></h4>
+			<pre class="prettyprint lang-php">
+				composer create-project laravel/laravel folder_name
+				composer install
+				composer update
+				composer dump-autoload
+			</pre>
+		
+		
+		
 			<h4><a name="routing" href="#routing">Routing</a></h4>
 			<pre class="prettyprint lang-php">Route::get('foo', function(){});
 Route::get('foo', 'ControllerName@function');
