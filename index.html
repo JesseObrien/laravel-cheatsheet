@@ -138,6 +138,17 @@ Event::flusher('foo', function($bar){});
 Event::flush('foo');
 Event::subscribe(new FooEventHandler);
 			</pre>
+			
+			<h4><a name="db" href="#db">DB</a></h4>
+			<pre class="prettyprint lang-php">
+$results = DB::select('select * from users where id = ?', array('value'));
+DB::insert('insert into users (id, name) values (?, ?)', array(1, 'Dayle'));
+DB::update('update users set votes = 100 where name = ?', array('John'));
+DB::delete('delete from users');
+DB::statement('drop table users');
+DB::listen(function($sql, $bindings, $time){ code_here() });
+DB::transaction(function(){  code_here() });
+			</pre>
 
 			<h4><a name="eloquent" href="#eloquent">Eloquent</a></h4>
 			<pre class="prettyprint lang-php">Model::create(array('key' => 'value'));
