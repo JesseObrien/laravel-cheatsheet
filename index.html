@@ -164,6 +164,8 @@ Model::where('foo', '=', 'bar')->delete();
 Model::whereRaw('foo = bar and cars = 2', array(20))->get();
 Model::on('connection-name')->find(1);
 Model::with('relation')->get();
+Model::all()->take(10);
+Model::all()->skip(10);
 			</pre>
 
 			<h6>Soft Delete</h6>
