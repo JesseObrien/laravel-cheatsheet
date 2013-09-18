@@ -30,20 +30,26 @@
 		
 		
 			<h4><a name="artisan" href="#routing">Artisan</a></h4>
-			<pre class="prettyprint lang-php">php artisan migrate:make create_users_table
+			<pre class="prettyprint lang-php">
+php artisan migrate:make create_users_table
 php artisan migrate
 php artisan migrate --env=local
 php artisan migrate:rollback
 php artisan migrate:reset
 php artisan migrate:refresh
 php artisan db:seed
+php artisan config:publish
+php artisan serve
+php artisan list
 			</pre>
 
 			<h4><a name="composer" href="#routing">Composer</a></h4>
-			<pre class="prettyprint lang-php">composer create-project laravel/laravel folder_name
+			<pre class="prettyprint lang-php">
+composer create-project laravel/laravel folder_name
 composer install
 composer update
 composer dump-autoload
+composer self-update
 			</pre>
 		
 		
