@@ -513,12 +513,12 @@ View::creator('viewname', function($view){});
 			<h4><a name="forms" href="#forms">Forms</a></h4>
 			<pre class="prettyprint lang-php">Form::open(array('url' => 'foo/bar', 'method' => 'PUT'));
 Form::open(array('route' => 'foo.bar'));
-Form::open(array('route' => 'foo.bar', $parameter));
+Form::open(array('route' => array('foo.bar', $parameter)));
 Form::open(array('action' => 'FooController@method'));
-Form::open(array('action' => 'FooController@method', $parameter));
+Form::open(array('action' => array('FooController@method', $parameter)));
 Form::open(array('url' => 'foo/bar', 'files' => true));
 Form::token();
-Form::model($foo, array('route' => 'foo.bar', $foo->bar));
+Form::model($foo, array('route' => array('foo.bar', $foo->bar)));
 			</pre>
 
 			<h6>Form Elements</h6>
