@@ -31,9 +31,9 @@
 		
 			<h4><a name="artisan" href="#routing">Artisan</a></h4>
 			<pre class="prettyprint lang-php">
-php artisan migrate:make create_users_table
-php artisan migrate
-php artisan migrate --env=local
+php artisan migrate:make create_users_table [--bench="vendor/package"]
+php artisan migrate [--bench="vendor/package"]
+php artisan migrate --env=local 
 php artisan migrate:rollback
 php artisan migrate:reset
 php artisan migrate:refresh
