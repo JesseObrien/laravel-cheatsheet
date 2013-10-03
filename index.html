@@ -374,6 +374,8 @@ return Redirect::route('foobar', array('key' => 'value'));
 return Redirect::action('FooController@index');
 return Redirect::action('FooController@baz', array('value'));
 return Redirect::action('FooController@baz', array('key' => 'value'));
+// redirect the user to the URL they were trying to access. If intented no defined defaults to foo/bar.
+return Redirect::intended('foo/bar');
 			</pre>
 
 			<h4><a name="ioc" href="#ioc">IoC</a></h4>
