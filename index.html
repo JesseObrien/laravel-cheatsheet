@@ -374,7 +374,7 @@ return Redirect::route('foobar', array('key' => 'value'));
 return Redirect::action('FooController@index');
 return Redirect::action('FooController@baz', array('value'));
 return Redirect::action('FooController@baz', array('key' => 'value'));
-// redirect the user to the URL they were trying to access. If intented no defined defaults to foo/bar.
+// If intended redirect is not defined, defaults to foo/bar.
 return Redirect::intended('foo/bar');
 			</pre>
 
