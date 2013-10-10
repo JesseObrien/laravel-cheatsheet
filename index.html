@@ -30,16 +30,50 @@
 		
 			<h4><a name="artisan" href="#artisan">Artisan</a></h4>
 			<pre class="prettyprint lang-php">
-php artisan migrate:make create_users_table [--bench="vendor/package"]
-php artisan migrate [--bench="vendor/package"]
-php artisan migrate --env=local 
-php artisan migrate:rollback
-php artisan migrate:reset
-php artisan migrate:refresh
-php artisan db:seed
-php artisan config:publish
-php artisan serve
+php artisan --help OR -h
+php artisan --quiet OR -q
+php artisan --version OR -V
+php artisan --no-interaction OR -n
+php artisan --ansi
+php artisan --no-ansi
+php artisan --env
+// -v|vv|vvv Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug
+php artisan --verbose
+
+php artisan changes
+php artisan clear-compiled
+php artisan down
+php artisan dump-autoload
+php artisan env
+php artisan help
 php artisan list
+php artisan migrate
+php artisan optimize
+php artisan routes
+php artisan serve
+php artisan tinker
+php artisan up
+php artisan workbench
+
+php artisan asset:publish [--bench[="vendor/package"]] [--path[="..."]] [package]
+php artisan auth:reminders
+php artisan cache:clear
+php artisan command:make name [--command[="..."]] [--path[="..."]] [--namespace[="..."]]
+php artisan config:publish
+php artisan controller:make [--bench="vendor/package"]
+php artisan db:seed [--class[="..."]] [--database[="..."]]
+php artisan key:generate
+php artisan migrate [--bench="vendor/package"] [--database[="..."]] [--path[="..."]] [--package[="..."]] [--pretend] [--seed]
+php artisan migrate:install [--database[="..."]]
+php artisan migrate:make name [--bench="vendor/package"] [--create] [--package[="..."]] [--path[="..."]] [--table[="..."]]
+php artisan migrate:refresh [--database[="..."]] [--seed]
+php artisan migrate:reset [--database[="..."]] [--pretend]
+php artisan migrate:rollback [--database[="..."]] [--pretend]
+php artisan queue:listen [--queue[="..."]] [--delay[="..."]] [--memory[="..."]] [--timeout[="..."]] [connection]
+php artisan queue:subscribe [--type[="..."]] queue url
+php artisan queue:work [--queue[="..."]] [--delay[="..."]] [--memory[="..."]] [--sleep] [connection]
+php artisan session:table 
+php artisan view:publish [--path[="..."]] package
 			</pre>
 
 			<h4><a name="composer" href="#composer">Composer</a></h4>
