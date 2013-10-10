@@ -110,7 +110,8 @@ Route::post('foo', function(){});
 Route::put('foo', function(){});
 Route::patch('foo', function(){});
 Route::delete('foo', function(){});
-Route::resource('foo', 'FooController'); // RESTful actions
+// RESTful actions
+Route::resource('foo', 'FooController'); 
 			</pre>
 
 			<h6>Secure Routes</h6>
@@ -124,13 +125,17 @@ Route::get('foo/{bar}/{baz}', function($bar, $baz){})
 			</pre>
 
 			<h6>Filters</h6>
-			<pre class="prettyprint lang-php">Route::filter('auth', function(){}); // Declare an auth filter
-Route::filter('foo', 'FooFilter'); // Register a class as a filter
-Route::get('foo', array('before' => 'auth', function(){}));
+			<pre class="prettyprint lang-php"> // Declare an auth filter
+Route::filter('auth', function(){});
+// Register a class as a filter
+Route::filter('foo', 'FooFilter');
 // Routes in this group are guarded by the 'auth' filter
+Route::get('foo', array('before' => 'auth', function(){}));
 Route::group(array('before' => 'auth'), function(){});
-Route::when('foo/*', 'foo'); // Pattern filter
-Route::when('foo/*', 'foo', array('post')); // HTTP verb pattern
+// Pattern filter
+Route::when('foo/*', 'foo');
+// HTTP verb pattern
+Route::when('foo/*', 'foo', array('post')); 
 			</pre>
 
 			<h6>Named Routes</h6>
@@ -195,10 +200,12 @@ DB::transaction(function(){  code_here() });
 Model::destroy(1);
 Model::all();
 Model::find(1);
-Model::findOrFail(1); // Trigger an exception
+// Trigger an exception
+Model::findOrFail(1);
 Model::where('foo', '=', 'bar')->get();
 Model::where('foo', '=', 'bar')->first();
-Model::where('foo', '=', 'bar')->firstOrFail(); // Exception
+// Exception
+Model::where('foo', '=', 'bar')->firstOrFail();
 Model::where('foo', '=', 'bar')->count();
 Model::where('foo', '=', 'bar')->delete();
 Model::whereRaw('foo = bar and cars = 2', array(20))->get();
@@ -234,7 +241,8 @@ Mail::send(array('html.view', 'text.view'), $data, $callback);
 Mail::queue('email.view', $data, function($message){});
 Mail::queueOn('queue-name', 'email.view', $data, $callback);
 Mail::later(5, 'email.view', $data, function($message){});
-Mail::pretend(); // Write all email to logs instead of sending
+// Write all email to logs instead of sending
+Mail::pretend();
 			</pre>
 
 			<h4><a name="queues" hre="#queues">Queues</a></h4>
@@ -273,14 +281,14 @@ File::lastModified('path');
 File::isDirectory('directory');
 File::isWritable('path');
 File::isFile('file');
-File::glob($patterns, $flag);
 // Find path names matching a given pattern.
-File::files('directory');
+File::glob($patterns, $flag);
 // Get an array of all files in a directory.
-File::allFiles('directory');
+File::files('directory');
 // Get all of the files from the given directory (recursive).
-File::directories('directory');
+File::allFiles('directory');
 // Get all of the directories within a given directory.
+File::directories('directory');
 File::makeDirectory('path',  $mode = 0777, $recursive = false);
 File::copyDirectory('directory', 'destination', $options = null);
 File::deleteDirectory('directory', $preserve = false);
@@ -290,7 +298,8 @@ File::cleanDirectory('directory');
 		<div class="large-4 columns code-column">
 			<h4><a name="input" href="#input">Input</a></h4>
 			<pre class="prettyprint lang-php">Input::get('key');
-Input::get('key', 'default'); // Default if the key is missing
+// Default if the key is missing
+Input::get('key', 'default'); 
 Input::has('key');
 Input::all();
 // Only retrieve 'foo' and 'bar' when getting input
@@ -415,12 +424,14 @@ return Redirect::intended('foo/bar');
 			<h4><a name="ioc" href="#ioc">IoC</a></h4>
 			<pre class="prettyprint lang-php">App::bind('foo', function($app){ return new Foo; });
 App::make('foo');
-App::make('FooBar'); // If this class exists, it's returned
+// If this class exists, it's returned
+App::make('FooBar');
 App::singleton('foo', function(){ return new Foo; });
 App::instance('foo', new Foo);
 App::bind('FooRepositoryInterface', 'BarRepository');
 App::register('FooServiceProvider');
-App::resolving(function($object){}); // Listen for object resolution
+// Listen for object resolution
+App::resolving(function($object){});
 			</pre>
 
 			<h4><a name="security" href="#security">Security</a></h4>
@@ -430,11 +441,14 @@ Hash::check('secretpassword', $hashedPassword);
 Hash::needsRehash($hashedPassword);
 			</pre>
 			<h6>Auth</h6>
-			<pre class="prettyprint lang-php">Auth::check(); // Check if the user is logged in
+			<pre class="prettyprint lang-php">// Check if the user is logged in
+Auth::check(); 
 Auth::user();
 Auth::attempt(array('email' => $email, 'password' => $password));
-Auth::attempt($credentials, true); // Remember user login
-Auth::once($credentials); // Log in for a single request
+// Remember user login
+Auth::attempt($credentials, true); 
+// Log in for a single request
+Auth::once($credentials);
 Auth::login(User::find(1));
 Auth::loginUsingId(1);
 Auth::logout();
@@ -522,10 +536,14 @@ View::creator('viewname', function($view){});
 
 			<h4><a name="blade" href="#blade">Blade Templates</a></h4>
 			<pre class="prettyprint lang-php">@extends('layout.name')
-@section('name') // Begin a section
-@stop // End a section
-@show // End a section an shown then
-@yield('name') // Show a section name in a template
+// Begin a section
+@section('name')
+// End a section
+@stop
+// End a section and then show it
+@show
+// Show a section name in a template
+@yield('name')
 @include('view.name')
 @include('view.name', array('key' => 'value'));
 @lang('messages.name')
@@ -542,8 +560,10 @@ View::creator('viewname', function($view){});
 @endforeach
 @while
 @endwhile
-{{ $var  }} // Echo content
-{{{ $var }}} // Echo escaped content
+// Echo content
+{{ $var  }}
+// Echo escaped content
+{{{ $var }}}
 {{-- Blade Comment --}}
 			</pre>
 
@@ -604,26 +624,31 @@ HTML::obfuscate($value);
 			</pre>
 
 			<h4><a name="str" href="#str">Strings</a></h4>
-			<pre class="prettyprint lang-php">Str::ascii($value) // Transliterate a UTF-8 value to ASCII.
+			<pre class="prettyprint lang-php">// Transliterate a UTF-8 value to ASCII
+Str::ascii($value)
 Str::camel($value)
 Str::contains($haystack, $needle)
 Str::endsWith($haystack, $needles)
-Str::finish($value, $cap) // Cap a string with a single instance of a given value.
+// Cap a string with a single instance of a given value.
+Str::finish($value, $cap)
 Str::is($pattern, $value)
 Str::length($value)
 Str::limit($value, $limit = 100, $end = '...')
 Str::lower($value)
 Str::words($value, $words = 100, $end = '...')
 Str::plural($value, $count = 2)
-Str::random($length = 16) // Generate a more truly "random" alpha-numeric string.
-Str::quickRandom($length = 16) // Generate a "random" alpha-numeric string.
+// Generate a more truly "random" alpha-numeric string.
+Str::random($length = 16) 
+// Generate a "random" alpha-numeric string.
+Str::quickRandom($length = 16)
 Str::upper($value)
 Str::title($value)
 Str::singular($value)
 Str::slug($title, $separator = '-')
 Str::snake($value, $delimiter = '_')
 Str::startsWith($haystack, $needles)
-Str::studly($value) // Convert a value to studly caps case.
+// Convert a value to studly caps case.
+Str::studly($value)
 Str::macro($name, $macro)
 			</pre>
 			
@@ -637,41 +662,52 @@ array_dot($array);
 array_except($array, array('key'));
 array_fetch($array, 'key');
 array_first($array, function($key, $value){}, $default);
-array_flatten($array); // Strips keys from the array
+// Strips keys from the array
+array_flatten($array);
 array_forget($array, 'foo');
-array_forget($array, 'foo.bar'); // Dot notation
+// Dot notation
+array_forget($array, 'foo.bar');
 array_get($array, 'foo', 'default');
 array_get($array, 'foo.bar', 'default');
 array_only($array, array('key'));
-array_pluck($array, 'key'); // Return array of key => values
-array_pull($array, 'key'); // Return and remove 'key' from array
+// Return array of key => values
+array_pluck($array, 'key');
+// Return and remove 'key' from array
+array_pull($array, 'key');
 array_set($array, 'key', 'value');
-array_set($array, 'key.subkey', 'value'); // Dot notation
+// Dot notation
+array_set($array, 'key.subkey', 'value');
 array_sort($array, function(){});
-head($array); // First element of an array
-last($array); // Last element of an array
+// First element of an array
+head($array);
+// Last element of an array
+last($array);
 			</pre>
 			<h6>Paths</h6>
 			<pre class="prettyprint lang-php">app_path();
 public_path();
-base_path(); // App root path
+// App root path
+base_path();
 storage_path();
 			</pre>
 			<h6>Strings</h6>
 			<pre class="prettyprint lang-php">
 camel_case($value);
 class_basename($class);
-e('&lt;html&gt;'); // Escape a string
+// Escape a string
+e('&lt;html&gt;');
 starts_with('Foo bar.', 'Foo');
 ends_with('Foo bar.', 'bar.');
 snake_case('fooBar');
 str_contains('Hello foo bar.', 'foo');
-str_finish('foo/bar', '/'); // Result: foo/bar/
+// Result: foo/bar/
+str_finish('foo/bar', '/');
 str_is('foo*', 'foobar');
 str_plural('car');
 str_random(25);
 str_singular('cars');
-studly_case('foo_bar'); // Result: FooBar
+// Result: FooBar
+studly_case('foo_bar');
 trans('foo.bar');
 trans_choice('foo.bar', $count);
 			</pre>
@@ -681,8 +717,10 @@ link_to('foo/bar', $title, $attributes, $secure);
 link_to_asset('img/foo.jpg', $title, $attributes, $secure);
 link_to_route('route.name', $title, $parameters, $attributes);
 link_to_action('FooController@method', $title, $params, $attrs);
-asset('img/photo.jpg', $title, $attributes); // HTML Link
-secure_asset('img/photo.jpg', $title, $attributes); // HTTPS link
+// HTML Link
+asset('img/photo.jpg', $title, $attributes);
+// HTTPS link
+secure_asset('img/photo.jpg', $title, $attributes);
 secure_url('path', $parameters);
 route($route, $parameters, $absolute = true);
 url('path', $parameters = array(), $secure = null);
