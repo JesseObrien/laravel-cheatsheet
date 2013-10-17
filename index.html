@@ -131,9 +131,10 @@ Route::filter('auth', function(){});
 Route::filter('foo', 'FooFilter'); 
 Route::get('foo', array('before' => 'auth', function(){}));
 // Routes in this group are guarded by the 'auth' filter
+Route::get('foo', array('before' => 'auth', function(){}));
 Route::group(array('before' => 'auth'), function(){});
 // Pattern filter
-Route::when('foo/*', 'foo'); 
+Route::when('foo/*', 'foo');
 // HTTP verb pattern
 Route::when('foo/*', 'foo', array('post')); 
 			</pre>
@@ -225,7 +226,9 @@ DB::table('name')->insert(
 	array('name' => 'John', 'email' => 'john@example.com')
 	array('name' => 'James', 'email' => 'james@example.com')
 );
-DB::table('name')->where('name', '=', 'John')->update(array('email', 'john@example2.com'));
+// Update an entry
+DB::table('name')->where('name', '=', 'John')
+	->update(array('email', 'john@example2.com'));
 // Delete everything from a table
 DB::table('name')->delete();
 // Delete specific records
@@ -288,65 +291,13 @@ Model::deleting(function($model){});
 Model::deleted(function($model){});
 Model::observe(new FooObserver);
 			</pre>
-
-
-			<h4><a name="mail" href="#mail">Mail</a> <a href="http://laravel.com/docs/mail" title="Mail @ Laravel Docs"><i class="icon-file-text"></i></a></h4>
-			<pre class="prettyprint lang-php">Mail::send('email.view', $data, function($message){});
-Mail::send(array('html.view', 'text.view'), $data, $callback);
-Mail::queue('email.view', $data, function($message){});
-Mail::queueOn('queue-name', 'email.view', $data, $callback);
-Mail::later(5, 'email.view', $data, function($message){});
-// Write all email to logs instead of sending
-Mail::pretend(); 
-			</pre>
-
-			<h4><a name="queues" href="#queues">Queues</a><a href="http://laravel.com/docs/queues" title="Queues @ Laravel Docs"><i class="icon-file-text"></i></a></h4>
-			<pre class="prettyprint lang-php">Queue::push('SendMail', array('message' => $message));
-Queue::push('SendEmail@send', array('message' => $message));
-Queue::push(function($job) use $id {});
-php artisan queue:listen
-php artisan queue:listen connection
-php artisan queue:listen --timeout=60
-php artisan queue:work
-			</pre>
-
-			<h4><a name="files" href="#files">Files</a> <a href="http://laravel.com/api/class-Illuminate.Filesystem.Filesystem.html" title="Filesystem @ Laravel Docs"><i class="icon-file-text"></i></a></h4>
-			<pre class="prettyprint lang-php">File::exists('path');
-File::get('path');
-File::getRemote('path');
-File::getRequire('path');
-File::requireOnce('path');
-File::put('path', 'contents');
-File::append('path', 'data');
-File::delete('path');
-File::move('path', 'target');
-File::copy('path', 'target');
-File::extension('path');
-File::type('path');
-File::size('path');
-File::lastModified('path');
-File::isDirectory('directory');
-File::isWritable('path');
-File::isFile('file');
-File::glob($patterns, $flag);
-// Find path names matching a given pattern.
-File::files('directory');
-// Get an array of all files in a directory.
-File::allFiles('directory');
-// Get all of the files from the given directory (recursive).
-File::directories('directory');
-// Get all of the directories within a given directory.
-File::makeDirectory('path',  $mode = 0777, $recursive = false);
-File::copyDirectory('directory', 'destination', $options = null);
-File::deleteDirectory('directory', $preserve = false);
-File::cleanDirectory('directory');
-			</pre>
 		</div>
+
 		<div class="large-4 columns code-column">
 			<h4><a name="input" href="#input">Input</a> <a href="http://laravel.com/docs/requests" title="Input @ Laravel Docs"><i class="icon-file-text"></i></a></h4>
 			<pre class="prettyprint lang-php">Input::get('key');
 // Default if the key is missing
-Input::get('key', 'default');
+Input::get('key', 'default'); 
 Input::has('key');
 Input::all();
 // Only retrieve 'foo' and 'bar' when getting input
@@ -472,13 +423,13 @@ return Redirect::intended('foo/bar');
 			<pre class="prettyprint lang-php">App::bind('foo', function($app){ return new Foo; });
 App::make('foo');
 // If this class exists, it's returned
-App::make('FooBar'); 
+App::make('FooBar');
 App::singleton('foo', function(){ return new Foo; });
 App::instance('foo', new Foo);
 App::bind('FooRepositoryInterface', 'BarRepository');
 App::register('FooServiceProvider');
 // Listen for object resolution
-App::resolving(function($object){}); 
+App::resolving(function($object){});
 			</pre>
 
 			<h4><a name="security" href="#security">Security</a></h4>
@@ -510,6 +461,26 @@ Password::remind($credentials, function($message, $user){});
 Crypt::decrypt($encryptedString);
 Crypt::setMode('ctr');
 Crypt::setCipher($cipher);
+			</pre>
+
+			<h4><a name="mail" href="#mail">Mail</a> <a href="http://laravel.com/docs/mail" title="Mail @ Laravel Docs"><i class="icon-file-text"></i></a></h4>
+			<pre class="prettyprint lang-php">Mail::send('email.view', $data, function($message){});
+Mail::send(array('html.view', 'text.view'), $data, $callback);
+Mail::queue('email.view', $data, function($message){});
+Mail::queueOn('queue-name', 'email.view', $data, $callback);
+Mail::later(5, 'email.view', $data, function($message){});
+// Write all email to logs instead of sending
+Mail::pretend(); 
+			</pre>
+
+			<h4><a name="queues" href="#queues">Queues</a> <a href="http://laravel.com/docs/queues" title="Queues @ Laravel Docs"><i class="icon-file-text"></i></a></h4>
+			<pre class="prettyprint lang-php">Queue::push('SendMail', array('message' => $message));
+Queue::push('SendEmail@send', array('message' => $message));
+Queue::push(function($job) use $id {});
+php artisan queue:listen
+php artisan queue:listen connection
+php artisan queue:listen --timeout=60
+php artisan queue:work
 			</pre>
 
 			<h4><a name="validation" href="#validation">Validation</a></h4>
@@ -671,7 +642,7 @@ HTML::obfuscate($value);
 			</pre>
 
 			<h4><a name="str" href="#str">Strings</a></h4>
-			<pre class="prettyprint lang-php">// Transliterate a UTF-8 value to ASCII.
+			<pre class="prettyprint lang-php">// Transliterate a UTF-8 value to ASCII
 Str::ascii($value)
 Str::camel($value)
 Str::contains($haystack, $needle)
@@ -685,7 +656,7 @@ Str::lower($value)
 Str::words($value, $words = 100, $end = '...')
 Str::plural($value, $count = 2)
 // Generate a more truly "random" alpha-numeric string.
-Str::random($length = 16)
+Str::random($length = 16) 
 // Generate a "random" alpha-numeric string.
 Str::quickRandom($length = 16)
 Str::upper($value)
@@ -694,7 +665,8 @@ Str::singular($value)
 Str::slug($title, $separator = '-')
 Str::snake($value, $delimiter = '_')
 Str::startsWith($haystack, $needles)
-Str::studly($value) // Convert a value to studly caps case.
+// Convert a value to studly caps case.
+Str::studly($value)
 Str::macro($name, $macro)
 			</pre>
 			
@@ -706,6 +678,39 @@ Lang::has('messages.welcome');
 Lang::choice('messages.apples', 10);
 			</pre>
 
+			<h4><a name="files" href="#files">Files</a> <a href="http://laravel.com/api/class-Illuminate.Filesystem.Filesystem.html" title="Filesystem @ Laravel Docs"><i class="icon-file-text"></i></a></h4>
+			<pre class="prettyprint lang-php">File::exists('path');
+File::get('path');
+File::getRemote('path');
+File::getRequire('path');
+File::requireOnce('path');
+File::put('path', 'contents');
+File::append('path', 'data');
+File::delete('path');
+File::move('path', 'target');
+File::copy('path', 'target');
+File::extension('path');
+File::type('path');
+File::size('path');
+File::lastModified('path');
+File::isDirectory('directory');
+File::isWritable('path');
+File::isFile('file');
+// Find path names matching a given pattern.
+File::glob($patterns, $flag);
+// Get an array of all files in a directory.
+File::files('directory');
+// Get all of the files from the given directory (recursive).
+File::allFiles('directory');
+// Get all of the directories within a given directory.
+File::directories('directory');
+File::makeDirectory('path',  $mode = 0777, $recursive = false);
+File::copyDirectory('directory', 'destination', $options = null);
+File::deleteDirectory('directory', $preserve = false);
+File::cleanDirectory('directory');
+			</pre>
+
+
 			<h4><a name="helpers" href="#helpers">Helpers</a></h4>
 			<h6>Arrays</h6>
 			<pre class="prettyprint lang-php">array_add($array, 'key', 'value');
@@ -716,16 +721,17 @@ array_except($array, array('key'));
 array_fetch($array, 'key');
 array_first($array, function($key, $value){}, $default);
 // Strips keys from the array
-array_flatten($array); 
+array_flatten($array);
 array_forget($array, 'foo');
-array_forget($array, 'foo.bar'); // Dot notation
+// Dot notation
+array_forget($array, 'foo.bar');
 array_get($array, 'foo', 'default');
 array_get($array, 'foo.bar', 'default');
 array_only($array, array('key'));
 // Return array of key => values
 array_pluck($array, 'key');
 // Return and remove 'key' from array
-array_pull($array, 'key'); 
+array_pull($array, 'key');
 array_set($array, 'key', 'value');
 // Dot notation
 array_set($array, 'key.subkey', 'value');
@@ -738,24 +744,28 @@ last($array);
 			<h6>Paths</h6>
 			<pre class="prettyprint lang-php">app_path();
 public_path();
-base_path(); // App root path
+// App root path
+base_path();
 storage_path();
 			</pre>
 			<h6>Strings</h6>
 			<pre class="prettyprint lang-php">
 camel_case($value);
 class_basename($class);
-e('&lt;html&gt;'); // Escape a string
+// Escape a string
+e('&lt;html&gt;');
 starts_with('Foo bar.', 'Foo');
 ends_with('Foo bar.', 'bar.');
 snake_case('fooBar');
 str_contains('Hello foo bar.', 'foo');
-str_finish('foo/bar', '/'); // Result: foo/bar/
+// Result: foo/bar/
+str_finish('foo/bar', '/');
 str_is('foo*', 'foobar');
 str_plural('car');
 str_random(25);
 str_singular('cars');
-studly_case('foo_bar'); // Result: FooBar
+// Result: FooBar
+studly_case('foo_bar');
 trans('foo.bar');
 trans_choice('foo.bar', $count);
 			</pre>
@@ -765,8 +775,10 @@ link_to('foo/bar', $title, $attributes, $secure);
 link_to_asset('img/foo.jpg', $title, $attributes, $secure);
 link_to_route('route.name', $title, $parameters, $attributes);
 link_to_action('FooController@method', $title, $params, $attrs);
-asset('img/photo.jpg', $title, $attributes); // HTML Link
-secure_asset('img/photo.jpg', $title, $attributes); // HTTPS link
+// HTML Link
+asset('img/photo.jpg', $title, $attributes);
+// HTTPS link
+secure_asset('img/photo.jpg', $title, $attributes);
 secure_url('path', $parameters);
 route($route, $parameters, $absolute = true);
 url('path', $parameters = array(), $secure = null);
