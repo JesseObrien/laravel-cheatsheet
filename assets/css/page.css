@@ -17,7 +17,7 @@ h1,h2,h3,h4,h5,h6 {font-family: 'UbuntuMono', monospace; }
 .top-bar .name h1 a { color: #fa503a; }
 .logo {background-image: url('logo.png'); height: 30px; width: 103px; margin-top: 5px;}
 .row.full-width { width: 100%; max-width: 100%; }
-.code-column {background-color: #333; color: #fff;}
+.code-column {background-color: #333; color: #fff; word-wrap: break-word; }
 .code-column h6 {color: #ddd; margin:0.2em 0;}
 .code-column h4 {color: #fff; margin: 10px 0;}
 .code-column h4 a { color: #fff; }

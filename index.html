@@ -76,7 +76,7 @@ php artisan session:table
 php artisan view:publish [--path[="..."]] package
 			</pre>
 
-			<h4><a name="composer" href="#composer">Composer</a></h4>
+			<h4><a name="composer" href="#composer">Composer</a> <a href="http://getcomposer.org/doc/03-cli.md" title="Composer CLI Docs"><i class="icon-file-text"></i></a></h4>
 			<pre class="prettyprint lang-php">
 composer create-project laravel/laravel folder_name
 composer install
@@ -87,7 +87,7 @@ composer self-update
 		
 		
 		
-			<h4><a name="routing" href="#routing">Routing</a></h4>
+			<h4><a name="routing" href="#routing">Routing</a> <a href="http://laravel.com/docs/routing" title="Routing @ Laravel Docs"><i class="icon-file-text"></i></a></h4>
 			<pre class="prettyprint lang-php">Route::get('foo', function(){});
 Route::get('foo', 'ControllerName@function');
 Route::controller('foo', 'FooController');
@@ -110,7 +110,8 @@ Route::post('foo', function(){});
 Route::put('foo', function(){});
 Route::patch('foo', function(){});
 Route::delete('foo', function(){});
-Route::resource('foo', 'FooController'); // RESTful actions
+// RESTful actions
+Route::resource('foo', 'FooController'); 
 			</pre>
 
 			<h6>Secure Routes</h6>
@@ -124,13 +125,17 @@ Route::get('foo/{bar}/{baz}', function($bar, $baz){})
 			</pre>
 
 			<h6>Filters</h6>
-			<pre class="prettyprint lang-php">Route::filter('auth', function(){}); // Declare an auth filter
-Route::filter('foo', 'FooFilter'); // Register a class as a filter
+			<pre class="prettyprint lang-php">// Declare an auth filter
+Route::filter('auth', function(){}); 
+// Register a class as a filter
+Route::filter('foo', 'FooFilter'); 
 Route::get('foo', array('before' => 'auth', function(){}));
 // Routes in this group are guarded by the 'auth' filter
 Route::group(array('before' => 'auth'), function(){});
-Route::when('foo/*', 'foo'); // Pattern filter
-Route::when('foo/*', 'foo', array('post')); // HTTP verb pattern
+// Pattern filter
+Route::when('foo/*', 'foo'); 
+// HTTP verb pattern
+Route::when('foo/*', 'foo', array('post')); 
 			</pre>
 
 			<h6>Named Routes</h6>
@@ -166,7 +171,7 @@ URL::setGenerator($generator);
 			</pre>
 
 
-			<h4><a name="events" href="#events">Events</a></h4>
+			<h4><a name="events" href="#events">Events</a> <a href="http://laravel.com/docs/events" title="Events @ Laravel Docs"><i class="icon-file-text"></i></a></h4>
 			<pre class="prettyprint lang-php">Event::fire('foo.bar', array($bar));
 Event::listen('foo.bar', function($bar){});
 Event::listen('foo.*', function($bar){});
@@ -179,26 +184,83 @@ Event::flush('foo');
 Event::subscribe(new FooEventHandler);
 			</pre>
 			
-			<h4><a name="db" href="#db">DB</a></h4>
+			<h4><a name="db" href="#db">Database</a> <a href="http://laravel.com/docs/queries" title="Query Builder @ Laravel Docs"><i class="icon-file-text"></i></a></h4>
 			<pre class="prettyprint lang-php">
-$results = DB::select('select * from users where id = ?', array('value'));
-DB::insert('insert into users (id, name) values (?, ?)', array(1, 'Dayle'));
-DB::update('update users set votes = 100 where name = ?', array('John'));
-DB::delete('delete from users');
+DB::connection('connection_name');
 DB::statement('drop table users');
-DB::listen(function($sql, $bindings, $time){ code_here() });
-DB::transaction(function(){  code_here() });
+DB::listen(function($sql, $bindings, $time){ code_here; });
+DB::transaction(function(){ transaction_code_here; });
+// Cache a query for $time minutes
+DB::table('users')->remember($time)->get();
+// Escape raw input
+DB::raw('sql expression here');
 			</pre>
 
-			<h4><a name="eloquent" href="#eloquent">Eloquent</a></h4>
+			<h6>Selects</h6>
+			<pre class="prettyprint lang-php">DB::table('name')->get();
+DB::table('name')->distinct()->get();
+DB::table('name')->select('column as column_alias')->get();
+DB::table('name')->where('name', '=', 'John')->get();
+DB::table('name')->whereBetween('column', array(1, 100))->get();
+DB::table('name')->whereIn('column', array(1, 2, 3))->get();
+DB::table('name')->whereNotIn('column', array(1, 2, 3))->get();
+DB::table('name')->whereNull('column')->get();
+DB::table('name')->groupBy('column')->get();
+DB::table('name')->orderBy('column')->get();
+DB::table('name')->having('count', '>', 100)->get();
+DB::table('name')->skip(10)->take(5)->get();
+DB::table('name')->first();
+DB::table('name')->pluck('column');
+DB::table('name')->lists('column');
+// Joins
+DB::table('name')->join('table', 'name.id', '=', 'table.id')
+    ->select('name.id', 'table.email');
+			</pre>
+			
+			<h6>Inserts, Updates, Deletes</h6>
+			<pre class="prettyprint lang-php">DB::table('name')->insert(array('name' => 'John', 'email' => 'john@example.com'));
+DB::table('name')->insertGetId(array('name' => 'John', 'email' => 'john@example.com'));
+// Batch insert
+DB::table('name')->insert(
+	array('name' => 'John', 'email' => 'john@example.com')
+	array('name' => 'James', 'email' => 'james@example.com')
+);
+DB::table('name')->where('name', '=', 'John')->update(array('email', 'john@example2.com'));
+// Delete everything from a table
+DB::table('name')->delete();
+// Delete specific records
+DB::table('name')->where('id', '>', '10')->delete();
+DB::table('name')->truncate();
+			</pre>
+
+			<h6>Aggregates</h6>
+			<pre class="prettyprint lang-php">DB::table('name')->count();
+DB::table('name')->max('column');
+DB::table('name')->min('column');
+DB::table('name')->avg('column');
+DB::table('name')->sum('column');
+DB::table('name')->increment('column');
+DB::table('name')->increment('column', $amount);
+DB::table('name')->decrement('column');
+DB::table('name')->decrement('column', $amount);
+			</pre>
+
+			<h6>Raw Expressions</h6>
+			<pre class="prettyprint lang-php">DB::select('select * from users where id = ?', array('value'));
+DB::table('name')->select(DB::raw('count(*) as count, column2'))->get();
+			</pre>
+
+			<h4><a name="eloquent" href="#eloquent">Eloquent</a> <a href="http://laravel.com/docs/eloquent" title="Eloquent @ Laravel Docs"><i class="icon-file-text"></i></a></h4>
 			<pre class="prettyprint lang-php">Model::create(array('key' => 'value'));
 Model::destroy(1);
 Model::all();
 Model::find(1);
-Model::findOrFail(1); // Trigger an exception
+// Throw an exception if the lookup fails
+Model::findOrFail(1); 
 Model::where('foo', '=', 'bar')->get();
 Model::where('foo', '=', 'bar')->first();
-Model::where('foo', '=', 'bar')->firstOrFail(); // Exception
+// Throw an exception if the lookup fails
+Model::where('foo', '=', 'bar')->firstOrFail(); 
 Model::where('foo', '=', 'bar')->count();
 Model::where('foo', '=', 'bar')->delete();
 Model::whereRaw('foo = bar and cars = 2', array(20))->get();
@@ -228,16 +290,17 @@ Model::observe(new FooObserver);
 			</pre>
 
 
-			<h4><a name="mail" href="#mail">Mail</a></h4>
+			<h4><a name="mail" href="#mail">Mail</a> <a href="http://laravel.com/docs/mail" title="Mail @ Laravel Docs"><i class="icon-file-text"></i></a></h4>
 			<pre class="prettyprint lang-php">Mail::send('email.view', $data, function($message){});
 Mail::send(array('html.view', 'text.view'), $data, $callback);
 Mail::queue('email.view', $data, function($message){});
 Mail::queueOn('queue-name', 'email.view', $data, $callback);
 Mail::later(5, 'email.view', $data, function($message){});
-Mail::pretend(); // Write all email to logs instead of sending
+// Write all email to logs instead of sending
+Mail::pretend(); 
 			</pre>
 
-			<h4><a name="queues" hre="#queues">Queues</a></h4>
+			<h4><a name="queues" href="#queues">Queues</a><a href="http://laravel.com/docs/queues" title="Queues @ Laravel Docs"><i class="icon-file-text"></i></a></h4>
 			<pre class="prettyprint lang-php">Queue::push('SendMail', array('message' => $message));
 Queue::push('SendEmail@send', array('message' => $message));
 Queue::push(function($job) use $id {});
@@ -247,15 +310,7 @@ php artisan queue:listen --timeout=60
 php artisan queue:work
 			</pre>
 
-			<h4><a name="localization" href="#localization">Localization</a></h4>
-			<pre class="prettyprint lang-php">App::setLocale('en');
-Lang::get('messages.welcome');
-Lang::get('messages.welcome', array('foo' => 'Bar'));
-Lang::has('messages.welcome');
-Lang::choice('messages.apples', 10);
-			</pre>
-
-			<h4><a name="files" href="#files">Files</a></h4>
+			<h4><a name="files" href="#files">Files</a> <a href="http://laravel.com/api/class-Illuminate.Filesystem.Filesystem.html" title="Filesystem @ Laravel Docs"><i class="icon-file-text"></i></a></h4>
 			<pre class="prettyprint lang-php">File::exists('path');
 File::get('path');
 File::getRemote('path');
@@ -288,9 +343,10 @@ File::cleanDirectory('directory');
 			</pre>
 		</div>
 		<div class="large-4 columns code-column">
-			<h4><a name="input" href="#input">Input</a></h4>
+			<h4><a name="input" href="#input">Input</a> <a href="http://laravel.com/docs/requests" title="Input @ Laravel Docs"><i class="icon-file-text"></i></a></h4>
 			<pre class="prettyprint lang-php">Input::get('key');
-Input::get('key', 'default'); // Default if the key is missing
+// Default if the key is missing
+Input::get('key', 'default');
 Input::has('key');
 Input::all();
 // Only retrieve 'foo' and 'bar' when getting input
@@ -415,12 +471,14 @@ return Redirect::intended('foo/bar');
 			<h4><a name="ioc" href="#ioc">IoC</a></h4>
 			<pre class="prettyprint lang-php">App::bind('foo', function($app){ return new Foo; });
 App::make('foo');
-App::make('FooBar'); // If this class exists, it's returned
+// If this class exists, it's returned
+App::make('FooBar'); 
 App::singleton('foo', function(){ return new Foo; });
 App::instance('foo', new Foo);
 App::bind('FooRepositoryInterface', 'BarRepository');
 App::register('FooServiceProvider');
-App::resolving(function($object){}); // Listen for object resolution
+// Listen for object resolution
+App::resolving(function($object){}); 
 			</pre>
 
 			<h4><a name="security" href="#security">Security</a></h4>
@@ -430,11 +488,14 @@ Hash::check('secretpassword', $hashedPassword);
 Hash::needsRehash($hashedPassword);
 			</pre>
 			<h6>Auth</h6>
-			<pre class="prettyprint lang-php">Auth::check(); // Check if the user is logged in
+			<pre class="prettyprint lang-php">// Check if the user is logged in
+Auth::check();
 Auth::user();
 Auth::attempt(array('email' => $email, 'password' => $password));
-Auth::attempt($credentials, true); // Remember user login
-Auth::once($credentials); // Log in for a single request
+// 'Remember me' by passing true to Auth::attempt()
+Auth::attempt($credentials, true); 
+// Log in for a single request
+Auth::once($credentials);
 Auth::login(User::find(1));
 Auth::loginUsingId(1);
 Auth::logout();
@@ -522,10 +583,14 @@ View::creator('viewname', function($view){});
 
 			<h4><a name="blade" href="#blade">Blade Templates</a></h4>
 			<pre class="prettyprint lang-php">@extends('layout.name')
-@section('name') // Begin a section
-@stop // End a section
-@show // End a section an shown then
-@yield('name') // Show a section name in a template
+// Begin a section
+@section('name')
+// End a section
+@stop 
+// End a section and yield
+@show 
+// Show a section in a template
+@yield('name')
 @include('view.name')
 @include('view.name', array('key' => 'value'));
 @lang('messages.name')
@@ -542,8 +607,10 @@ View::creator('viewname', function($view){});
 @endforeach
 @while
 @endwhile
-{{ $var  }} // Echo content
-{{{ $var }}} // Echo escaped content
+// Echo content
+{{ $var }} 
+// Echo escaped content
+{{{ $var }}}
 {{-- Blade Comment --}}
 			</pre>
 
@@ -604,19 +671,23 @@ HTML::obfuscate($value);
 			</pre>
 
 			<h4><a name="str" href="#str">Strings</a></h4>
-			<pre class="prettyprint lang-php">Str::ascii($value) // Transliterate a UTF-8 value to ASCII.
+			<pre class="prettyprint lang-php">// Transliterate a UTF-8 value to ASCII.
+Str::ascii($value)
 Str::camel($value)
 Str::contains($haystack, $needle)
 Str::endsWith($haystack, $needles)
-Str::finish($value, $cap) // Cap a string with a single instance of a given value.
+// Cap a string with a single instance of a given value.
+Str::finish($value, $cap)
 Str::is($pattern, $value)
 Str::length($value)
 Str::limit($value, $limit = 100, $end = '...')
 Str::lower($value)
 Str::words($value, $words = 100, $end = '...')
 Str::plural($value, $count = 2)
-Str::random($length = 16) // Generate a more truly "random" alpha-numeric string.
-Str::quickRandom($length = 16) // Generate a "random" alpha-numeric string.
+// Generate a more truly "random" alpha-numeric string.
+Str::random($length = 16)
+// Generate a "random" alpha-numeric string.
+Str::quickRandom($length = 16)
 Str::upper($value)
 Str::title($value)
 Str::singular($value)
@@ -627,6 +698,13 @@ Str::studly($value) // Convert a value to studly caps case.
 Str::macro($name, $macro)
 			</pre>
 			
+			<h4><a name="localization" href="#localization">Localization</a> <a href="http://laravel.com/docs/localization" title="Localization @ Laravel Docs"><i class="icon-file-text"></i></a></h4>
+			<pre class="prettyprint lang-php">App::setLocale('en');
+Lang::get('messages.welcome');
+Lang::get('messages.welcome', array('foo' => 'Bar'));
+Lang::has('messages.welcome');
+Lang::choice('messages.apples', 10);
+			</pre>
 
 			<h4><a name="helpers" href="#helpers">Helpers</a></h4>
 			<h6>Arrays</h6>
@@ -637,19 +715,25 @@ array_dot($array);
 array_except($array, array('key'));
 array_fetch($array, 'key');
 array_first($array, function($key, $value){}, $default);
-array_flatten($array); // Strips keys from the array
+// Strips keys from the array
+array_flatten($array); 
 array_forget($array, 'foo');
 array_forget($array, 'foo.bar'); // Dot notation
 array_get($array, 'foo', 'default');
 array_get($array, 'foo.bar', 'default');
 array_only($array, array('key'));
-array_pluck($array, 'key'); // Return array of key => values
-array_pull($array, 'key'); // Return and remove 'key' from array
+// Return array of key => values
+array_pluck($array, 'key');
+// Return and remove 'key' from array
+array_pull($array, 'key'); 
 array_set($array, 'key', 'value');
-array_set($array, 'key.subkey', 'value'); // Dot notation
+// Dot notation
+array_set($array, 'key.subkey', 'value');
 array_sort($array, function(){});
-head($array); // First element of an array
-last($array); // Last element of an array
+// First element of an array
+head($array); 
+// Last element of an array
+last($array); 
 			</pre>
 			<h6>Paths</h6>
 			<pre class="prettyprint lang-php">app_path();
