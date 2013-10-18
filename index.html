@@ -354,6 +354,8 @@ Cache::section('group')->flush();
 			<pre class="prettyprint lang-php">Cookie::get('key');
 // Create a cookie that lasts for ever
 Cookie::forever('key', 'value');
+// Set a cookie before a response has been created
+Cookie::queue('key', 'value', 'minutes');
 // Send a cookie with a response
 $response = Response::make('Hello World');
 $response->withCookie(Cookie::make('name', 'value', $minutes));
