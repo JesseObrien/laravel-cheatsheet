@@ -26,8 +26,8 @@
 
 	<div class="row full-width">
 		<div class="large-4 columns code-column">
-		
-		
+
+
 			<h4><a name="artisan" href="#artisan">Artisan</a></h4>
 			<pre class="prettyprint lang-php">
 php artisan --help OR -h
@@ -72,7 +72,7 @@ php artisan migrate:rollback [--database[="..."]] [--pretend]
 php artisan queue:listen [--queue[="..."]] [--delay[="..."]] [--memory[="..."]] [--timeout[="..."]] [connection]
 php artisan queue:subscribe [--type[="..."]] queue url
 php artisan queue:work [--queue[="..."]] [--delay[="..."]] [--memory[="..."]] [--sleep] [connection]
-php artisan session:table 
+php artisan session:table
 php artisan view:publish [--path[="..."]] package
 			</pre>
 
@@ -84,9 +84,9 @@ composer update
 composer dump-autoload [--optimize]
 composer self-update
 			</pre>
-		
-		
-		
+
+
+
 			<h4><a name="routing" href="#routing">Routing</a> <a href="http://laravel.com/docs/routing" title="Routing @ Laravel Docs"><i class="icon-file-text"></i></a></h4>
 			<pre class="prettyprint lang-php">Route::get('foo', function(){});
 Route::get('foo', 'ControllerName@function');
@@ -111,7 +111,7 @@ Route::put('foo', function(){});
 Route::patch('foo', function(){});
 Route::delete('foo', function(){});
 // RESTful actions
-Route::resource('foo', 'FooController'); 
+Route::resource('foo', 'FooController');
 			</pre>
 
 			<h6>Secure Routes</h6>
@@ -126,9 +126,9 @@ Route::get('foo/{bar}/{baz}', function($bar, $baz){})
 
 			<h6>Filters</h6>
 			<pre class="prettyprint lang-php">// Declare an auth filter
-Route::filter('auth', function(){}); 
+Route::filter('auth', function(){});
 // Register a class as a filter
-Route::filter('foo', 'FooFilter'); 
+Route::filter('foo', 'FooFilter');
 Route::get('foo', array('before' => 'auth', function(){}));
 // Routes in this group are guarded by the 'auth' filter
 Route::get('foo', array('before' => 'auth', function(){}));
@@ -136,7 +136,7 @@ Route::group(array('before' => 'auth'), function(){});
 // Pattern filter
 Route::when('foo/*', 'foo');
 // HTTP verb pattern
-Route::when('foo/*', 'foo', array('post')); 
+Route::when('foo/*', 'foo', array('post'));
 			</pre>
 
 			<h6>Named Routes</h6>
@@ -184,7 +184,7 @@ Event::flusher('foo', function($bar){});
 Event::flush('foo');
 Event::subscribe(new FooEventHandler);
 			</pre>
-			
+
 			<h4><a name="db" href="#db">Database</a> <a href="http://laravel.com/docs/queries" title="Query Builder @ Laravel Docs"><i class="icon-file-text"></i></a></h4>
 			<pre class="prettyprint lang-php">
 DB::connection('connection_name');
@@ -206,6 +206,7 @@ DB::table('name')->whereBetween('column', array(1, 100))->get();
 DB::table('name')->whereIn('column', array(1, 2, 3))->get();
 DB::table('name')->whereNotIn('column', array(1, 2, 3))->get();
 DB::table('name')->whereNull('column')->get();
+DB::table('name')->whereNotNull('column')->get();
 DB::table('name')->groupBy('column')->get();
 DB::table('name')->orderBy('column')->get();
 DB::table('name')->having('count', '>', 100)->get();
@@ -217,7 +218,7 @@ DB::table('name')->lists('column');
 DB::table('name')->join('table', 'name.id', '=', 'table.id')
     ->select('name.id', 'table.email');
 			</pre>
-			
+
 			<h6>Inserts, Updates, Deletes</h6>
 			<pre class="prettyprint lang-php">DB::table('name')->insert(array('name' => 'John', 'email' => 'john@example.com'));
 DB::table('name')->insertGetId(array('name' => 'John', 'email' => 'john@example.com'));
@@ -259,11 +260,11 @@ Model::destroy(1);
 Model::all();
 Model::find(1);
 // Throw an exception if the lookup fails
-Model::findOrFail(1); 
+Model::findOrFail(1);
 Model::where('foo', '=', 'bar')->get();
 Model::where('foo', '=', 'bar')->first();
 // Throw an exception if the lookup fails
-Model::where('foo', '=', 'bar')->firstOrFail(); 
+Model::where('foo', '=', 'bar')->firstOrFail();
 Model::where('foo', '=', 'bar')->count();
 Model::where('foo', '=', 'bar')->delete();
 Model::whereRaw('foo = bar and cars = 2', array(20))->get();
@@ -297,7 +298,7 @@ Model::observe(new FooObserver);
 			<h4><a name="input" href="#input">Input</a> <a href="http://laravel.com/docs/requests" title="Input @ Laravel Docs"><i class="icon-file-text"></i></a></h4>
 			<pre class="prettyprint lang-php">Input::get('key');
 // Default if the key is missing
-Input::get('key', 'default'); 
+Input::get('key', 'default');
 Input::has('key');
 Input::all();
 // Only retrieve 'foo' and 'bar' when getting input
@@ -446,7 +447,7 @@ Auth::check();
 Auth::user();
 Auth::attempt(array('email' => $email, 'password' => $password));
 // 'Remember me' by passing true to Auth::attempt()
-Auth::attempt($credentials, true); 
+Auth::attempt($credentials, true);
 // Log in for a single request
 Auth::once($credentials);
 Auth::login(User::find(1));
@@ -472,7 +473,7 @@ Mail::queue('email.view', $data, function($message){});
 Mail::queueOn('queue-name', 'email.view', $data, $callback);
 Mail::later(5, 'email.view', $data, function($message){});
 // Write all email to logs instead of sending
-Mail::pretend(); 
+Mail::pretend();
 			</pre>
 
 			<h4><a name="queues" href="#queues">Queues</a> <a href="http://laravel.com/docs/queues" title="Queues @ Laravel Docs"><i class="icon-file-text"></i></a></h4>
@@ -533,7 +534,7 @@ unique:table,column,except,idColumn
 url
 
 			</pre>
-			
+
 		</div>
 		<div class="large-4 columnsi code-column">
 			<h4><a name="views" href="#views">Views</a></h4>
@@ -559,9 +560,9 @@ View::creator('viewname', function($view){});
 // Begin a section
 @section('name')
 // End a section
-@stop 
+@stop
 // End a section and yield
-@show 
+@show
 // Show a section in a template
 @yield('name')
 @include('view.name')
@@ -581,7 +582,7 @@ View::creator('viewname', function($view){});
 @while
 @endwhile
 // Echo content
-{{ $var }} 
+{{ $var }}
 // Echo escaped content
 {{{ $var }}}
 {{-- Blade Comment --}}
@@ -661,7 +662,7 @@ Str::lower($value)
 Str::words($value, $words = 100, $end = '...')
 Str::plural($value, $count = 2)
 // Generate a more truly "random" alpha-numeric string.
-Str::random($length = 16) 
+Str::random($length = 16)
 // Generate a "random" alpha-numeric string.
 Str::quickRandom($length = 16)
 Str::upper($value)
@@ -674,7 +675,7 @@ Str::startsWith($haystack, $needles)
 Str::studly($value)
 Str::macro($name, $macro)
 			</pre>
-			
+
 			<h4><a name="localization" href="#localization">Localization</a> <a href="http://laravel.com/docs/localization" title="Localization @ Laravel Docs"><i class="icon-file-text"></i></a></h4>
 			<pre class="prettyprint lang-php">App::setLocale('en');
 Lang::get('messages.welcome');
@@ -742,9 +743,9 @@ array_set($array, 'key', 'value');
 array_set($array, 'key.subkey', 'value');
 array_sort($array, function(){});
 // First element of an array
-head($array); 
+head($array);
 // Last element of an array
-last($array); 
+last($array);
 			</pre>
 			<h6>Paths</h6>
 			<pre class="prettyprint lang-php">app_path();
