@@ -256,6 +256,8 @@ DB::table('name')->select(DB::raw('count(*) as count, column2'))->get();
 
 			<h4><a name="eloquent" href="#eloquent">Eloquent</a> <a href="http://laravel.com/docs/eloquent" title="Eloquent @ Laravel Docs"><i class="icon-file-text"></i></a></h4>
 			<pre class="prettyprint lang-php">Model::create(array('key' => 'value'));
+// Fill a model with an array of attributes, beware of mass assignment!
+Model::fill($attributes);
 Model::destroy(1);
 Model::all();
 Model::find(1);
