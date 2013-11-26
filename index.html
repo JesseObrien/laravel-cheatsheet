@@ -272,6 +272,8 @@ Model::where('foo', '=', 'bar')->firstOrFail();
 Model::where('foo', '=', 'bar')->count();
 Model::where('foo', '=', 'bar')->delete();
 Model::whereRaw('foo = bar and cars = 2', array(20))->get();
+Model::remember(5)->get();
+Model::remember(5, 'cache-key-name')->get();
 Model::on('connection-name')->find(1);
 Model::with('relation')->get();
 Model::all()->take(10);
