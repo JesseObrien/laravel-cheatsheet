@@ -301,6 +301,73 @@ Model::observe(new FooObserver);
 		</div>
 
 		<div class="large-4 columns code-column">
+			<h4><a name="db" href="#db">Schema</a> <a href="http://laravel.com/docs/schema" title="Schema Builder @ Laravel Docs"><i class="icon-file-text"></i></a></h4>
+			<pre class="prettyprint lang-php">
+Schema::create('table', function($table)
+{
+    $table->increments('id');
+});
+// Specify a Connection
+Schema::connection('foo')->create('table', function($table){});
+Schema::rename($from, $to);
+Schema::drop('table');
+Schema::dropIfExists('table');
+Schema::hasTable('table');
+Schema::hasColumn('table', 'column');
+// Update an existing table
+Schema::table('table', function($table){});
+$table->renameColumn('from', 'to');
+$table->dropColumn(string|array);
+$table->engine = 'InnoDB';
+// Only work on MySQL
+$table->string('name')->after('email');
+			</pre>
+
+			<h6>Indexes</h6>
+			<pre class="prettyprint lang-php">
+$table->string('column')->unique();
+$table->primary('column');
+$table->primary(array('first', 'last'));
+$table->unique('column');
+$table->index('column');
+$table->dropPrimary('table_column_primary');
+$table->dropUnique('table_column_unique');
+$table->dropIndex('table_column_index');
+			</pre>
+
+			<h6>Foreign Keys</h6>
+			<pre class="prettyprint lang-php">
+$table->foreign('user_id')->references('id')->on('users');
+$table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+$table->dropForeign('posts_user_id_foreign');
+			</pre>
+
+			<h6>Column Types</h6>
+			<pre class="prettyprint lang-php">$table->increments('id');
+$table->bigIncrements('id');
+$table->string('email');
+$table->string('name', 100);
+$table->integer('votes');
+$table->bigInteger('votes');
+$table->smallInteger('votes');
+$table->float('amount');
+$table->double('column', 15, 8);
+$table->decimal('amount', 5, 2);
+$table->boolean('confirmed');
+$table->date('created_at');
+$table->dateTime('created_at');
+$table->time('sunrise');
+$table->timestamp('added_on');
+$table->timestamps();
+$table->softDeletes();
+$table->text('description');
+$table->binary('data');
+$table->enum('choices', array('foo', 'bar'));
+->nullable()
+->default($value)
+->unsigned()
+			</pre>
+
 			<h4><a name="input" href="#input">Input</a> <a href="http://laravel.com/docs/requests" title="Input @ Laravel Docs"><i class="icon-file-text"></i></a></h4>
 			<pre class="prettyprint lang-php">Input::get('key');
 // Default if the key is missing
