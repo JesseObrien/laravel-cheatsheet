@@ -263,8 +263,12 @@ Model::fill($attributes);
 Model::destroy(1);
 Model::all();
 Model::find(1);
+// Find using dual primary key
+Model::find(array('first', 'last'));
 // Throw an exception if the lookup fails
 Model::findOrFail(1);
+// Find using dual primary key and throw exception if the lookup fails
+Model::findOrFail(array('first', 'last'));
 Model::where('foo', '=', 'bar')->get();
 Model::where('foo', '=', 'bar')->first();
 // Throw an exception if the lookup fails
