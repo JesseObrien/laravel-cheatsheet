@@ -334,8 +334,17 @@ $table->string('name')->after('email');
 $table->string('column')->unique();
 $table->primary('column');
 $table->primary(array('first', 'last'));
+// Creates a dual primary key
 $table->unique('column');
+$table->unique('column', 'key_name');
+$table->unique(array('first', 'last'));
+// Creates a dual unique index
+$table->unique(array('first', 'last'), 'key_name');
 $table->index('column');
+$table->index('column', 'key_name');
+$table->index(array('first', 'last'));
+// Creates a dual index
+$table->index(array('first', 'last'), 'key_name');
 $table->dropPrimary('table_column_primary');
 $table->dropUnique('table_column_unique');
 $table->dropIndex('table_column_index');
