@@ -619,6 +619,7 @@ url
 			<h4><a name="views" href="#views">Views</a></h4>
 			<pre class="prettyprint lang-php">View::make('path/to/view');
 View::make('foo/bar')->with('key', 'value');
+View::make('foo/bar')->withKey('value');
 View::make('foo/bar', array('key' => 'value'));
 View::exists('foo/bar');
 // Share a value across all views
