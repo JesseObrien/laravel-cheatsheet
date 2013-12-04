@@ -298,8 +298,14 @@ Model::deleting(function($model){});
 Model::deleted(function($model){});
 Model::observe(new FooObserver);
 			</pre>
+			<h6>Eloquent Configuration</h6>
+			<pre class="prettyprint lang-php">Eloquent::unguard();
+// Disables mass assignment exceptions from being thrown from model inserts and updates
+Eloquent::reguard();
+// Renables any ability to throw mass assignment exceptions
+			</pre>
 		</div>
-
+			
 		<div class="large-4 columns code-column">
 			<h4><a name="input" href="#input">Input</a> <a href="http://laravel.com/docs/requests" title="Input @ Laravel Docs"><i class="icon-file-text"></i></a></h4>
 			<pre class="prettyprint lang-php">Input::get('key');
