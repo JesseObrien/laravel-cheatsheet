@@ -688,8 +688,10 @@ Form::open(array('route' => array('foo.bar', $parameter)));
 Form::open(array('action' => 'FooController@method'));
 Form::open(array('action' => array('FooController@method', $parameter)));
 Form::open(array('url' => 'foo/bar', 'files' => true));
+Form::close();
 Form::token();
 Form::model($foo, array('route' => array('foo.bar', $foo->bar)));
+
 			</pre>
 
 			<h6>Form Elements</h6>
