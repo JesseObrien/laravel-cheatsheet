@@ -263,8 +263,12 @@ Model::fill($attributes);
 Model::destroy(1);
 Model::all();
 Model::find(1);
+// Find using dual primary key
+Model::find(array('first', 'last'));
 // Throw an exception if the lookup fails
 Model::findOrFail(1);
+// Find using dual primary key and throw exception if the lookup fails
+Model::findOrFail(array('first', 'last'));
 Model::where('foo', '=', 'bar')->get();
 Model::where('foo', '=', 'bar')->first();
 // Throw an exception if the lookup fails
@@ -298,8 +302,14 @@ Model::deleting(function($model){});
 Model::deleted(function($model){});
 Model::observe(new FooObserver);
 			</pre>
+			<h6>Eloquent Configuration</h6>
+			<pre class="prettyprint lang-php">Eloquent::unguard();
+// Disables mass assignment exceptions from being thrown from model inserts and updates
+Eloquent::reguard();
+// Renables any ability to throw mass assignment exceptions
+			</pre>
 		</div>
-
+			
 		<div class="large-4 columns code-column">
 			<h4><a name="db" href="#db">Schema</a> <a href="http://laravel.com/docs/schema" title="Schema Builder @ Laravel Docs"><i class="icon-file-text"></i></a></h4>
 			<pre class="prettyprint lang-php">
@@ -327,9 +337,18 @@ $table->string('name')->after('email');
 			<pre class="prettyprint lang-php">
 $table->string('column')->unique();
 $table->primary('column');
+// Creates a dual primary key
 $table->primary(array('first', 'last'));
 $table->unique('column');
+$table->unique('column', 'key_name');
+// Creates a dual unique index
+$table->unique(array('first', 'last'));
+$table->unique(array('first', 'last'), 'key_name');
 $table->index('column');
+$table->index('column', 'key_name');
+// Creates a dual index
+$table->index(array('first', 'last'));
+$table->index(array('first', 'last'), 'key_name');
 $table->dropPrimary('table_column_primary');
 $table->dropUnique('table_column_unique');
 $table->dropIndex('table_column_index');
@@ -613,6 +632,7 @@ url
 			<h4><a name="views" href="#views">Views</a></h4>
 			<pre class="prettyprint lang-php">View::make('path/to/view');
 View::make('foo/bar')->with('key', 'value');
+View::make('foo/bar')->withKey('value');
 View::make('foo/bar', array('key' => 'value'));
 View::exists('foo/bar');
 // Share a value across all views
@@ -668,8 +688,10 @@ Form::open(array('route' => array('foo.bar', $parameter)));
 Form::open(array('action' => 'FooController@method'));
 Form::open(array('action' => array('FooController@method', $parameter)));
 Form::open(array('url' => 'foo/bar', 'files' => true));
+Form::close();
 Form::token();
 Form::model($foo, array('route' => array('foo.bar', $foo->bar)));
+
 			</pre>
 
 			<h6>Form Elements</h6>
