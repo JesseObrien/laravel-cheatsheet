@@ -568,6 +568,27 @@ Mail::later(5, 'email.view', $data, function($message){});
 Mail::pretend();
 			</pre>
 
+            <h6>Messages</h6>
+            <pre class="prettyprint lang-php">// These can be used on the $message instance passed into Mail::send() or Mail::queue()
+$message->from('email@example.com', 'Mr. Example');
+$message->sender('email@example.com', 'Mr. Example');
+$message->returnPath('email@example.com');
+$message->to('email@example.com', 'Mr. Example');
+$message->cc('email@example.com', 'Mr. Example');
+$message->bcc('email@example.com', 'Mr. Example');
+$message->replyTo('email@example.com', 'Mr. Example');
+$message->subject('Welcome to the Jungle');
+$message->priority(2);
+$message->attach('foo\bar.txt', $options);
+// This uses in-memory data as attachments
+$message->attachData('bar', 'Data Name', $options);
+// Embed a file in the message and get the CID
+$message->embed('foo\bar.txt');
+$message->embedData('foo', 'Data Name', $options);
+// Get the underlying Swift Message instance
+$message->getSwiftMessage();
+            </pre>
+
 			<h4><a name="queues" href="#queues">Queues</a> <a href="http://laravel.com/docs/queues" title="Queues @ Laravel Docs"><i class="icon-file-text"></i></a></h4>
 			<pre class="prettyprint lang-php">Queue::push('SendMail', array('message' => $message));
 Queue::push('SendEmail@send', array('message' => $message));
