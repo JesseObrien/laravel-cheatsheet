@@ -232,7 +232,7 @@ DB::table('name')->insert(
 );
 // Update an entry
 DB::table('name')->where('name', '=', 'John')
-	->update(array('email', 'john@example2.com'));
+	->update(array('email' => 'john@example2.com'));
 // Delete everything from a table
 DB::table('name')->delete();
 // Delete specific records
@@ -730,11 +730,15 @@ Form::hidden('foo', $value);
 Form::password('password');
 Form::password('password', array('placeholder' => 'Password'));
 Form::email('name', $value, array());
-Form::file('name', array());
+Form::file('name', array('class' => 'name'));
 Form::checkbox('name', 'value');
-Form::radio('name', 'value');
+// Generating a checkbox that is checked
+Form::checkbox('name', 'value', true, array('class' => 'name'));
+Form::radio('name', 'value');	
+// Generating a radio input that is selected
+Form::radio('name', 'value', true, array('class' => 'name'));
 Form::select('name', array('key' => 'value'));
-Form::select('name', array('key' => 'value'), 'key');
+Form::select('name', array('key' => 'value'), 'key', array('class' => 'name'));
 Form::submit('Submit!');
 Form::macro('fooField', function()
 {
