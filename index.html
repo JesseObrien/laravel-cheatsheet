@@ -408,6 +408,8 @@ $table->softDeletes();
 $table->text('description');
 $table->binary('data');
 $table->enum('choices', array('foo', 'bar'));
+$table->morphs('parent');
+// Adds INTEGER parent_id and STRING parent_type
 ->nullable()
 ->default($value)
 ->unsigned()
