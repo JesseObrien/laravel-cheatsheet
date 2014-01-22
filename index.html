@@ -185,6 +185,7 @@ Event::listen('foor.bar', function($event){ return false; });
 Event::queue('foo', array($bar));
 Event::flusher('foo', function($bar){});
 Event::flush('foo');
+Event::forget('foo');
 Event::subscribe(new FooEventHandler);
 			</pre>
 
