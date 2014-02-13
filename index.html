@@ -78,6 +78,7 @@ php artisan queue:subscribe [--type[="..."]] queue url
 php artisan queue:work [--queue[="..."]] [--delay[="..."]] [--memory[="..."]] [--sleep] [connection]
 php artisan session:table
 php artisan view:publish [--path[="..."]] package
+php artisan tail [--path[="..."]] [--lines[="..."]] [connection]
 			</pre>
 
 			<h4><a name="composer" href="#composer">Composer</a> <a href="http://getcomposer.org/doc/03-cli.md" title="Composer CLI Docs"><i class="icon-file-text"></i></a></h4>
@@ -311,7 +312,7 @@ Model::observe(new FooObserver);
 Eloquent::reguard();
 // Renables any ability to throw mass assignment exceptions
 			</pre>
-			
+
 			<h4>
 				<a name="remote" href="#remote">The Remote Component</a>
 			</h4>
@@ -323,7 +324,7 @@ SSH::run(array $commands, function($line)
 	echo $line.PHP_EOL;
 });
 			</pre>
-			
+
 			<h6>Tasks</h6>
 			<pre class="prettyprint lang-php">SSH::define($taskName, array $commands); // define
 SSH::task($taskName, function($line) // execute
@@ -331,13 +332,13 @@ SSH::task($taskName, function($line) // execute
 	echo $line.PHP_EOL;
 });
 			</pre>
-			
+
 			<h6>SFTP Uploads</h6>
 			<pre class="prettyprint lang-php">SSH::put($localFile, $remotePath);
 SSH::putString($string, $remotePath);
 			</pre>
 		</div>
-			
+
 		<div class="large-4 columns code-column">
 			<h4><a name="db" href="#db">Schema</a> <a href="http://laravel.com/docs/schema" title="Schema Builder @ Laravel Docs"><i class="icon-file-text"></i></a></h4>
 			<pre class="prettyprint lang-php">
@@ -731,6 +732,10 @@ View::creator('viewname', function($view){});
 // Echo escaped content
 {{{ $var }}}
 {{-- Blade Comment --}}
+// Echoing Data After Checking For Existence
+{{{ $name or 'Default' }}}
+// Displaying Raw Text With Curly Braces
+@{{ This will not be processed by Blade }}
 			</pre>
 
 			<h4><a name="forms" href="#forms">Forms</a></h4>
@@ -763,7 +768,7 @@ Form::file('name', array('class' => 'name'));
 Form::checkbox('name', 'value');
 // Generating a checkbox that is checked
 Form::checkbox('name', 'value', true, array('class' => 'name'));
-Form::radio('name', 'value');	
+Form::radio('name', 'value');
 // Generating a radio input that is selected
 Form::radio('name', 'value', true, array('class' => 'name'));
 Form::select('name', array('key' => 'value'));
