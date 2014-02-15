@@ -529,7 +529,7 @@ return Response::make($content)
 	->withCookie(Cookie::make('key', 'value'));
 			</pre>
 
-			<h4><a name="redirects" href="#redirects">Redirects</a></h4>
+			<h4><a name="redirects" href="#redirects">Redirects</a> <a href="http://laravel.com/docs/responses#redirects" title="Redirects @ Laravel Docs"><i class="icon-file-text"></i></a></h4>
 			<pre class="prettyprint lang-php">return Redirect::to('foo/bar');
 return Redirect::to('foo/bar')->with('key', 'value');
 return Redirect::to('foo/bar')->withInput(Input::get());
@@ -631,7 +631,7 @@ php artisan queue:listen --timeout=60
 php artisan queue:work
 			</pre>
 
-			<h4><a name="validation" href="#validation">Validation</a></h4>
+			<h4><a name="validation" href="#validation">Validation</a> <a href="http://laravel.com/docs/validation" title="Validation @ Laravel Docs"><i class="icon-file-text"></i></a></h4>
 			<pre class="prettyprint lang-php">Validator::make(
 	array('key' => 'Foo'),
 	array('key' => 'required|in:Foo')
