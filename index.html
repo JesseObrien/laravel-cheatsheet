@@ -546,7 +546,7 @@ return Redirect::action('FooController@baz', array('key' => 'value'));
 return Redirect::intended('foo/bar');
 			</pre>
 
-			<h4><a name="ioc" href="#ioc">IoC</a></h4>
+			<h4><a name="ioc" href="#ioc">IoC</a> <a href="http://laravel.com/docs/ioc" title="IoC Container @ Laravel Docs"><i class="icon-file-text"></i></a></h4>
 			<pre class="prettyprint lang-php">App::bind('foo', function($app){ return new Foo; });
 App::make('foo');
 // If this class exists, it's returned
