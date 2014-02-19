@@ -159,7 +159,7 @@ Route::group(array('prefix' => 'foo'), function(){})
 Route::group(array('domain' => '{sub}.example.com'), function(){});
 			</pre>
 
-		<h4><a name="urls" href="#urls">URLs</a></h4>
+		<h4><a name="urls" href="#urls">URLs</a> <a href="http://laravel.com/docs/helpers#urls" title="URLs @ Laravel Docs"><i class="icon-file-text"></i></a></h4>
 			<pre class="prettyprint lang-php">URL::full();
 URL::current();
 URL::previous();
@@ -314,7 +314,7 @@ Eloquent::reguard();
 			</pre>
 
 			<h4>
-				<a name="remote" href="#remote">The Remote Component</a>
+				<a name="remote" href="#remote">The Remote Component</a> <a href="http://laravel.com/docs/ssh" title="SSH @ Laravel Docs"><i class="icon-file-text"></i></a>
 			</h4>
 			<h6>Executing Commands</h6>
 			<pre class="prettyprint lang-php">SSH::run(array $commands);
@@ -455,7 +455,7 @@ Input::file('name')->move($destinationPath);
 Input::file('name')->move($destinationPath, $fileName);
 			</pre>
 
-			<h4><a name="cache" href="#cache">Cache</a></h4>
+			<h4><a name="cache" href="#cache">Cache</a> <a href="http://laravel.com/docs/cache" title="Cache @ Laravel Docs"><i class="icon-file-text"></i></a></h4>
 			<pre class="prettyprint lang-php">Cache::put('key', 'value', $minutes);
 Cache::add('key', 'value', $minutes);
 Cache::forever('key', 'value');
@@ -475,7 +475,7 @@ Cache::section('group')->get('key');
 Cache::section('group')->flush();
 			</pre>
 
-			<h4><a name="cookies" href="#cookies">Cookies</a></h4>
+			<h4><a name="cookies" href="#cookies">Cookies</a> <a href="http://laravel.com/docs/requests#cookies" title="Cookies @ Laravel Docs"><i class="icon-file-text"></i></a></h4>
 			<pre class="prettyprint lang-php">Cookie::get('key');
 // Create a cookie that lasts for ever
 Cookie::forever('key', 'value');
@@ -486,7 +486,7 @@ $response = Response::make('Hello World');
 $response->withCookie(Cookie::make('name', 'value', $minutes));
 			</pre>
 
-			<h4><a name="sessions" href="#sessions">Sessions</a></h4>
+			<h4><a name="sessions" href="#sessions">Sessions</a> <a href="http://laravel.com/docs/session" title="Session @ Laravel Docs"><i class="icon-file-text"></i></a></h4>
 			<pre class="prettyprint lang-php">Session::get('key');
 Session::get('key', 'default');
 Session::get('key', function(){ return 'default'; });
@@ -501,7 +501,7 @@ Session::reflash();
 Session::keep(array('key1', 'key2'));
 			</pre>
 
-			<h4><a name="requests" href="#requests">Requests</a></h4>
+			<h4><a name="requests" href="#requests">Requests</a> <a href="http://laravel.com/docs/requests#request-information" title="Requests @ Laravel Docs"><i class="icon-file-text"></i></a></h4>
 			<pre class="prettyprint lang-php">Request::path();
 Request::is('foo/*');
 Request::url();
@@ -512,7 +512,7 @@ Request::ajax();
 Request::secure();
 			</pre>
 
-			<h4><a name="responses" href="#responses">Responses</a></h4>
+			<h4><a name="responses" href="#responses">Responses</a> <a href="http://laravel.com/docs/responses" title="Responses @ Laravel Docs"><i class="icon-file-text"></i></a></h4>
 			<pre class="prettyprint lang-php">return Response::make($contents);
 return Response::make($contents, 200);
 return Response::json(array('key' => 'value'));
@@ -529,7 +529,7 @@ return Response::make($content)
 	->withCookie(Cookie::make('key', 'value'));
 			</pre>
 
-			<h4><a name="redirects" href="#redirects">Redirects</a></h4>
+			<h4><a name="redirects" href="#redirects">Redirects</a> <a href="http://laravel.com/docs/responses#redirects" title="Redirects @ Laravel Docs"><i class="icon-file-text"></i></a></h4>
 			<pre class="prettyprint lang-php">return Redirect::to('foo/bar');
 return Redirect::to('foo/bar')->with('key', 'value');
 return Redirect::to('foo/bar')->withInput(Input::get());
@@ -546,7 +546,7 @@ return Redirect::action('FooController@baz', array('key' => 'value'));
 return Redirect::intended('foo/bar');
 			</pre>
 
-			<h4><a name="ioc" href="#ioc">IoC</a></h4>
+			<h4><a name="ioc" href="#ioc">IoC</a> <a href="http://laravel.com/docs/ioc" title="IoC Container @ Laravel Docs"><i class="icon-file-text"></i></a></h4>
 			<pre class="prettyprint lang-php">App::bind('foo', function($app){ return new Foo; });
 App::make('foo');
 // If this class exists, it's returned
@@ -559,7 +559,7 @@ App::register('FooServiceProvider');
 App::resolving(function($object){});
 			</pre>
 
-			<h4><a name="security" href="#security">Security</a></h4>
+			<h4><a name="security" href="#security">Security</a> <a href="http://laravel.com/docs/security" title="Security @ Laravel Docs"><i class="icon-file-text"></i></a></h4>
 			<h6>Passwords</h6>
 			<pre class="prettyprint lang-php">Hash::make('secretpassword');
 Hash::check('secretpassword', $hashedPassword);
@@ -631,7 +631,7 @@ php artisan queue:listen --timeout=60
 php artisan queue:work
 			</pre>
 
-			<h4><a name="validation" href="#validation">Validation</a></h4>
+			<h4><a name="validation" href="#validation">Validation</a> <a href="http://laravel.com/docs/validation" title="Validation @ Laravel Docs"><i class="icon-file-text"></i></a></h4>
 			<pre class="prettyprint lang-php">Validator::make(
 	array('key' => 'Foo'),
 	array('key' => 'required|in:Foo')
@@ -739,7 +739,7 @@ View::creator('viewname', function($view){});
 @{{ This will not be processed by Blade }}
 			</pre>
 
-			<h4><a name="forms" href="#forms">Forms</a></h4>
+			<h4><a name="forms" href="#forms">Forms</a> <a href="http://laravel.com/docs/html" title="Forms & HTML @ Laravel Docs"><i class="icon-file-text"></i></a></h4>
 			<pre class="prettyprint lang-php">Form::open(array('url' => 'foo/bar', 'method' => 'PUT'));
 Form::open(array('route' => 'foo.bar'));
 Form::open(array('route' => array('foo.bar', $parameter)));
@@ -807,7 +807,7 @@ HTML::attributeElement($key, $value);
 HTML::obfuscate($value);
 			</pre>
 
-			<h4><a name="str" href="#str">Strings</a></h4>
+			<h4><a name="str" href="#str">Strings</a> <a href="http://laravel.com/docs/helpers#strings" title="Strings CLI @ Laravel Docs"><i class="icon-file-text"></i></a></h4>
 			<pre class="prettyprint lang-php">// Transliterate a UTF-8 value to ASCII
 Str::ascii($value)
 Str::camel($value)
@@ -877,7 +877,7 @@ File::cleanDirectory('directory');
 			</pre>
 
 
-			<h4><a name="helpers" href="#helpers">Helpers</a></h4>
+			<h4><a name="helpers" href="#helpers">Helpers</a> <a href="http://laravel.com/docs/helpers" title="Helpers @ Laravel Docs"><i class="icon-file-text"></i></a></h4>
 			<h6>Arrays</h6>
 			<pre class="prettyprint lang-php">array_add($array, 'key', 'value');
 array_build($array, function(){});
