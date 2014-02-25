@@ -128,7 +128,9 @@ Route::resource('foo', 'FooController');
 Route::get('foo/{bar}/{baz}', function($bar, $baz){})
 	->where(array('bar' => '[0-9]+', 'baz' => '[A-Za-z]'))
 			</pre>
-
+			<pre class="prettyprint lang-php">// Set a pattern to be used across routes
+			Route::pattern('bar', '[0-9]+')
+			</pre>
 			<h6>Filters</h6>
 			<pre class="prettyprint lang-php">// Declare an auth filter
 Route::filter('auth', function(){});
