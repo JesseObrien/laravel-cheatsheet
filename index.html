@@ -491,6 +491,8 @@ $response->withCookie(Cookie::make('name', 'value', $minutes));
 Session::get('key', 'default');
 Session::get('key', function(){ return 'default'; });
 Session::put('key', 'value');
+// Push a value into an array in the session
+Session::push('foo.bar','value');
 Session::all();
 Session::has('key');
 Session::forget('key');
