@@ -256,6 +256,10 @@ DB::table('name')->increment('column');
 DB::table('name')->increment('column', $amount);
 DB::table('name')->decrement('column');
 DB::table('name')->decrement('column', $amount);
+DB::table('name')->remember(5)->get();
+DB::table('name')->remember(5, 'cache-key-name')->get();
+DB::table('name')->cacheTags('my-key')->remember(5)->get();
+DB::table('name')->cacheTags(array('my-first-key','my-second-key'))->remember(5)->get();
 			</pre>
 
 			<h6>Raw Expressions</h6>
@@ -285,6 +289,8 @@ Model::where('foo', '=', 'bar')->delete();
 Model::whereRaw('foo = bar and cars = 2', array(20))->get();
 Model::remember(5)->get();
 Model::remember(5, 'cache-key-name')->get();
+Model::cacheTags('my-tag')->remember(5)->get();
+Model::cacheTags(array('my-first-key','my-second-key'))->remember(5)->get();
 Model::on('connection-name')->find(1);
 Model::with('relation')->get();
 Model::all()->take(10);
@@ -469,6 +475,9 @@ Cache::has('key');
 Cache::get('key');
 Cache::get('key', 'default');
 Cache::get('key', function(){ return 'default'; });
+Cache::tag('my-tag')->put('key','value', 10);
+Cache::tag('my-tag')->get('key');
+Cache::tag('my-tag')->flush();
 Cache::increment('key');
 Cache::increment('key', $amount);
 Cache::decrement('key');
