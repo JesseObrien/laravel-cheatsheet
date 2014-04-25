@@ -217,7 +217,9 @@ DB::table('name')->whereNotIn('column', array(1, 2, 3))->get();
 DB::table('name')->whereNull('column')->get();
 DB::table('name')->whereNotNull('column')->get();
 DB::table('name')->groupBy('column')->get();
+// Default Eloquent sort is ascendant
 DB::table('name')->orderBy('column')->get();
+DB::table('name')->orderBy('column','desc')->get();
 DB::table('name')->having('count', '>', 100)->get();
 DB::table('name')->skip(10)->take(5)->get();
 DB::table('name')->first();
