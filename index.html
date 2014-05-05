@@ -397,7 +397,8 @@ $table->dropIndex('table_column_index');
 			<h6>Foreign Keys</h6>
 			<pre class="prettyprint lang-php">
 $table->foreign('user_id')->references('id')->on('users');
-$table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+$table->foreign('user_id')->references('id')->on('users')->onDelete('cascade'|'restrict'|'set null'|'no action');
+$table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade'|'restrict'|'set null'|'no action');
 $table->dropForeign('posts_user_id_foreign');
 			</pre>
 
