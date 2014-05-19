@@ -234,10 +234,10 @@ DB::table('name')->join('table', 'name.id', '=', 'table.id')
 			<pre class="prettyprint lang-php">DB::table('name')->insert(array('name' => 'John', 'email' => 'john@example.com'));
 DB::table('name')->insertGetId(array('name' => 'John', 'email' => 'john@example.com'));
 // Batch insert
-DB::table('name')->insert(
+DB::table('name')->insert(array(
 	array('name' => 'John', 'email' => 'john@example.com')
 	array('name' => 'James', 'email' => 'james@example.com')
-);
+));
 // Update an entry
 DB::table('name')->where('name', '=', 'John')
 	->update(array('email' => 'john@example2.com'));
