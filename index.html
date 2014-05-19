@@ -128,7 +128,7 @@ Route::resource('foo', 'FooController');
 	->where('bar', '[0-9]+');
 Route::get('foo/{bar}/{baz}', function($bar, $baz){})
 	->where(array('bar' => '[0-9]+', 'baz' => '[A-Za-z]'))
-			</pre>
+			</pre>r
 			<pre class="prettyprint lang-php">// Set a pattern to be used across routes
 			Route::pattern('bar', '[0-9]+')
 			</pre>
@@ -156,7 +156,11 @@ Route::get('foo/bar', array('as' => 'foobar', function(){}));
 			<pre class="prettyprint lang-php">// This route group will carry the prefix 'foo'
 Route::group(array('prefix' => 'foo'), function(){})
 			</pre>
-
+			
+			<h6>Route Namespacing</h6>
+			<pre class="prettyprint lang-php">// This route group will carry the namespace 'Foo\Bar'
+Route::group(array('namespace' => 'Foo\Bar'), function(){})
+			</pre>
 			<h6>Sub-Domain Routing</h6>
 			<pre class="prettyprint lang-php">// {sub} will be passed to the closure
 Route::group(array('domain' => '{sub}.example.com'), function(){});
