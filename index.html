@@ -128,7 +128,7 @@ Route::resource('foo', 'FooController');
 	->where('bar', '[0-9]+');
 Route::get('foo/{bar}/{baz}', function($bar, $baz){})
 	->where(array('bar' => '[0-9]+', 'baz' => '[A-Za-z]'))
-			</pre>r
+			</pre>
 			<pre class="prettyprint lang-php">// Set a pattern to be used across routes
 			Route::pattern('bar', '[0-9]+')
 			</pre>
