@@ -34,49 +34,88 @@
 
 			<h4><a name="artisan" href="#artisan">Artisan</a> <a href="http://laravel.com/docs/artisan" title="Artisan CLI @ Laravel Docs"><i class="icon-file-text"></i></a></h4>
 			<pre class="prettyprint lang-php">
+// Displays help for a given command
 php artisan --help OR -h
+// Do not output any message
 php artisan --quiet OR -q
+// Display this application version
 php artisan --version OR -V
+// Do not ask any interactive question
 php artisan --no-interaction OR -n
+// Force ANSI output
 php artisan --ansi
+// Disable ANSI output
 php artisan --no-ansi
+// The environment the command should run under
 php artisan --env
 // -v|vv|vvv Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug
 php artisan --verbose
 
+// Display the framework change list
 php artisan changes
+// Remove the compiled class file
 php artisan clear-compiled
+// Put the application into maintenance mode
 php artisan down
+// Regenerate framework autoload files
 php artisan dump-autoload
+// Display the current framework environment
 php artisan env
+// Displays help for a command
 php artisan help
+// Lists commands
 php artisan list
+// Run the database migrations
 php artisan migrate
+// Optimize the framework for better performance
 php artisan optimize
+// List all registered routes
 php artisan routes
+// Serve the application on the PHP development server
 php artisan serve
+// Interact with your application
 php artisan tinker
+// Bring the application out of maintenance mode
 php artisan up
+// Create a new package workbench
 php artisan workbench
 
+// Publish a package's assets to the public directory
 php artisan asset:publish [--bench[="vendor/package"]] [--path[="..."]] [package]
+// Create a migration for the password reminders table
 php artisan auth:reminders-table
+// Flush the application cache
 php artisan cache:clear
+// Create a new Artisan command
 php artisan command:make name [--command[="..."]] [--path[="..."]] [--namespace[="..."]]
+// Publish a package's configuration to the application
 php artisan config:publish
+// Create a new resourceful controller
 php artisan controller:make [--bench="vendor/package"]
+// Seed the database with records
 php artisan db:seed [--class[="..."]] [--database[="..."]]
+// Set the application key
 php artisan key:generate
 php artisan migrate [--bench="vendor/package"] [--database[="..."]] [--path[="..."]] [--package[="..."]] [--pretend] [--seed]
+// Create the migration repository
 php artisan migrate:install [--database[="..."]]
+// Create a new migration file
 php artisan migrate:make name [--bench="vendor/package"] [--create] [--package[="..."]] [--path[="..."]] [--table[="..."]]
+// Reset and re-run all migrations
 php artisan migrate:refresh [--database[="..."]] [--seed]
+// Rollback all database migrations
 php artisan migrate:reset [--database[="..."]] [--pretend]
+// Rollback the last database migration
 php artisan migrate:rollback [--database[="..."]] [--pretend]
+// Listen to a given queue
 php artisan queue:listen [--queue[="..."]] [--delay[="..."]] [--memory[="..."]] [--timeout[="..."]] [connection]
+// Subscribe a URL to an Iron.io push queue
 php artisan queue:subscribe [--type[="..."]] queue url
+// Process the next job on a queue
 php artisan queue:work [--queue[="..."]] [--delay[="..."]] [--memory[="..."]] [--sleep] [connection]
+// Create a migration for the session database table
 php artisan session:table
+// Publish a package's views to the application
 php artisan view:publish [--path[="..."]] package
 php artisan tail [--path[="..."]] [--lines[="..."]] [connection]
 			</pre>
@@ -307,8 +346,10 @@ Model::all()->skip(10);
 
 			<h6>Soft Delete</h6>
 			<pre class="prettyprint lang-php">Model::withTrashed()->where('cars', 2)->get();
+// Include the soft deleted models in the results
 Model::withTrashed()->where('cars', 2)->restore();
 Model::where('cars', 2)->forceDelete();
+// Force the result set to only included soft deletes
 Model::onlyTrashed()->where('cars', 2)->get();
 			</pre>
 
@@ -506,23 +547,34 @@ Cookie::forever('key', 'value');
 Cookie::queue('key', 'value', 'minutes');
 // Send a cookie with a response
 $response = Response::make('Hello World');
+// Add a cookie to the response
 $response->withCookie(Cookie::make('name', 'value', $minutes));
 			</pre>
 
 			<h4><a name="sessions" href="#sessions">Sessions</a> <a href="http://laravel.com/docs/session" title="Session @ Laravel Docs"><i class="icon-file-text"></i></a></h4>
 			<pre class="prettyprint lang-php">Session::get('key');
+// Returns an item from the session
 Session::get('key', 'default');
 Session::get('key', function(){ return 'default'; });
+// Put a key / value pair in the session
 Session::put('key', 'value');
 // Push a value into an array in the session
 Session::push('foo.bar','value');
+// Returns all items from the session
 Session::all();
+// Checks if an item is defined
 Session::has('key');
+// Remove an item from the session
 Session::forget('key');
+// Remove all of the items from the session
 Session::flush();
+// Generate a new session identifier
 Session::regenerate();
+// Flash a key / value pair to the session
 Session::flash('key', 'value');
+// Reflash all of the session flash data
 Session::reflash();
+// Reflash a subset of the current flash data
 Session::keep(array('key1', 'key2'));
 			</pre>
 
@@ -596,20 +648,29 @@ Hash::check('secretpassword', $hashedPassword);
 Hash::needsRehash($hashedPassword);
 			</pre>
 			<h6>Auth</h6>
-			<pre class="prettyprint lang-php">// Check if the user is logged in
+			<pre class="prettyprint lang-php">// Determine if the current user is authenticated
 Auth::check();
+// Get the currently authenticated user
 Auth::user();
+// Attempt to authenticate a user using the given credentials
 Auth::attempt(array('email' => $email, 'password' => $password));
 // 'Remember me' by passing true to Auth::attempt()
 Auth::attempt($credentials, true);
 // Log in for a single request
 Auth::once($credentials);
+// Log a user into the application
 Auth::login(User::find(1));
+// Log the given user ID into the application
 Auth::loginUsingId(1);
+// Log the user out of the application
 Auth::logout();
+// Validate a user's credentials
 Auth::validate($credentials);
+// Attempt to authenticate using HTTP Basic Auth
 Auth::basic('username');
+// Perform a stateless HTTP Basic login attempt
 Auth::onceBasic();
+// Send a password reminder to a user
 Password::remind($credentials, function($message, $user){});
 			</pre>
 
@@ -819,17 +880,25 @@ HTML::decode($value);
 HTML::script($url, $attributes);
 HTML::style($url, $attributes);
 HTML::image($url, $alt, $attributes);
+// Generate a HTML link
 HTML::link($url, 'title', $attributes, $secure);
+// Generate a HTTPS HTML link
 HTML::secureLink($url, 'title', $attributes);
+// Generate a HTML link to an asset
 HTML::linkAsset($url, 'title', $attributes, $secure);
+// Generate a HTTPS HTML link to an asset
 HTML::linkSecureAsset($url, 'title', $attributes);
+// Generate a HTML link to a named route
 HTML::linkRoute($name, 'title', $parameters, $attributes);
+// Generate a HTML link to a controller action
 HTML::linkAction($action, 'title', $parameters, $attributes);
 HTML::mailto($email, 'title', $attributes);
 HTML::email($email);
 HTML::ol($list, $attributes);
 HTML::ul($list, $attributes);
+// Create a listing HTML element
 HTML::listing($type, $list, $attributes);
+// Create the HTML for a listing element
 HTML::listingElement($key, $type, $value);
 HTML::nestedListing($key, $type, $value);
 HTML::attributes($attributes);
