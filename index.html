@@ -162,6 +162,27 @@ Route::group(array('prefix' => 'foo'), function(){})
 Route::group(array('domain' => '{sub}.example.com'), function(){});
 			</pre>
 
+		<h4><a name="app" href="#app">APP</a> <a href="http://laravel.com/docs/helpers#app" title="APP @ Laravel Docs"><i class="icon-file-text"></i></a></h4>
+			<pre class="prettyprint lang-php">
+App::environment();
+// test equal to
+App::environment('local');
+App::runningInConsole();
+App::runningUnitTests();
+			</pre>
+
+		<h4><a name="log" href="#log">LOG</a> <a href="http://laravel.com/docs/helpers#log" title="LOG @ Laravel Docs"><i class="icon-file-text"></i></a></h4>
+			<pre class="prettyprint lang-php">
+Log::info('info');
+Log::info('info',array('context'=>'additional info'));
+Log::error('error');
+Log::warning('warning');
+// get monolog instance
+Log::getMonolog();
+// add listener
+Log::listen(function($level, $message, $context) {});
+			</pre>
+
 		<h4><a name="urls" href="#urls">URLs</a> <a href="http://laravel.com/docs/helpers#urls" title="URLs @ Laravel Docs"><i class="icon-file-text"></i></a></h4>
 			<pre class="prettyprint lang-php">URL::full();
 URL::current();
@@ -524,17 +545,26 @@ Session::keep(array('key1', 'key2'));
 
 			<h4><a name="requests" href="#requests">Requests</a> <a href="http://laravel.com/docs/requests#request-information" title="Requests @ Laravel Docs"><i class="icon-file-text"></i></a></h4>
 			<pre class="prettyprint lang-php">
-Request::url(); // http://xx.com/aa/bb
-Request::path(); // /aa/bb
-Request::getRequestUri();  // /aa/bb/?c=d
-Request::getUri();  // http://xx.com/aa/bb/?c=d
-Request::getQueryString();  // c=d
+// url: http://xx.com/aa/bb
+Request::url(); 
+// path: /aa/bb
+Request::path(); 
+// getRequestUri: /aa/bb/?c=d
+Request::getRequestUri();  
+// getUri: http://xx.com/aa/bb/?c=d
+Request::getUri();  
+// getQueryString: c=d
+Request::getQueryString(); 
 Request::is('foo/*');
 Request::segment(1);
 Request::header('Content-Type');
 Request::server('PATH_INFO');
 Request::ajax();
 Request::secure();
+Request::method();
+Request::isMethod('post'); 
+// get raw POST data
+Request::instance()->getContent();
 
 			</pre>
 
