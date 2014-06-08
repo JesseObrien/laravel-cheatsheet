@@ -620,6 +620,8 @@ Request::url();
 Request::path(); 
 // getRequestUri: /aa/bb/?c=d
 Request::getRequestUri();  
+// Returns user's IP
+Request::getClientIp();  
 // getUri: http://xx.com/aa/bb/?c=d
 Request::getUri();  
 // getQueryString: c=d
@@ -695,6 +697,8 @@ Hash::needsRehash($hashedPassword);
 Auth::check();
 // Get the currently authenticated user
 Auth::user();
+// Get the ID of the currently authenticated user
+Auth::id();
 // Attempt to authenticate a user using the given credentials
 Auth::attempt(array('email' => $email, 'password' => $password));
 // 'Remember me' by passing true to Auth::attempt()
