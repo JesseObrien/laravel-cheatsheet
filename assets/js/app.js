@@ -12,3 +12,14 @@ var $url_elements = $("span.pln:contains('URL')").removeClass('pln').addClass('t
 var $url_elements = $("span.pln:contains('SSH')").removeClass('pln').addClass('typ');
 var $url_elements = $("span.pln:contains('DB')").addClass('typ');
 
+$('#searchForm').submit(function(event){
+
+	$("span").removeHighlight();
+
+	$value = $('#search').val();
+
+	$("span").highlight($value);
+	event.preventDefault();
+});
+
+$('#search').focus();

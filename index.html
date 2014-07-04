@@ -4,6 +4,7 @@
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="assets/css/foundation.min.css" />
 	<link href="assets/css/font-awesome.min.css" rel="stylesheet" />
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 	<link rel="shortcut icon" href="assets/ico/favicon.png">
 	<link rel="stylesheet" href="assets/css/page.css" />
 	<meta name="description" content="Laravel Cheat Sheet , Codes , function , methodes of laravel framework">
@@ -26,6 +27,21 @@
 				</ul>
 			</section>
 		</nav>
+	</div>
+
+	<div class="row">
+		<div class="small-6 small-offset-3 columns">
+			<form id="searchForm">
+			<div class="row collapse">
+				<div class="small-10 columns">
+					<input type="text" placeholder="Find on page..." id="search" name="search" />
+				</div>
+				<div class="small-2 columns">
+					<button class="button postfix" id="search-button">Search</button>
+				</div>
+			</div>
+			</form>
+		</div>
 	</div>
 
 	<div class="row full-width">
@@ -1140,6 +1156,7 @@ $this->seed($connection);
 		</div>
 	</div>
 	<script src="assets/js/jquery-1.10.2.min.js"></script>
+	<script src="assets/js/jquery.highlight-4.js"></script>
 	<script src="assets/js/google-code-prettify/prettify.js"></script>
 	<script type="text/javascript" src="assets/js/app.js"></script>
 </body>

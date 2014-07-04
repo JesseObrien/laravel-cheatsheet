@@ -9,11 +9,12 @@
     font-style: normal;
 }
 
-body {background: #333; margin-bottom: 40px; margin-top: 40px; font-size: 16px; font-family: 'Ubuntu Mono', monospace;}
-h1,h2,h3,h4,h5,h6 {font-family: 'UbuntuMono', monospace; }
-.top-bar {background: #333;box-shadow: 0px 1px 2px #fff; margin-bottom: 0;}
-.top-bar-section li a:not(.button) { background: #333; }
-.top-bar-section li a:not(.button):hover { color: #ddd; }
+body {background: #333; margin-bottom: 40px; margin-top: 70px; font-size: 16px; font-family: 'Open Sans', sans-serif;}
+h1,h2,h3,h4,h5,h6 {font-family: 'Open Sans', sans-serif; }
+.top-bar {background: #333; margin-bottom: 0; height: 47px;}
+.top-bar-section li a:not(.button) { color: #888; background: transparent; border-bottom: 1px solid transparent; }
+.top-bar-section li a:not(.button):hover { color: white; background: transparent; border-bottom: 2px solid #fa503a; }
+.top-bar-section ul { background: transparent; }
 .top-bar .name h1 a { color: #fa503a; }
 .logo {background-image: url('logo.png'); height: 30px; width: 103px; margin-top: 5px;}
 .row.full-width { width: 100%; max-width: 100%; }
@@ -23,11 +24,18 @@ h1,h2,h3,h4,h5,h6 {font-family: 'UbuntuMono', monospace; }
 .code-column h4 a { color: #fff; }
 .code-column h4 a:hover { color: #ddd; text-decoration: underline; }
 
+.highlight { background-color: lightYellow; }
+#search-button {
+	background: #5f5f5f;
+	border: none;
+
+}
+
 
 /**
  * This prettyprint code is shamelessly stolen from the one and only @daylerees http://laravel.com/css/style.css
  */
- pre{font-family: "Ubuntu Mono", monospace;background-color:#333;padding:5px;font-size:90%;color:#e9e4e5;line-height:1.5em;margin:0.2em 0;border: 0;white-space:pre-wrap;} 
+ pre{font-family: "Lucida Console", monospace;background-color:#333;padding:5px;font-size:90%;color:#e9e4e5;line-height:1.5em;margin:0.2em 0;border: 0;white-space:pre-wrap;} 
  pre .pln{color:#e9e4e5;}
  pre .str{color:#bcd42a;}
  pre .kwd{color:#4bb1b1;}
@@ -41,5 +49,5 @@ h1,h2,h3,h4,h5,h6 {font-family: 'UbuntuMono', monospace; }
  pre .atv{color:#bcd42a;}
  pre .dec, pre .var{color:#660066;}
  pre .fun{color:#ff0000;}
- pre code{font-family: "Ubuntu Mono", monospace;}
+ pre code{font-family: "Lucida Console", monospace;}
  pre.prettyprint { border: 0 ! important; }
