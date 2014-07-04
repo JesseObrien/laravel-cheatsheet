@@ -65,8 +65,7 @@ php artisan env
 php artisan help
 // Lists commands
 php artisan list
-// Run the database migrations
-php artisan migrate
+
 // Optimize the framework for better performance
 php artisan optimize
 // List all registered routes
@@ -86,7 +85,7 @@ php artisan asset:publish [--bench[="vendor/package"]] [--path[="..."]] [package
 php artisan auth:reminders-table
 // Flush the application cache
 php artisan cache:clear
-// Create a new Artisan command
+// Create a new Artisan command (L3:task)
 php artisan command:make name [--command[="..."]] [--path[="..."]] [--namespace[="..."]]
 // Publish a package's configuration to the application
 php artisan config:publish
@@ -96,6 +95,9 @@ php artisan controller:make [--bench="vendor/package"]
 php artisan db:seed [--class[="..."]] [--database[="..."]]
 // Set the application key
 php artisan key:generate
+
+// Database migrations
+php artisan migrate
 php artisan migrate [--bench="vendor/package"] [--database[="..."]] [--path[="..."]] [--package[="..."]] [--pretend] [--seed]
 // Create the migration repository
 php artisan migrate:install [--database[="..."]]
@@ -107,6 +109,7 @@ php artisan migrate:refresh [--database[="..."]] [--seed]
 php artisan migrate:reset [--database[="..."]] [--pretend]
 // Rollback the last database migration
 php artisan migrate:rollback [--database[="..."]] [--pretend]
+
 // Listen to a given queue
 php artisan queue:listen [--queue[="..."]] [--delay[="..."]] [--memory[="..."]] [--timeout[="..."]] [connection]
 // Subscribe a URL to an Iron.io push queue
@@ -114,6 +117,7 @@ php artisan queue:subscribe [--type[="..."]] queue url
 // Process the next job on a queue
 php artisan queue:work [--queue[="..."]] [--delay[="..."]] [--memory[="..."]] [--sleep] [connection]
 // Create a migration for the session database table
+
 php artisan session:table
 // Publish a package's views to the application
 php artisan view:publish [--path[="..."]] package
@@ -329,7 +333,16 @@ DB::table('name')->cacheTags(array('my-first-key','my-second-key'))->remember(5)
 			</pre>
 
 			<h6>Raw Expressions</h6>
-			<pre class="prettyprint lang-php">DB::select('select * from users where id = ?', array('value'));
+			<pre class="prettyprint lang-php">
+// return rows
+DB::select('select * from users where id = ?', array('value'));
+// return nr affected rows
+DB::insert('insert into foo set bar=2');
+DB::update('update foo set bar=2');
+DB::delete('delete from bar');
+// returns void
+DB::statement('update foo set bar=2');
+// raw expression inside a statement
 DB::table('name')->select(DB::raw('count(*) as count, column2'))->get();
 			</pre>
 
@@ -1090,6 +1103,40 @@ value(function(){ return 'bar'; });
 with(new Foo)->chainedMethod();
 			</pre>
 
+			<h4><a name="unittest" href="#unittest">Unit testing</a> <a href="http://laravel.com/docs/unittest" title="Unit testing @ Laravel Docs"><i class="icon-file-text"></i></a></h4>
+			<h6>Install and run</h6>
+			<pre class="prettyprint lang-php">// add to composer and update:
+"phpunit/phpunit": "4.0.*"
+// run tests (from project root)
+./vendor/bin/phpunit
+			</pre>
+			<h6>Asserts</h6>
+			<pre class="prettyprint lang-php">
+$this->assertTrue(true);
+$this->assertEquals('foo', $bar);
+$this->assertCount(1,$times);
+$this->assertResponseOk();
+$this->assertResponseStatus(403);
+$this->assertRedirectedTo('foo');
+$this->assertRedirectedToRoute('route.name');
+$this->assertRedirectedToAction('Controller@method');    
+$this->assertViewHas('name');
+$this->assertViewHas('age', $value);
+$this->assertSessionHasErrors();
+// Asserting the session has errors for a given key...
+$this->assertSessionHasErrors('name');
+// Asserting the session has errors for several keys...
+$this->assertSessionHasErrors(array('name', 'age'));
+$this->assertHasOldInput();
+			</pre>
+			<h6>Calling routes</h6>
+			<pre class="prettyprint lang-php">
+$response = $this->call($method, $uri, $parameters, $files, $server, $content);
+$response = $this->callSecure('GET', 'foo/bar');
+$this->session(['foo' => 'bar']);
+$this->flushSession();
+$this->seed();
+$this->seed($connection);
 		</div>
 	</div>
 	<script src="assets/js/jquery-1.10.2.min.js"></script>
