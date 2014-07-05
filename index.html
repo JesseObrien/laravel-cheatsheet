@@ -2,45 +2,57 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
+	<link rel="stylesheet" href="assets/css/normalize.css" />
 	<link rel="stylesheet" href="assets/css/foundation.min.css" />
-	<link href="assets/css/font-awesome.min.css" rel="stylesheet" />
-	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="assets/css/font-awesome.min.css" />
 	<link rel="shortcut icon" href="assets/ico/favicon.png">
 	<link rel="stylesheet" href="assets/css/page.css" />
-	<meta name="description" content="Laravel Cheat Sheet , Codes , function , methodes of laravel framework">
+	<meta name="description" content="Laravel Cheat Sheet , Codes , function , methods of laravel framework">
 	<title>Laravel Cheat Sheet</title>
 </head>
 <body>
+
+	<a href="#top" id="top-button" title="Top"><i class="icon-arrow-up"></i></a>
 	<div class="fixed">
-		<nav class="top-bar">
+		<nav class="top-bar" data-topbar>
 			<ul class="title-area">
 				<li class="name"><h1><a href="#">Laravel Cheat Sheet</a></h1></li>
 				<li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
 			</ul>
 			<section class="top-bar-section">
-				<ul class="left">
+				<ul class="right">
 					<li class="comments-toggle"><a href="#"><i class="icon-comments"></i> Toggle Code Comments</a></li>
                     <li><a href="/Laravel%20Cheatsheet.pdf"><i class="icon-download"></i> PDF Version</a></li>
-					<li><a href="http://github.com/jesseobrien/laravel-cheatsheet"><i class="icon-github"></i> Github</a></li>
-					<li><a href="http://three.laravel.com/"><i class="icon-file-text"></i> Laravel 3 Docs</a></li>
-					<li><a href="http://laravel.com/docs"><i class="icon-file-text"></i> Laravel 4 Docs</a></li>
+					<li><a href="http://github.com/jesseobrien/laravel-cheatsheet" target="_blank"><i class="icon-github"></i> Github</a></li>
+					<li class="has-dropdown">
+						<a href="#">Laravel Docs</a>
+						<ul class="dropdown">
+							<li>
+								<a href="http://three.laravel.com/" target="_blank"><i class="icon-file-text"></i> Laravel 3 Docs</a>
+							</li>
+							<li>
+								<a href="http://laravel.com/docs" target="_blank"><i class="icon-file-text"></i> Laravel 4 Docs</a>i
+							</li>
+						</ul>
+					</li>
 				</ul>
 			</section>
 		</nav>
 	</div>
 
-	<div class="row">
-		<div class="small-6 small-offset-3 columns">
-			<form id="searchForm">
-			<div class="row collapse">
-				<div class="small-10 columns">
-					<input type="text" placeholder="Find on page..." id="search" name="search" />
+	<a name="top" id="top-anchor"></a>
+
+	<div class="row" id="search-box">
+		<div class="small-10 small-offset-1 large-6 large-offset-3 columns">
+				<div class="row collapse">
+					<div class="small-10 columns">
+						<input type="text" placeholder="Start typing to search..." id="search" name="search" />
+					</div>
+					<div class="small-2 columns">
+						<button class="button postfix" id="search-button"><i class="icon-search"></i></button>
+					</div>
 				</div>
-				<div class="small-2 columns">
-					<button class="button postfix" id="search-button">Search</button>
-				</div>
-			</div>
-			</form>
+			<small id="searchHint">hint: keep tapping the search, it scrolls to the result</small>
 		</div>
 	</div>
 
@@ -225,7 +237,7 @@ Route::group(array('namespace' => 'Foo\Bar'), function(){})
 Route::group(array('domain' => '{sub}.example.com'), function(){});
 			</pre>
 
-		<h4><a name="app" href="#app">APP</a> <a href="http://laravel.com/docs/helpers#app" title="APP @ Laravel Docs"><i class="icon-file-text"></i></a></h4>
+		<h4><a name="app" href="#app">App</a> <a href="http://laravel.com/docs/helpers#app" title="App @ Laravel Docs"><i class="icon-file-text"></i></a></h4>
 			<pre class="prettyprint lang-php">
 App::environment();
 // test equal to
@@ -234,7 +246,7 @@ App::runningInConsole();
 App::runningUnitTests();
 			</pre>
 
-		<h4><a name="log" href="#log">LOG</a> <a href="http://laravel.com/docs/helpers#log" title="LOG @ Laravel Docs"><i class="icon-file-text"></i></a></h4>
+		<h4><a name="log" href="#log">Log</a> <a href="http://laravel.com/docs/helpers#log" title="Log @ Laravel Docs"><i class="icon-file-text"></i></a></h4>
 			<pre class="prettyprint lang-php">
 Log::info('info');
 Log::info('info',array('context'=>'additional info'));
@@ -415,36 +427,12 @@ Model::deleted(function($model){});
 Model::observe(new FooObserver);
 			</pre>
 			<h6>Eloquent Configuration</h6>
-			<pre class="prettyprint lang-php">Eloquent::unguard();
-// Disables mass assignment exceptions from being thrown from model inserts and updates
-Eloquent::reguard();
+			<pre class="prettyprint lang-php">// Disables mass assignment exceptions from being thrown from model inserts and updates
+Eloquent::unguard();
 // Renables any ability to throw mass assignment exceptions
+Eloquent::reguard();
 			</pre>
 
-			<h4>
-				<a name="remote" href="#remote">The Remote Component</a> <a href="http://laravel.com/docs/ssh" title="SSH @ Laravel Docs"><i class="icon-file-text"></i></a>
-			</h4>
-			<h6>Executing Commands</h6>
-			<pre class="prettyprint lang-php">SSH::run(array $commands);
-SSH::into($remote)->run(array $commands); // specify remote, otherwise assumes default
-SSH::run(array $commands, function($line)
-{
-	echo $line.PHP_EOL;
-});
-			</pre>
-
-			<h6>Tasks</h6>
-			<pre class="prettyprint lang-php">SSH::define($taskName, array $commands); // define
-SSH::task($taskName, function($line) // execute
-{
-	echo $line.PHP_EOL;
-});
-			</pre>
-
-			<h6>SFTP Uploads</h6>
-			<pre class="prettyprint lang-php">SSH::put($localFile, $remotePath);
-SSH::putString($string, $remotePath);
-			</pre>
 		</div>
 
 		<div class="large-4 columns code-column">
@@ -1153,11 +1141,38 @@ $this->session(['foo' => 'bar']);
 $this->flushSession();
 $this->seed();
 $this->seed($connection);
+			</pre>
+
+			<h4><a name="SSH" href="#SSH">SSH</a> <a href="http://laravel.com/docs/ssh" title="SSH @ Laravel Docs"><i class="icon-file-text"></i></a>
+			</h4>
+			<h6>Executing Commands</h6>
+			<pre class="prettyprint lang-php">SSH::run(array $commands);
+SSH::into($remote)->run(array $commands); // specify remote, otherwise assumes default
+SSH::run(array $commands, function($line)
+{
+	echo $line.PHP_EOL;
+});
+			</pre>
+
+			<h6>Tasks</h6>
+			<pre class="prettyprint lang-php">SSH::define($taskName, array $commands); // define
+SSH::task($taskName, function($line) // execute
+{
+	echo $line.PHP_EOL;
+});
+			</pre>
+
+			<h6>SFTP Uploads</h6>
+			<pre class="prettyprint lang-php">SSH::put($localFile, $remotePath);
+SSH::putString($string, $remotePath);
+			</pre>
 		</div>
+
 	</div>
-	<script src="assets/js/jquery-1.10.2.min.js"></script>
+	<script src="assets/js/jquery.js"></script>
 	<script src="assets/js/jquery.highlight-4.js"></script>
+	<script src="assets/js/foundation.min.js"></script>
 	<script src="assets/js/google-code-prettify/prettify.js"></script>
-	<script type="text/javascript" src="assets/js/app.js"></script>
+	<script src="assets/js/app.js"></script>
 </body>
 </html>
