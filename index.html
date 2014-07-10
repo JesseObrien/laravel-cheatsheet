@@ -395,6 +395,8 @@ Model::whereFoo('bar')->first();
 Model::where('foo', '=', 'bar')->firstOrFail();
 Model::where('foo', '=', 'bar')->count();
 Model::where('foo', '=', 'bar')->delete();
+//Output raw query
+Model::where('foo', '=', 'bar')->toSql();
 Model::whereRaw('foo = bar and cars = 2', array(20))->get();
 Model::remember(5)->get();
 Model::remember(5, 'cache-key-name')->get();
