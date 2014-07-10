@@ -256,6 +256,8 @@ Log::warning('warning');
 Log::getMonolog();
 // add listener
 Log::listen(function($level, $message, $context) {});
+// get all ran queries.
+DB::getQueryLog();
 			</pre>
 
 		<h4><a name="urls" href="#urls">URLs</a> <a href="http://laravel.com/docs/helpers#urls" title="URLs @ Laravel Docs"><i class="icon-file-text"></i></a></h4>
