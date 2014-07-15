@@ -167,7 +167,13 @@ composer self-update
 			<pre class="prettyprint lang-php">Route::get('foo', function(){});
 Route::get('foo', 'ControllerName@function');
 Route::controller('foo', 'FooController');
-Route::resource('posts','PostsController');
+			</pre>
+
+			<h6>RESTful Controllers</h6>
+			<pre class="prettyprint lang-php">Route::resource('posts','PostsController');
+//Specify a subset of actions to handle on the route
+Route::resource('photo', 'PhotoController',['only' => ['index', 'show']]);
+Route::resource('photo', 'PhotoController',['except' => ['update', 'destroy']]);
 			</pre>
 
 			<h6>Triggering Errors</h6>
