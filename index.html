@@ -498,26 +498,45 @@ $table->dropForeign('posts_user_id_foreign');
 			</pre>
 
 			<h6>Column Types</h6>
-			<pre class="prettyprint lang-php">$table->increments('id');
+			<pre class="prettyprint lang-php">// Increments
+$table->increments('id');
 $table->bigIncrements('id');
-$table->string('email');
-$table->string('name', 100);
+
+// Numbers
 $table->integer('votes');
-$table->bigInteger('votes');
+$table->tinyInteger('votes');
 $table->smallInteger('votes');
+$table->mediumInteger('votes');
+$table->bigInteger('votes');
 $table->float('amount');
 $table->double('column', 15, 8);
 $table->decimal('amount', 5, 2);
-$table->boolean('confirmed');
+
+//String and Text
+$table->char('name', 4);
+$table->string('email');
+$table->string('name', 100);
+$table->text('description');
+$table->mediumText('description');
+$table->longText('description');
+
+//Date and Time
 $table->date('created_at');
 $table->dateTime('created_at');
 $table->time('sunrise');
 $table->timestamp('added_on');
 $table->timestamps();
-$table->softDeletes();
-$table->text('description');
+// Adds created_at and updated_at columns
+$table->nullableTimestamps();
+
+// Others
 $table->binary('data');
+$table->boolean('confirmed');
+$table->softDeletes();
+// Adds deleted_at column for soft deletes
 $table->enum('choices', array('foo', 'bar'));
+$table->rememberToken();
+// Adds remember_token as VARCHAR(100) NULL
 $table->morphs('parent');
 // Adds INTEGER parent_id and STRING parent_type
 ->nullable()
