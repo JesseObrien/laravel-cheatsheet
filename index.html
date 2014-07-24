@@ -655,6 +655,12 @@ Request::method();
 Request::isMethod('post'); 
 // get raw POST data
 Request::instance()->getContent();
+// get requested response format
+Request::format();
+// true if HTTP Content-Type header is contains */json
+Request::isJson();
+// true if HTTP Accept header is application/json
+Request::wantsJson();
 
 			</pre>
 
