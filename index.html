@@ -663,7 +663,8 @@ Request::getClientIp();
 // getUri: http://xx.com/aa/bb/?c=d
 Request::getUri();  
 // getQueryString: c=d
-Request::getQueryString(); 
+Request::getQueryString();
+Request::getPort();
 Request::is('foo/*');
 Request::segment(1);
 Request::header('Content-Type');
@@ -674,6 +675,12 @@ Request::method();
 Request::isMethod('post'); 
 // get raw POST data
 Request::instance()->getContent();
+// get requested response format
+Request::format();
+// true if HTTP Content-Type header contains */json
+Request::isJson();
+// true if HTTP Accept header is application/json
+Request::wantsJson();
 
 			</pre>
 
