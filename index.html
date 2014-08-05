@@ -233,7 +233,7 @@ Route::get('foo/bar', array('as' => 'foobar', function(){}));
 			<pre class="prettyprint lang-php">// This route group will carry the prefix 'foo'
 Route::group(array('prefix' => 'foo'), function(){})
 			</pre>
-			
+
 			<h6>Route Namespacing</h6>
 			<pre class="prettyprint lang-php">// This route group will carry the namespace 'Foo\Bar'
 Route::group(array('namespace' => 'Foo\Bar'), function(){})
@@ -398,7 +398,7 @@ Model::findOrFail(array('first', 'last'));
 Model::where('foo', '=', 'bar')->get();
 Model::where('foo', '=', 'bar')->first();
 // dynamic
-Model::whereFoo('bar')->first(); 
+Model::whereFoo('bar')->first();
 // Throw an exception if the lookup fails
 Model::where('foo', '=', 'bar')->firstOrFail();
 Model::where('foo', '=', 'bar')->count();
@@ -448,21 +448,30 @@ Eloquent::reguard();
 		<div class="large-4 columns code-column">
 			<h4><a name="db" href="#db">Schema</a> <a href="http://laravel.com/docs/schema" title="Schema Builder @ Laravel Docs"><i class="icon-file-text"></i></a></h4>
 			<pre class="prettyprint lang-php">
+// Indicate that the table needs to be created
 Schema::create('table', function($table)
 {
     $table->increments('id');
 });
 // Specify a Connection
 Schema::connection('foo')->create('table', function($table){});
+// Rename the table to a given name
 Schema::rename($from, $to);
+// Indicate that the table should be dropped
 Schema::drop('table');
+// Indicate that the table should be dropped if it exists
 Schema::dropIfExists('table');
+// Determine if the given table exists
 Schema::hasTable('table');
+// Determine if the given table has a given column
 Schema::hasColumn('table', 'column');
 // Update an existing table
 Schema::table('table', function($table){});
+// Indicate that the given columns should be renamed
 $table->renameColumn('from', 'to');
+// Indicate that the given columns should be dropped
 $table->dropColumn(string|array);
+// The storage engine that should be used for the table
 $table->engine = 'InnoDB';
 // Only work on MySQL
 $table->string('name')->after('email');
@@ -559,8 +568,11 @@ Input::except('foo');
 			<h6>Session Input (flash)</h6>
 			<pre class="prettyprint lang-php">// Flash input to the session
 Input::flash();
+// Flash only some of the input to the session
 Input::flashOnly('foo', 'bar');
+// Flash only some of the input to the session
 Input::flashExcept('foo', 'baz');
+// Retrieve an old input item
 Input::old('key','default_value');
 			</pre>
 
@@ -653,29 +665,38 @@ Session::keep(array('key1', 'key2'));
 			<h4><a name="requests" href="#requests">Requests</a> <a href="http://laravel.com/docs/requests#request-information" title="Requests @ Laravel Docs"><i class="icon-file-text"></i></a></h4>
 			<pre class="prettyprint lang-php">
 // url: http://xx.com/aa/bb
-Request::url(); 
+Request::url();
 // path: /aa/bb
-Request::path(); 
+Request::path();
 // getRequestUri: /aa/bb/?c=d
-Request::getRequestUri();  
+Request::getRequestUri();
 // Returns user's IP
-Request::getClientIp();  
+Request::getClientIp();
 // getUri: http://xx.com/aa/bb/?c=d
-Request::getUri();  
+Request::getUri();
 // getQueryString: c=d
 Request::getQueryString();
+// Get the port scheme of the request (e.g., 80, 443, etc.)
 Request::getPort();
+// Determine if the current request URI matches a pattern
 Request::is('foo/*');
+// Get a segment from the URI (1 based index)
 Request::segment(1);
+// Retrieve a header from the request
 Request::header('Content-Type');
+// Retrieve a server variable from the request
 Request::server('PATH_INFO');
+// Determine if the request is the result of an AJAX call
 Request::ajax();
+// Determine if the request is over HTTPS
 Request::secure();
+// Get the request method
 Request::method();
-Request::isMethod('post'); 
-// get raw POST data
+// Checks if the request method is of specified type
+Request::isMethod('post');
+// Get raw POST data
 Request::instance()->getContent();
-// get requested response format
+// Get requested response format
 Request::format();
 // true if HTTP Content-Type header contains */json
 Request::isJson();
@@ -707,10 +728,13 @@ return Redirect::to('foo/bar')->with('key', 'value');
 return Redirect::to('foo/bar')->withInput(Input::get());
 return Redirect::to('foo/bar')->withInput(Input::except('password'));
 return Redirect::to('foo/bar')->withErrors($validator);
+// Create a new redirect response to the previous location
 return Redirect::back();
+// Create a new redirect response to a named route
 return Redirect::route('foobar');
 return Redirect::route('foobar', array('value'));
 return Redirect::route('foobar', array('key' => 'value'));
+// Create a new redirect response to a controller action
 return Redirect::action('FooController@index');
 return Redirect::action('FooController@baz', array('value'));
 return Redirect::action('FooController@baz', array('key' => 'value'));
@@ -723,9 +747,13 @@ return Redirect::intended('foo/bar');
 App::make('foo');
 // If this class exists, it's returned
 App::make('FooBar');
+// Register a shared binding in the container
 App::singleton('foo', function(){ return new Foo; });
+// Register an existing instance as shared in the container
 App::instance('foo', new Foo);
+// Register a binding with the container
 App::bind('FooRepositoryInterface', 'BarRepository');
+// Register a service provider with the application
 App::register('FooServiceProvider');
 // Listen for object resolution
 App::resolving(function($object){});
@@ -975,10 +1003,15 @@ Form::fooField();
 
 			<h4><a name="html" href="#html">HTML Builder</a></h4>
 			<pre class="prettyprint lang-php">HTML::macro('name', function(){});
+// Convert an HTML string to entities
 HTML::entities($value);
+// Convert entities to HTML characters
 HTML::decode($value);
+// Generate a link to a JavaScript file
 HTML::script($url, $attributes);
+// Generate a link to a CSS file
 HTML::style($url, $attributes);
+// Generate an HTML image element
 HTML::image($url, $alt, $attributes);
 // Generate a HTML link
 HTML::link($url, 'title', $attributes, $secure);
@@ -992,17 +1025,25 @@ HTML::linkSecureAsset($url, 'title', $attributes);
 HTML::linkRoute($name, 'title', $parameters, $attributes);
 // Generate a HTML link to a controller action
 HTML::linkAction($action, 'title', $parameters, $attributes);
+// Generate a HTML link to an email address
 HTML::mailto($email, 'title', $attributes);
+// Obfuscate an e-mail address to prevent spam-bots from sniffing it
 HTML::email($email);
+// Generate an ordered list of items
 HTML::ol($list, $attributes);
+// Generate an un-ordered list of items
 HTML::ul($list, $attributes);
 // Create a listing HTML element
 HTML::listing($type, $list, $attributes);
 // Create the HTML for a listing element
 HTML::listingElement($key, $type, $value);
+// Create the HTML for a nested listing attribute
 HTML::nestedListing($key, $type, $value);
+// Build an HTML attribute string from an array
 HTML::attributes($attributes);
+// Build a single attribute element
 HTML::attributeElement($key, $value);
+// Obfuscate a string to prevent spam-bots from sniffing it
 HTML::obfuscate($value);
 			</pre>
 
@@ -1047,19 +1088,33 @@ Lang::choice('messages.apples', 10);
 			<pre class="prettyprint lang-php">File::exists('path');
 File::get('path');
 File::getRemote('path');
+// Get a file's contents by requiring it
 File::getRequire('path');
+// Require the given file once
 File::requireOnce('path');
+// Write the contents of a file
 File::put('path', 'contents');
+// Append to a file
 File::append('path', 'data');
+// Delete the file at a given path
 File::delete('path');
+// Move a file to a new location
 File::move('path', 'target');
+// Copy a file to a new location
 File::copy('path', 'target');
+// Extract the file extension from a file path
 File::extension('path');
+// Get the file type of a given file
 File::type('path');
+// Get the file size of a given file
 File::size('path');
+// Get the file's last modification time
 File::lastModified('path');
+// Determine if the given path is a directory
 File::isDirectory('directory');
+// Determine if the given path is writable
 File::isWritable('path');
+// Determine if the given path is a file
 File::isFile('file');
 // Find path names matching a given pattern.
 File::glob($patterns, $flag);
@@ -1069,9 +1124,13 @@ File::files('directory');
 File::allFiles('directory');
 // Get all of the directories within a given directory.
 File::directories('directory');
+// Create a directory
 File::makeDirectory('path',  $mode = 0777, $recursive = false);
+// Copy a directory from one location to another
 File::copyDirectory('directory', 'destination', $options = null);
+// Recursively delete a directory
 File::deleteDirectory('directory', $preserve = false);
+// Empty the specified directory of all files and folders
 File::cleanDirectory('directory');
 			</pre>
 
@@ -1079,24 +1138,34 @@ File::cleanDirectory('directory');
 			<h4><a name="helpers" href="#helpers">Helpers</a> <a href="http://laravel.com/docs/helpers" title="Helpers @ Laravel Docs"><i class="icon-file-text"></i></a></h4>
 			<h6>Arrays</h6>
 			<pre class="prettyprint lang-php">array_add($array, 'key', 'value');
+// Build a new array using a callback
 array_build($array, function(){});
+// Divide an array into two arrays. One with keys and the other with values
 array_divide($array);
+// Flatten a multi-dimensional associative array with dots
 array_dot($array);
+// Get all of the given array except for a specified array of items
 array_except($array, array('key'));
+// Fetch a flattened array of a nested array element
 array_fetch($array, 'key');
+// Return the first element in an array passing a given truth test
 array_first($array, function($key, $value){}, $default);
 // Strips keys from the array
 array_flatten($array);
+// Remove one or many array items from a given array using "dot" notation
 array_forget($array, 'foo');
 // Dot notation
 array_forget($array, 'foo.bar');
+// Get an item from an array using "dot" notation
 array_get($array, 'foo', 'default');
 array_get($array, 'foo.bar', 'default');
+// Get a subset of the items from the given array
 array_only($array, array('key'));
 // Return array of key => values
 array_pluck($array, 'key');
 // Return and remove 'key' from array
 array_pull($array, 'key');
+// Set an array item to a given value using "dot" notation
 array_set($array, 'key', 'value');
 // Dot notation
 array_set($array, 'key.subkey', 'value');
@@ -1108,20 +1177,28 @@ last($array);
 			</pre>
 			<h6>Paths</h6>
 			<pre class="prettyprint lang-php">app_path();
+//  Get the path to the public folder
 public_path();
 // App root path
 base_path();
+// Get the path to the storage folder
 storage_path();
 			</pre>
 			<h6>Strings</h6>
 			<pre class="prettyprint lang-php">
+// Convert a value to camel case
 camel_case($value);
+// Get the class "basename" of the given object / class
 class_basename($class);
 // Escape a string
 e('&lt;html&gt;');
+// Determine if a given string starts with a given substring
 starts_with('Foo bar.', 'Foo');
+// Determine if a given string ends with a given substring
 ends_with('Foo bar.', 'bar.');
+// Convert a string to snake case
 snake_case('fooBar');
+// Determine if a given string contains a given substring
 str_contains('Hello foo bar.', 'foo');
 // Result: foo/bar/
 str_finish('foo/bar', '/');
@@ -1172,7 +1249,7 @@ $this->assertResponseOk();
 $this->assertResponseStatus(403);
 $this->assertRedirectedTo('foo');
 $this->assertRedirectedToRoute('route.name');
-$this->assertRedirectedToAction('Controller@method');    
+$this->assertRedirectedToAction('Controller@method');
 $this->assertViewHas('name');
 $this->assertViewHas('age', $value);
 $this->assertSessionHasErrors();
