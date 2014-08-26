@@ -19,8 +19,19 @@ h1,h2,h3,h4,h5,h6 {
 	font-family: 'Open Sans', sans-serif;
 }
 
+.larajobs-text {
+	padding-top: 10px;
+	font-size: 10pt;
+}
+
+img.larajobs-logo { 
+	display: inline;
+	height: 30px;
+}
+
 .top-bar {
 	background: #333;
+	color: white;
 }
 
 .top-bar-section .has-form {
