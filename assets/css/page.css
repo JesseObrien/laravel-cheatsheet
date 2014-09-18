@@ -1,45 +1,182 @@
 @font-face {
-    font-family: 'UbuntuMono';
-    src: url('ubuntumono-r-webfont.eot');
-    src: url('ubuntumono-r-webfont.eot?#iefix') format('embedded-opentype'),
-         url('ubuntumono-r-webfont.woff') format('woff'),
-         url('ubuntumono-r-webfont.ttf') format('truetype'),
-         url('ubuntumono-r-webfont.svg#ubuntu_monoregular') format('svg');
+    font-family: 'Open Sans';
+    src: local('Open Sans'),
+	local('OpenSans'),
+	url('../font/OpenSans-Regular.ttf')
     font-weight: normal;
     font-style: normal;
 }
 
-body {background: #333; margin-bottom: 40px; margin-top: 40px; font-size: 16px; font-family: 'Ubuntu Mono', monospace;}
-h1,h2,h3,h4,h5,h6 {font-family: 'UbuntuMono', monospace; }
-.top-bar {background: #333;box-shadow: 0px 1px 2px #fff; margin-bottom: 0;}
-.top-bar-section li a:not(.button) { background: #333; }
-.top-bar-section li a:not(.button):hover { color: #ddd; }
-.top-bar .name h1 a { color: #fa503a; }
-.logo {background-image: url('logo.png'); height: 30px; width: 103px; margin-top: 5px;}
-.row.full-width { width: 100%; max-width: 100%; }
-.code-column {background-color: #333; color: #fff; word-wrap: break-word; }
-.code-column h6 {color: #ddd; margin:0.2em 0;}
-.code-column h4 {color: #fff; margin: 10px 0;}
-.code-column h4 a { color: #fff; }
-.code-column h4 a:hover { color: #ddd; text-decoration: underline; }
+body {
+	background: #333;
+	margin-bottom: 40px;
+	margin-top: 20px;
+	font-size: 16px;
+	font-family: 'Open Sans', sans-serif;
+}
+
+h1,h2,h3,h4,h5,h6 {
+	font-family: 'Open Sans', sans-serif;
+}
+
+.larajobs-text {
+	padding-top: 10px;
+	font-size: 10pt;
+}
+
+img.larajobs-logo { 
+	display: inline;
+	height: 30px;
+}
+
+.top-bar {
+	background: #333;
+	color: white;
+}
+
+.top-bar-section .has-form {
+	background: transparent;
+}
+
+.top-bar-section li a:not(.button) { 
+	color: #888;
+	background: transparent;
+	border-bottom: 1px solid transparent;
+}
+
+.top-bar-section li:not(.has-form) a:not(.button):hover {
+	color: white;
+	background: transparent;
+	border-bottom: 2px solid #fa503a;
+}
+
+.top-bar-section .dropdown li:not(.has-form) a:not(.button):hover {
+	color: white;
+	background:transparent;
+}
+
+.top-bar-section ul { 
+	background: transparent;
+}
+
+.top-bar-section ul li>a {
+	font-family: "Open Sans", sans-serif;
+	font-size: 90%;
+	font-weight: bold; 
+}
+
+.top-bar .name h1 a { 
+	font-family: "Open Sans", sans-serif;
+	font-weight: bold;
+	font-size: 110%;
+	color: #fa503a;
+}
+
+.row.full-width { 
+	width: 100%;
+	max-width: 100%;
+}
+
+#top-button {
+	position: fixed;
+	right: 20px;
+	bottom: 20px;
+	border: 1px solid #5d5d5d;
+	border-radius: 3px;
+	display: block;
+	padding: 10px;
+	color: #ddd; 
+}
+
+#top-button:hover {
+	background: #ddd;
+	color: #333;
+}
+
+.code-column {
+	background-color: #333; 
+	color: #fff; 
+	word-wrap: break-word; 
+}
+
+.code-column h6 {
+	color: #ddd;
+	margin:0.2em 0;
+}
+
+.code-column h4 {
+	color: #fff;
+	margin: 10px 0;
+}
+
+.code-column h4 a { 
+	color: #fff;
+}
+
+.code-column h4 a:hover {
+	color: #ddd; 
+	text-decoration: underline; 
+}
+
+.highlight { 
+	background-color: orange; 
+	color: #888;
+}
+
+#search-box {
+	margin-bottom: 1em;
+}
+
+#searchForm {
+	margin: 0;
+}
+
+#search {
+	margin-bottom: 0;
+}
+
+#searchHint {
+	color: #888;
+}
+
+#search-button {
+	background: transparent;
+	border: 1px solid #5d5d5d;
+	margin-bottom: 0;
+}
+
+#search-button:hover {
+	background: #ddd;
+	color: #333;
+}
 
 
 /**
  * This prettyprint code is shamelessly stolen from the one and only @daylerees http://laravel.com/css/style.css
  */
- pre{font-family: "Ubuntu Mono", monospace;background-color:#333;padding:5px;font-size:90%;color:#e9e4e5;line-height:1.5em;margin:0.2em 0;border: 0;white-space:pre-wrap;} 
- pre .pln{color:#e9e4e5;}
- pre .str{color:#bcd42a;}
- pre .kwd{color:#4bb1b1;}
- pre .com{color:#888888;display:block;}
- pre .com + .pln {white-space: normal;}
- pre .typ{color:#ef7c61;}
- pre .lit{color:#bcd42a;}
- pre .pun, pre .opn, pre .clo{color:#ffffff;}
- pre .tag{color:#4bb1b1;}
- pre .atn{color:#ef7c61;}
- pre .atv{color:#bcd42a;}
- pre .dec, pre .var{color:#660066;}
- pre .fun{color:#ff0000;}
- pre code{font-family: "Ubuntu Mono", monospace;}
- pre.prettyprint { border: 0 ! important; }
+pre {
+	font-family: Monaco,Consolas,"Lucida Console",monospace;
+	background-color:#333;
+	padding:5px;
+	font-size:90%;
+	color:#e9e4e5;
+	line-height:1.5em;
+	margin:0.2em 0;
+	border: 0;
+	white-space:pre-wrap;
+} 
+pre .pln{color:#e9e4e5;}
+pre .str{color:#bcd42a;}
+pre .kwd{color:#4bb1b1;}
+pre .com{color:#888888;display:block;}
+pre .com + .pln {white-space: normal;}
+pre .typ{color:#ef7c61;}
+pre .lit{color:#bcd42a;}
+pre .pun, pre .opn, pre .clo{color:#ffffff;}
+pre .tag{color:#4bb1b1;}
+pre .atn{color:#ef7c61;}
+pre .atv{color:#bcd42a;}
+pre .dec, pre .var{color:#660066;}
+pre .fun{color:#ff0000;}
+pre code{font-family: Monaco,Consolas,"Lucida Console",monospace;}
+pre .prettyprint { border: 0 ! important; }
