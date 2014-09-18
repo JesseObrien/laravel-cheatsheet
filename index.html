@@ -104,6 +104,10 @@ php artisan optimize
 php artisan routes
 // Serve the application on the PHP development server
 php artisan serve
+// Change the default port
+php artisan serve --port 8080
+// Get it to work outside localhost
+php artisan serve --host 0.0.0.0
 // Interact with your application
 php artisan tinker
 // Bring the application out of maintenance mode
