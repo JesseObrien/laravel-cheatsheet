@@ -950,6 +950,10 @@ View::creator('viewname', function($view){});
 @endforeach
 @while
 @endwhile
+//forelse 4.2 feature
+@forelse($users as $user)
+@empty
+@endforelse
 // Echo content
 {{ $var }}
 // Echo escaped content
