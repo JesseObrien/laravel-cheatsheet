@@ -451,6 +451,19 @@ Eloquent::unguard();
 Eloquent::reguard();
 			</pre>
 
+		<h4><a name="pagination" href="#pagination">Pagination</a> <a href="http://laravel.com/docs/pagination" title="Pagination @ Laravel Docs"><i class="icon-file-text"></i></a></h4>
+			<pre class="prettyprint lang-php">
+// Auto-Magic Pagination
+Model::paginate(15);
+Model::where('cars', 2)->paginate(15);
+// "Next" and "Previous" only
+Model::where('cars', 2)->simplePaginate(15);
+// Manual Paginator
+Paginator::make($items, $totalItems, $perPage);
+// Print page navigators in view
+$variable->links();
+			</pre>
+
 		</div>
 
 		<div class="large-4 columns code-column">
