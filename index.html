@@ -661,6 +661,8 @@ $response->withCookie(Cookie::make('name', 'value', $minutes));
 // Returns an item from the session
 Session::get('key', 'default');
 Session::get('key', function(){ return 'default'; });
+// Get the session ID
+Session::getId();
 // Put a key / value pair in the session
 Session::put('key', 'value');
 // Push a value into an array in the session
