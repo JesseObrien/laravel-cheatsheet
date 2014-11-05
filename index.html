@@ -1033,6 +1033,9 @@ Form::radio('name', 'value');
 Form::radio('name', 'value', true, array('class' => 'name'));
 Form::select('name', array('key' => 'value'));
 Form::select('name', array('key' => 'value'), 'key', array('class' => 'name'));
+Form::selectRange('range', 1, 10);
+Form::selectYear('year', 2011, 2015);
+Form::selectMonth('month');
 Form::submit('Submit!', array('class' => 'name'));
 Form::button('name', array('class' => 'name'));
 Form::macro('fooField', function()
