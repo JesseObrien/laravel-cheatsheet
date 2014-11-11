@@ -133,7 +133,6 @@ php artisan db:seed [--class[="..."]] [--database[="..."]]
 php artisan key:generate
 
 // Database migrations
-php artisan migrate
 php artisan migrate [--bench="vendor/package"] [--database[="..."]] [--path[="..."]] [--package[="..."]] [--pretend] [--seed]
 // Create the migration repository
 php artisan migrate:install [--database[="..."]]
@@ -145,6 +144,8 @@ php artisan migrate:refresh [--database[="..."]] [--seed]
 php artisan migrate:reset [--database[="..."]] [--pretend]
 // Rollback the last database migration
 php artisan migrate:rollback [--database[="..."]] [--pretend]
+// Publish a package's migrations to migration directory
+php artisan migrate:publish vendor/package
 
 // Listen to a given queue
 php artisan queue:listen [--queue[="..."]] [--delay[="..."]] [--memory[="..."]] [--timeout[="..."]] [connection]
@@ -392,6 +393,12 @@ DB::table('name')->select(DB::raw('count(*) as count, column2'))->get();
 
 			<h4><a name="eloquent" href="#eloquent">Eloquent</a> <a href="http://laravel.com/docs/eloquent" title="Eloquent @ Laravel Docs"><i class="icon-file-text"></i></a></h4>
 			<pre class="prettyprint lang-php">Model::create(array('key' => 'value'));
+// Find first matching record by attributes or create
+Model::firstOrCreate(array('key' => 'value'));
+// Find first record by attributes or instantiate
+Model::firstOrNew(array('key' => 'value'));
+// Create or update a record matching attibutes, and fill with values
+Model::updateOrCreate($attributes = array('key' => 'value'), $values = array('key' => 'value'));
 // Fill a model with an array of attributes, beware of mass assignment!
 Model::fill($attributes);
 Model::destroy(1);
