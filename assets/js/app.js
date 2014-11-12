@@ -59,7 +59,7 @@ $(function(){
 
 	// I made this so it doesn't have to be a form event
 	// form events append their stuff to the uri
-	$('#search').on('keypress', function(event){
+	$('#search').keyup(function(event){
 		if (event.which == 13)
 		{
 			search();
