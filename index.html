@@ -169,6 +169,14 @@ composer update
 composer dump-autoload [--optimize]
 composer self-update
                 </pre>
+                <h4><a name="Configuration" href="#Configuration">Configuration</a> <a href="http://laravel.com/docs/configuration" title="Configuration Docs"><i class="icon-file-text"></i></a></h4>
+                <pre class="prettyprint lang-php">
+Config::get('app.timezone');
+//get with Default value
+Config::get('app.timezone', 'UTC');
+//set Configuration
+Config::set('database.default', 'sqlite');
+                </pre>
 
 
 
