@@ -405,8 +405,8 @@ DB::table('name')->select(DB::raw('count(*) as count, column2'))->get();
 Model::firstOrCreate(array('key' => 'value'));
 // Find first record by attributes or instantiate
 Model::firstOrNew(array('key' => 'value'));
-// Create or update a record matching attibutes, and fill with values
-Model::updateOrCreate($attributes = array('key' => 'value'), $values = array('key' => 'value'));
+// Create or update a record matching attibutes, and fill with values.
+Model::updateOrCreate(array('search_key' => 'search_value'), array('key' => 'value'));
 // Fill a model with an array of attributes, beware of mass assignment!
 Model::fill($attributes);
 Model::destroy(1);
