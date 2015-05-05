@@ -1,4 +1,4 @@
-## Laravel Cheat Sheet
+## Laravel 5 Cheat Sheet
 
 Inpsired by [Laravel Cheat Sheets](https://github.com/jesseobrien/laravel-cheatsheet)
 

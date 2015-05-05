@@ -81,13 +81,11 @@ php artisan --env
 php artisan --verbose
 
 // Display the framework change list
-php artisan changes
+L4:php artisan changes
 // Remove the compiled class file
 php artisan clear-compiled
-// Put the application into maintenance mode
-php artisan down
 // Regenerate framework autoload files
-php artisan dump-autoload
+L4:php artisan dump-autoload
 // Display the current framework environment
 php artisan env
 // Displays help for a command
@@ -97,8 +95,6 @@ php artisan list
 
 // Optimize the framework for better performance
 php artisan optimize
-// List all registered routes
-php artisan routes
 // Serve the application on the PHP development server
 php artisan serve
 // Change the default port
@@ -107,17 +103,32 @@ php artisan serve --port 8080
 php artisan serve --host 0.0.0.0
 // Interact with your application
 php artisan tinker
+// Put the application into maintenance mode
+php artisan down
 // Bring the application out of maintenance mode
 php artisan up
 // Create a new package workbench
-php artisan workbench
+L4:php artisan workbench
+
+// Create a route cache file for faster route registration
+php artisan route:cache
+// Remove the route cache file
+php artisan route:clear
+// List all registered routes
+php artisan route:list
 
 // Publish a package's assets to the public directory
-php artisan asset:publish [--bench[="vendor/package"]] [--path[="..."]] [package]
+L4:php artisan asset:publish [--bench[="vendor/package"]] [--path[="..."]] [package]
 // Create a migration for the password reminders table
-php artisan auth:reminders-table
+L4:php artisan auth:reminders-table
+// Flush expired password reset tokens
+php artisan auth:clear-resets
+
 // Flush the application cache
 php artisan cache:clear
+// Create a migration for the cache database table
+php artisan cache:table
+
 // Create a new Artisan command (L3:task)
 php artisan command:make name [--command[="..."]] [--path[="..."]] [--namespace[="..."]]
 // Publish a package's configuration to the application
