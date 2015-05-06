@@ -13,8 +13,9 @@
     <body>
 
         <a href="#top" id="top-button" title="Top"><i class="icon-arrow-up"></i></a>
-        <div class="fixed">
-            <nav class="top-bar" data-topbar>
+        <div class="fixed">            
+            <nav class="top-bar" data-topbar>                
+                <div class="update-date"><span class="label">Last updated: 2015-05-06</span></div>
                 <ul class="title-area">
                     <li class="name"><h1><a href="#">Laravel 5 Cheat Sheet</a></h1></li>
                     <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
@@ -135,7 +136,7 @@ php artisan db:seed [--class[="..."]] [--database[="..."]] [--force]
 
 // Generate the missing events and handlers based on registration
 php artisan event:generate     
-  
+
 // Create a new command handler class
 // --command      The command class the handler handles.
 php artisan handler:command [--command="..."] name

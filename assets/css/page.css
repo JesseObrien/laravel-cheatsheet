@@ -32,6 +32,15 @@ img.larajobs-logo {
 .top-bar {
 	background: #333;
 	color: white;
+  height: 80px !important;
+  border: solid 1px #555;
+}
+
+.update-date {	
+	position: relative;
+  top: -10px;
+  height: 22px;
+  text-align: right;
 }
 
 .top-bar-section .has-form {
