@@ -29,6 +29,10 @@ img.larajobs-logo {
 	height: 30px;
 }
 
+a.l5update {
+	color: yellow !important;
+}
+
 .top-bar {
 	background: #333;
 	color: white;
@@ -118,7 +122,8 @@ img.larajobs-logo {
 	margin: 10px 0;
 }
 
-.code-column h4 a { 
+.code-column h4 a,
+.code-column h6 a { 
 	color: #fff;
 }
 

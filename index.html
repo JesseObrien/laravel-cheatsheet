@@ -8,14 +8,14 @@
         <link rel="shortcut icon" href="assets/ico/favicon.png">
         <link rel="stylesheet" href="assets/css/page.css" />
         <meta name="description" content="Laravel Cheat Sheet , Codes , function , methods of laravel framework">
-        <title>Laravel Cheat Sheet</title>
+        <title>Laravel 5 Cheat Sheet</title>
     </head>
     <body>
 
         <a href="#top" id="top-button" title="Top"><i class="icon-arrow-up"></i></a>
         <div class="fixed">            
             <nav class="top-bar" data-topbar>                
-                <div class="update-date"><span class="label">Last updated: 2015-05-06</span></div>
+                <div class="update-date"><span class="label">Last updated: 2015-05-07</span></div>
                 <ul class="title-area">
                     <li class="name"><h1><a href="#">Laravel 5 Cheat Sheet</a></h1></li>
                     <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
@@ -62,7 +62,7 @@
             <div class="large-4 columns code-column">
 
 
-                <h4><a name="artisan" href="#artisan">Artisan</a> <a href="http://laravel.com/docs/artisan" title="Artisan CLI @ Laravel Docs"><i class="icon-file-text"></i></a></h4>
+                <h4><a class="l5update" name="artisan" href="#artisan">Artisan</a> <a href="http://laravel.com/docs/artisan" title="Artisan CLI @ Laravel Docs"><i class="icon-file-text"></i></a></h4>
                 <pre class="prettyprint lang-php">
 // Displays help for a given command
 php artisan --help OR -h
@@ -278,26 +278,28 @@ Config::set('database.default', 'sqlite');
 
 
 
-                <h4><a name="routing" href="#routing">Routing</a> <a href="http://laravel.com/docs/routing" title="Routing @ Laravel Docs"><i class="icon-file-text"></i></a></h4>
+                <h4><a name="routing" href="#routing">Routing</a> <a href="http://laravel.com/docs/5.0/routing" title="Routing @ Laravel Docs"><i class="icon-file-text"></i></a></h4>
                 <pre class="prettyprint lang-php">Route::get('foo', function(){});
 Route::get('foo', 'ControllerName@function');
 Route::controller('foo', 'FooController');
                 </pre>
 
-                <h6>RESTful Controllers</h6>
+                http://laravel.com/docs/5.0/helpers#routing
+
+                <h6>RESTful Controllers <a href="http://laravel.com/docs/5.0/controllers#restful-resource-controllers" title="RESTful Controllers @ Laravel Docs"><i class="icon-file-text"></i></a></h6>
                 <pre class="prettyprint lang-php">Route::resource('posts','PostsController');
 //Specify a subset of actions to handle on the route
 Route::resource('photo', 'PhotoController',['only' => ['index', 'show']]);
 Route::resource('photo', 'PhotoController',['except' => ['update', 'destroy']]);
                 </pre>
 
-                <h6>Triggering Errors</h6>
+                <h6>Triggering Errors <a href="http://laravel.com/docs/5.0/routing#throwing-404-errors" title="throwing-404-errors @ Laravel Docs"><i class="icon-file-text"></i></a></h6>
                 <pre class="prettyprint lang-php">App::abort(404);
-App::missing(function($exception){});
+$handler->missing(...) in ErrorServiceProvider::boot();
 throw new NotFoundHttpException;
                 </pre>
 
-                <h6>Route Parameters</h6>
+                <h6>Route Parameters <a href="http://laravel.com/docs/5.0/routing#route-parameters" title="RESTful Controllers @ Laravel Docs"><i class="icon-file-text"></i></a></h6>
                 <pre class="prettyprint lang-php">Route::get('foo/{bar}', function($bar){});
 Route::get('foo/{bar?}', function($bar = 'bar'){});
                 </pre>
@@ -310,9 +312,11 @@ Route::patch('foo', function(){});
 Route::delete('foo', function(){});
 // RESTful actions
 Route::resource('foo', 'FooController');
+// Registering A Route For Multiple Verbs
+Route::match(['get', 'post'], '/', function(){});
                 </pre>
 
-                <h6>Secure Routes</h6>
+                <h6>Secure Routes(TBD)</h6>
                 <pre class="prettyprint lang-php">Route::get('foo', array('https', function(){}));</pre>
 
                 <h6>Route Constraints</h6>
@@ -324,29 +328,31 @@ Route::get('foo/{bar}/{baz}', function($bar, $baz){})
                 <pre class="prettyprint lang-php">// Set a pattern to be used across routes
 			Route::pattern('bar', '[0-9]+')
                 </pre>
-                <h6>Filters</h6>
-                <pre class="prettyprint lang-php">// Declare an auth filter
-Route::filter('auth', function(){});
-// Register a class as a filter
-Route::filter('foo', 'FooFilter');
-Route::get('foo', array('before' => 'auth', function(){}));
-// Routes in this group are guarded by the 'auth' filter
-Route::get('foo', array('before' => 'auth', function(){}));
-Route::group(array('before' => 'auth'), function(){});
-// Pattern filter
-Route::when('foo/*', 'foo');
-// HTTP verb pattern
-Route::when('foo/*', 'foo', array('post'));
+
+                <h6>HTTP Middleware <a href="http://laravel.com/docs/5.0/middleware" title="HTTP Middleware @ Laravel Docs"><i class="icon-file-text"></i></a></h6>
+                <pre class="prettyprint lang-php">
+// Assigning Middleware To Routes
+Route::get('admin/profile', ['middleware' => 'auth', function(){}]);
                 </pre>
 
                 <h6>Named Routes</h6>
                 <pre class="prettyprint lang-php">Route::currentRouteName();
 Route::get('foo/bar', array('as' => 'foobar', function(){}));
+Route::get('user/profile', [
+    'as' => 'profile', 'uses' => 'UserController@showProfile'
+]);
+$url = route('profile');
+$redirect = redirect()->route('profile');
                 </pre>
 
                 <h6>Route Prefixing</h6>
-                <pre class="prettyprint lang-php">// This route group will carry the prefix 'foo'
-Route::group(array('prefix' => 'foo'), function(){})
+                <pre class="prettyprint lang-php">
+Route::group(['prefix' => 'admin'], function()
+{
+    Route::get('users', function(){
+        // Matches The "/admin/users" URL
+    });
+});                
                 </pre>
 
                 <h6>Route Namespacing</h6>
@@ -358,17 +364,21 @@ Route::group(array('namespace' => 'Foo\Bar'), function(){})
 Route::group(array('domain' => '{sub}.example.com'), function(){});
                 </pre>
 
-                <h4><a name="app" href="#app">App</a> <a href="http://laravel.com/docs/helpers#app" title="App @ Laravel Docs"><i class="icon-file-text"></i></a></h4>
+                <h4><a name="app" href="#app">Environment Configuration</a> <a href="http://laravel.com/docs/5.0/configuration#environment-configuration" title="Environment Configuration @ Laravel Docs"><i class="icon-file-text"></i></a></h4>
                 <pre class="prettyprint lang-php">
-App::environment();
-// test equal to
-App::environment('local');
-App::runningInConsole();
-App::runningUnitTests();
+$environment = app()->environment();
+$environment = App::environment();
+$environment = $app->environment();
+// The environment is local
+if ($app->environment('local')){}
+// The environment is either local OR staging...
+if ($app->environment('local', 'staging')){}
                 </pre>
 
-                <h4><a name="log" href="#log">Log</a> <a href="http://laravel.com/docs/helpers#log" title="Log @ Laravel Docs"><i class="icon-file-text"></i></a></h4>
+                <h4><a name="log" href="#log">Log</a> <a href="http://laravel.com/docs/5.0/errors#logging" title="Log @ Laravel Docs"><i class="icon-file-text"></i></a></h4>
                 <pre class="prettyprint lang-php">
+// The logger provides the seven logging levels defined in RFC 5424:
+// debug, info, notice, warning, error, critical, and alert.                
 Log::info('info');
 Log::info('info',array('context'=>'additional info'));
 Log::error('error');
@@ -377,15 +387,23 @@ Log::warning('warning');
 Log::getMonolog();
 // add listener
 Log::listen(function($level, $message, $context) {});
-// get all ran queries.
+                </pre>
+
+                <h6>Query Logging <a href="http://laravel.com/docs/5.0/database#query-logging" title="Log @ Laravel Docs"><i class="icon-file-text"></i></a></h6>
+                <pre class="prettyprint lang-php">
+// enable the log
+DB::connection()->enableQueryLog();
+// get an array of the executed queries
 DB::getQueryLog();
                 </pre>
 
-                <h4><a name="urls" href="#urls">URLs</a> <a href="http://laravel.com/docs/helpers#urls" title="URLs @ Laravel Docs"><i class="icon-file-text"></i></a></h4>
+                <h4><a name="urls" href="#urls">UrlGenerator</a> <a href="http://laravel.com/api/5.0/Illuminate/Routing/UrlGenerator.html" title="UrlGenerator @ Laravel Docs"><i class="icon-file-text"></i></a>&nbsp;<a href="http://laravel.com/docs/helpers#urls" title="URL helper @ Laravel Docs"><i class="icon-file-text"></i></a></h4>
                 <pre class="prettyprint lang-php">URL::full();
 URL::current();
 URL::previous();
 URL::to('foo/bar', $parameters, $secure);
+URL::action('NewsController@item', ['id'=>123]);
+URL::action('Auth\AuthController@logout');
 URL::action('FooController@method', $parameters, $absolute);
 URL::route('foo', $parameters, $absolute);
 URL::secure('foo/bar', $parameters);
