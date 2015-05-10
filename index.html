@@ -13,8 +13,8 @@
     <body>
 
         <a href="#top" id="top-button" title="Top"><i class="icon-arrow-up"></i></a>
-        <div class="fixed">            
-            <nav class="top-bar" data-topbar>                
+        <div class="fixed">
+            <nav class="top-bar" data-topbar>
                 <div class="update-date"><span class="label">Last updated: 2015-05-07</span></div>
                 <ul class="title-area">
                     <li class="name"><h1><a href="#">Laravel 5 Cheat Sheet</a></h1></li>
@@ -135,7 +135,7 @@ php artisan config:clear
 php artisan db:seed [--class[="..."]] [--database[="..."]] [--force]
 
 // Generate the missing events and handlers based on registration
-php artisan event:generate     
+php artisan event:generate
 
 // Create a new command handler class
 // --command      The command class the handler handles.
@@ -148,7 +148,7 @@ php artisan handler:event [--event="..."] [--queued] name
 // Set the application key
 php artisan key:generate
 
-// By default, this creates a self-handling command that isn't pushed to the queue. 
+// By default, this creates a self-handling command that isn't pushed to the queue.
 // Pass this the --handler flag to generate a handler, and the --queued flag to make it queued.
 php artisan make:command [--handler] [--queued] name
 // Create a new Artisan command
@@ -159,17 +159,17 @@ make:console [--command[="..."]] name
 php artisan make:controller [--plain] name
 // Create a new event class
 php artisan make:event name
-// Create a new middleware class    
+// Create a new middleware class
 php artisan make:middleware name
 // Create a new migration file
 // --create     The table to be created.
 // --table      The table to migrate.
 php artisan make:migration [--create[="..."]] [--table[="..."]] name
-// Create a new Eloquent model class     
+// Create a new Eloquent model class
 php artisan make:model name
 // Create a new service provider class
 php artisan make:provider name
-// Create a new form request class 
+// Create a new form request class
 php artisan make:request name
 
 // Database migrations
@@ -216,14 +216,14 @@ php artisan queue:flush
 // Delete a failed queue job
 php artisan queue:forget
 // Restart queue worker daemons after their current job
-php artisan queue:restart        
+php artisan queue:restart
 // Retry a failed queue job(id: The ID of the failed job)
-php artisan queue:retry id      
+php artisan queue:retry id
 // Subscribe a URL to an Iron.io push queue
 // queue: The name of Iron.io queue.
 // url: The URL to be subscribed.
 // --type       The push type for the queue.
-php artisan queue:subscribe [--type[="..."]] queue url  
+php artisan queue:subscribe [--type[="..."]] queue url
 // Process the next job on a queue
 // --queue      The queue to listen on
 // --daemon     Run the worker in daemon mode
@@ -278,13 +278,11 @@ Config::set('database.default', 'sqlite');
 
 
 
-                <h4><a name="routing" href="#routing">Routing</a> <a href="http://laravel.com/docs/5.0/routing" title="Routing @ Laravel Docs"><i class="icon-file-text"></i></a></h4>
+                <h4><a name="routing" href="#routing">Routing</a> <a href="http://laravel.com/docs/5.0/routing" title="Routing @ Laravel Docs"><i class="icon-file-text"></i></a> <a href="http://laravel.com/docs/5.0/helpers#routing" title="Routing Helpers @ Laravel Docs"><i class="icon-file-text"></i></a> </h4>
                 <pre class="prettyprint lang-php">Route::get('foo', function(){});
 Route::get('foo', 'ControllerName@function');
 Route::controller('foo', 'FooController');
                 </pre>
-
-                http://laravel.com/docs/5.0/helpers#routing
 
                 <h6>RESTful Controllers <a href="http://laravel.com/docs/5.0/controllers#restful-resource-controllers" title="RESTful Controllers @ Laravel Docs"><i class="icon-file-text"></i></a></h6>
                 <pre class="prettyprint lang-php">Route::resource('posts','PostsController');
@@ -352,7 +350,7 @@ Route::group(['prefix' => 'admin'], function()
     Route::get('users', function(){
         // Matches The "/admin/users" URL
     });
-});                
+});
                 </pre>
 
                 <h6>Route Namespacing</h6>
@@ -378,7 +376,7 @@ if ($app->environment('local', 'staging')){}
                 <h4><a name="log" href="#log">Log</a> <a href="http://laravel.com/docs/5.0/errors#logging" title="Log @ Laravel Docs"><i class="icon-file-text"></i></a></h4>
                 <pre class="prettyprint lang-php">
 // The logger provides the seven logging levels defined in RFC 5424:
-// debug, info, notice, warning, error, critical, and alert.                
+// debug, info, notice, warning, error, critical, and alert.
 Log::info('info');
 Log::info('info',array('context'=>'additional info'));
 Log::error('error');
