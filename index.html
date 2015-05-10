@@ -278,26 +278,26 @@ Config::set('database.default', 'sqlite');
 
 
 
-                <h4><a name="routing" href="#routing">Routing</a> <a href="http://laravel.com/docs/5.0/routing" title="Routing @ Laravel Docs"><i class="icon-file-text"></i></a> <a href="http://laravel.com/docs/5.0/helpers#routing" title="Routing Helpers @ Laravel Docs"><i class="icon-file-text"></i></a> </h4>
+                <h4><a name="routing" href="#routing">Routing</a> <a href="http://laravel.com/docs/routing" title="Routing @ Laravel Docs"><i class="icon-file-text"></i></a> <a href="http://laravel.com/docs/helpers#routing" title="Routing Helpers @ Laravel Docs"><i class="icon-file-text"></i></a> </h4>
                 <pre class="prettyprint lang-php">Route::get('foo', function(){});
 Route::get('foo', 'ControllerName@function');
 Route::controller('foo', 'FooController');
                 </pre>
 
-                <h6>RESTful Controllers <a href="http://laravel.com/docs/5.0/controllers#restful-resource-controllers" title="RESTful Controllers @ Laravel Docs"><i class="icon-file-text"></i></a></h6>
+                <h6>RESTful Controllers <a href="http://laravel.com/docs/controllers#restful-resource-controllers" title="RESTful Controllers @ Laravel Docs"><i class="icon-file-text"></i></a></h6>
                 <pre class="prettyprint lang-php">Route::resource('posts','PostsController');
 //Specify a subset of actions to handle on the route
 Route::resource('photo', 'PhotoController',['only' => ['index', 'show']]);
 Route::resource('photo', 'PhotoController',['except' => ['update', 'destroy']]);
                 </pre>
 
-                <h6>Triggering Errors <a href="http://laravel.com/docs/5.0/routing#throwing-404-errors" title="throwing-404-errors @ Laravel Docs"><i class="icon-file-text"></i></a></h6>
+                <h6>Triggering Errors <a href="http://laravel.com/docs/routing#throwing-404-errors" title="throwing-404-errors @ Laravel Docs"><i class="icon-file-text"></i></a></h6>
                 <pre class="prettyprint lang-php">App::abort(404);
 $handler->missing(...) in ErrorServiceProvider::boot();
 throw new NotFoundHttpException;
                 </pre>
 
-                <h6>Route Parameters <a href="http://laravel.com/docs/5.0/routing#route-parameters" title="RESTful Controllers @ Laravel Docs"><i class="icon-file-text"></i></a></h6>
+                <h6>Route Parameters <a href="http://laravel.com/docs/routing#route-parameters" title="RESTful Controllers @ Laravel Docs"><i class="icon-file-text"></i></a></h6>
                 <pre class="prettyprint lang-php">Route::get('foo/{bar}', function($bar){});
 Route::get('foo/{bar?}', function($bar = 'bar'){});
                 </pre>
@@ -327,7 +327,7 @@ Route::get('foo/{bar}/{baz}', function($bar, $baz){})
 			Route::pattern('bar', '[0-9]+')
                 </pre>
 
-                <h6>HTTP Middleware <a href="http://laravel.com/docs/5.0/middleware" title="HTTP Middleware @ Laravel Docs"><i class="icon-file-text"></i></a></h6>
+                <h6>HTTP Middleware <a href="http://laravel.com/docs/middleware" title="HTTP Middleware @ Laravel Docs"><i class="icon-file-text"></i></a></h6>
                 <pre class="prettyprint lang-php">
 // Assigning Middleware To Routes
 Route::get('admin/profile', ['middleware' => 'auth', function(){}]);
@@ -362,7 +362,7 @@ Route::group(array('namespace' => 'Foo\Bar'), function(){})
 Route::group(array('domain' => '{sub}.example.com'), function(){});
                 </pre>
 
-                <h4><a name="app" href="#app">Environment Configuration</a> <a href="http://laravel.com/docs/5.0/configuration#environment-configuration" title="Environment Configuration @ Laravel Docs"><i class="icon-file-text"></i></a></h4>
+                <h4><a name="app" href="#app">Environment Configuration</a> <a href="http://laravel.com/docs/configuration#environment-configuration" title="Environment Configuration @ Laravel Docs"><i class="icon-file-text"></i></a></h4>
                 <pre class="prettyprint lang-php">
 $environment = app()->environment();
 $environment = App::environment();
@@ -373,7 +373,7 @@ if ($app->environment('local')){}
 if ($app->environment('local', 'staging')){}
                 </pre>
 
-                <h4><a name="log" href="#log">Log</a> <a href="http://laravel.com/docs/5.0/errors#logging" title="Log @ Laravel Docs"><i class="icon-file-text"></i></a></h4>
+                <h4><a name="log" href="#log">Log</a> <a href="http://laravel.com/docs/errors#logging" title="Log @ Laravel Docs"><i class="icon-file-text"></i></a></h4>
                 <pre class="prettyprint lang-php">
 // The logger provides the seven logging levels defined in RFC 5424:
 // debug, info, notice, warning, error, critical, and alert.
@@ -387,7 +387,7 @@ Log::getMonolog();
 Log::listen(function($level, $message, $context) {});
                 </pre>
 
-                <h6>Query Logging <a href="http://laravel.com/docs/5.0/database#query-logging" title="Log @ Laravel Docs"><i class="icon-file-text"></i></a></h6>
+                <h6>Query Logging <a href="http://laravel.com/docs/database#query-logging" title="Log @ Laravel Docs"><i class="icon-file-text"></i></a></h6>
                 <pre class="prettyprint lang-php">
 // enable the log
 DB::connection()->enableQueryLog();
@@ -818,7 +818,7 @@ Session::reflash();
 Session::keep(array('key1', 'key2'));
                 </pre>
 
-                <h4><a name="requests" href="#requests">Requests</a> <a href="http://laravel.com/docs/requests#request-information" title="Requests @ Laravel Docs"><i class="icon-file-text"></i></a></h4>
+                <h4><a name="requests" href="#requests">Requests</a> <a href="http://laravel.com/docs/requests" title="Requests @ Laravel Docs"><i class="icon-file-text"></i></a></h4>
                 <pre class="prettyprint lang-php">
 // url: http://xx.com/aa/bb
 Request::url();
@@ -898,7 +898,7 @@ return Redirect::action('FooController@baz', array('key' => 'value'));
 return Redirect::intended('foo/bar');
                 </pre>
 
-                <h4><a name="ioc" href="#ioc">IoC</a> <a href="http://laravel.com/docs/ioc" title="IoC Container @ Laravel Docs"><i class="icon-file-text"></i></a></h4>
+                <h4><a name="service-container" href="#service-container">Service Container</a> <a href="http://laravel.com/docs/container" title="Service Container @ Laravel Docs"><i class="icon-file-text"></i></a></h4>
                 <pre class="prettyprint lang-php">App::bind('foo', function($app){ return new Foo; });
 App::make('foo');
 // If this class exists, it's returned
@@ -915,13 +915,13 @@ App::register('FooServiceProvider');
 App::resolving(function($object){});
                 </pre>
 
-                <h4><a name="security" href="#security">Security</a> <a href="http://laravel.com/docs/security" title="Security @ Laravel Docs"><i class="icon-file-text"></i></a></h4>
-                <h6>Passwords</h6>
+                <h4><a name="security" href="#security">Security</a></h4>
+                <h6>Hashing <a href="http://laravel.com/docs/hashing" title="Hashing @ Laravel Docs"><i class="icon-file-text"></i></a></h6>
                 <pre class="prettyprint lang-php">Hash::make('secretpassword');
 Hash::check('secretpassword', $hashedPassword);
 Hash::needsRehash($hashedPassword);
                 </pre>
-                <h6>Auth</h6>
+                <h6>Authentication <a href="http://laravel.com/docs/authentication" title="Authentication @ Laravel Docs"><i class="icon-file-text"></i></a></h6>
                 <pre class="prettyprint lang-php">// Determine if the current user is authenticated
 Auth::check();
 // Get the currently authenticated user
@@ -1070,7 +1070,7 @@ url
 
             </div>
             <div class="large-4 columnsi code-column">
-                <h4><a name="views" href="#views">Views</a> <a href="http://laravel.com/docs/responses#views" title="Views @ Laravel Docs"><i class="icon-file-text"></i></a></h4>
+                <h4><a name="views" href="#views">Views</a> <a href="http://laravel.com/docs/views" title="Views @ Laravel Docs"><i class="icon-file-text"></i></a></h4>
                 <pre class="prettyprint lang-php">View::make('path/to/view');
 View::make('foo/bar')->with('key', 'value');
 View::make('foo/bar')->withKey('value');
@@ -1131,7 +1131,7 @@ View::creator('viewname', function($view){});
 @{{ This will not be processed by Blade }}
                 </pre>
 
-                <h4><a name="forms" href="#forms">Forms</a> <a href="http://laravel.com/docs/html" title="Forms & HTML @ Laravel Docs"><i class="icon-file-text"></i></a></h4>
+                <h4><a name="forms" href="#forms">Forms</a> <a href="https://github.com/illuminate/html/" title="Forms & HTML @ GitHub"><i class="icon-file-text"></i></a></h4>
                 <pre class="prettyprint lang-php">Form::open(array('url' => 'foo/bar', 'method' => 'PUT'));
 Form::open(array('route' => 'foo.bar'));
 Form::open(array('route' => array('foo.bar', $parameter)));
@@ -1263,7 +1263,7 @@ Lang::choice('messages.apples', 10);
 trans('messages.welcome');
                 </pre>
 
-                <h4><a name="files" href="#files">Files</a> <a href="http://laravel.com/api/class-Illuminate.Filesystem.Filesystem.html" title="Filesystem @ Laravel Docs"><i class="icon-file-text"></i></a></h4>
+                <h4><a name="files" href="#files">Files</a> <a href="http://laravel.com/api/5.0/Illuminate/Filesystem/Filesystem.html" title="Filesystem @ Laravel Docs"><i class="icon-file-text"></i></a></h4>
                 <pre class="prettyprint lang-php">File::exists('path');
 File::get('path');
 File::getRemote('path');
@@ -1412,7 +1412,7 @@ value(function(){ return 'bar'; });
 with(new Foo)->chainedMethod();
                 </pre>
 
-                <h4><a name="unittest" href="#unittest">Unit testing</a> <a href="http://laravel.com/docs/unittest" title="Unit testing @ Laravel Docs"><i class="icon-file-text"></i></a></h4>
+                <h4><a name="unittest" href="#unittest">Unit testing</a> <a href="http://laravel.com/docs/testing" title="Unit testing @ Laravel Docs"><i class="icon-file-text"></i></a></h4>
                 <h6>Install and run</h6>
                 <pre class="prettyprint lang-php">// add to composer and update:
 "phpunit/phpunit": "4.0.*"
