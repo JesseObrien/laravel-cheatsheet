@@ -15,7 +15,7 @@
         <a href="#top" id="top-button" title="Top"><i class="icon-arrow-up"></i></a>
         <div class="fixed">            
             <nav class="top-bar" data-topbar>                
-                <div class="update-date"><span class="label">Last updated: 2015-05-07</span></div>
+                <div class="update-date"><span class="label">Last updated: 2015-05-08</span></div>
                 <ul class="title-area">
                     <li class="name"><h1><a href="#">Laravel 5 Cheat Sheet</a></h1></li>
                     <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
@@ -403,6 +403,7 @@ URL::current();
 URL::previous();
 URL::to('foo/bar', $parameters, $secure);
 URL::action('NewsController@item', ['id'=>123]);
+// need be in appropriate namespace
 URL::action('Auth\AuthController@logout');
 URL::action('FooController@method', $parameters, $absolute);
 URL::route('foo', $parameters, $absolute);
@@ -412,23 +413,21 @@ URL::secureAsset('css/foo.css');
 URL::isValidUrl('http://example.com');
 URL::getRequest();
 URL::setRequest($request);
-URL::getGenerator();
-URL::setGenerator($generator);
                 </pre>
 
 
                 <h4><a name="events" href="#events">Events</a> <a href="http://laravel.com/docs/events" title="Events @ Laravel Docs"><i class="icon-file-text"></i></a></h4>
                 <pre class="prettyprint lang-php">Event::fire('foo.bar', array($bar));
-Event::listen('foo.bar', function($bar){});
+// Register an event listener with the dispatcher.
+// void listen(string|array $events, mixed $listener, int $priority)
+Event::listen('App\Events\UserSignup', function($bar){});
 Event::listen('foo.*', function($bar){});
 Event::listen('foo.bar', 'FooHandler', 10);
 Event::listen('foo.bar', 'BarHandler', 5);
+// Stopping The Propagation Of An Event
+// You may do so using by returning false from your handler.
 Event::listen('foor.bar', function($event){ return false; });
-Event::queue('foo', array($bar));
-Event::flusher('foo', function($bar){});
-Event::flush('foo');
-Event::forget('foo');
-Event::subscribe(new FooEventHandler);
+Event::subscribe('UserEventHandler');
                 </pre>
 
                 <h4><a name="db" href="#db">Database</a> <a href="http://laravel.com/docs/queries" title="Query Builder @ Laravel Docs"><i class="icon-file-text"></i></a></h4>
