@@ -428,78 +428,139 @@ Event::listen('foor.bar', function($event){ return false; });
 Event::subscribe('UserEventHandler');
                 </pre>
 
-                <h4><a name="db" href="#db">Database</a> <a href="http://laravel.com/docs/queries" title="Query Builder @ Laravel Docs"><i class="icon-file-text"></i></a></h4>
+                <h4><a name="db" href="#db">Database</a> <a href="http://laravel.com/docs/5.0/database" title="Basic Database Usage @ Laravel Docs"><i class="icon-file-text"></i></a></h4>
+
+                <h6>Basic Database Usage</h6>
                 <pre class="prettyprint lang-php">
 DB::connection('connection_name');
+// Running A Select Query
+$results = DB::select('select * from users where id = ?', [1]);
+$results = DB::select('select * from users where id = :id', ['id' => 1]);
+// Running A General Statement
 DB::statement('drop table users');
+// Listening For Query Events
 DB::listen(function($sql, $bindings, $time){ code_here; });
-DB::transaction(function(){ transaction_code_here; });
-// Cache a query for $time minutes
-DB::table('users')->remember($time)->get();
-// Escape raw input
-DB::raw('sql expression here');
+// Database Transactions
+DB::transaction(function()
+{
+    DB::table('users')->update(['votes' => 1]);
+    DB::table('posts')->delete();
+});
+DB::beginTransaction();
+DB::rollback();
+DB::commit();
                 </pre>
 
-                <h6>Selects</h6>
-                <pre class="prettyprint lang-php">DB::table('name')->get();
-DB::table('name')->distinct()->get();
-DB::table('name')->select('column as column_alias')->get();
-DB::table('name')->where('name', '=', 'John')->get();
-DB::table('name')->whereBetween('column', array(1, 100))->get();
-DB::table('name')->whereIn('column', array(1, 2, 3))->get();
-DB::table('name')->whereNotIn('column', array(1, 2, 3))->get();
-DB::table('name')->whereNull('column')->get();
-DB::table('name')->whereNotNull('column')->get();
-DB::table('name')->groupBy('column')->get();
-// Default Eloquent sort is ascendant
+                <h6>Query Builder <a href="http://laravel.com/docs/5.0/queries" title="Query Builder @ Laravel Docs"><i class="icon-file-text"></i></a></h6>
+                <pre class="prettyprint lang-php">
+// Retrieving All Rows From A Table
+DB::table('name')->get();
+// Chunking Results From A Table
+DB::table('users')->chunk(100, function($users)
+{
+    foreach ($users as $user)
+    {
+        //
+    }
+});
+// Retrieving A Single Row From A Table
+$user = DB::table('users')->where('name', 'John')->first();
+DB::table('name')->first();
+// Retrieving A Single Column From A Row
+$name = DB::table('users')->where('name', 'John')->pluck('name');
+DB::table('name')->pluck('column');
+// Retrieving A List Of Column Values
+$roles = DB::table('roles')->lists('title');
+$roles = DB::table('roles')->lists('title', 'name');
+// Specifying A Select Clause
+$users = DB::table('users')->select('name', 'email')->get();
+$users = DB::table('users')->distinct()->get();
+$users = DB::table('users')->select('name as user_name')->get();
+// Adding A Select Clause To An Existing Query
+$query = DB::table('users')->select('name');
+$users = $query->addSelect('age')->get();
+// Using Where Operators
+$users = DB::table('users')->where('votes', '>', 100)->get();
+$users = DB::table('users')
+                    ->where('votes', '>', 100)
+                    ->orWhere('name', 'John')
+                    ->get();
+$users = DB::table('users')
+                    ->whereBetween('votes', [1, 100])->get();
+$users = DB::table('users')
+                    ->whereNotBetween('votes', [1, 100])->get();
+$users = DB::table('users')
+                    ->whereIn('id', [1, 2, 3])->get();
+$users = DB::table('users')
+                    ->whereNotIn('id', [1, 2, 3])->get();
+$users = DB::table('users')
+                    ->whereNull('updated_at')->get();
+DB::table('name')->whereNotNull('column')->get();                    
+// Dynamic Where Clauses
+$admin = DB::table('users')->whereId(1)->first();
+$john = DB::table('users')
+                    ->whereIdAndEmail(2, 'john@doe.com')
+                    ->first();
+$jane = DB::table('users')
+                    ->whereNameOrAge('Jane', 22)
+                    ->first();
+// Order By, Group By, And Having
+$users = DB::table('users')
+                    ->orderBy('name', 'desc')
+                    ->groupBy('count')
+                    ->having('count', '>', 100)
+                    ->get();
 DB::table('name')->orderBy('column')->get();
 DB::table('name')->orderBy('column','desc')->get();
-DB::table('name')->having('count', '>', 100)->get();
-DB::table('name')->skip(10)->take(5)->get();
-DB::table('name')->first();
-DB::table('name')->pluck('column');
-DB::table('name')->lists('column');
-// Joins
-DB::table('name')->join('table', 'name.id', '=', 'table.id')
-    ->select('name.id', 'table.email');
-                </pre>
+DB::table('name')->having('count', '>', 100)->get();                    
+// Offset & Limit                    
+$users = DB::table('users')->skip(10)->take(5)->get();     
+            </pre>
 
-                <h6>Inserts, Updates, Deletes</h6>
-                <pre class="prettyprint lang-php">DB::table('name')->insert(array('name' => 'John', 'email' => 'john@example.com'));
-DB::table('name')->insertGetId(array('name' => 'John', 'email' => 'john@example.com'));
-// Batch insert
-DB::table('name')->insert(array(
-	array('name' => 'John', 'email' => 'john@example.com')
-	array('name' => 'James', 'email' => 'james@example.com')
-));
-// Update an entry
-DB::table('name')->where('name', '=', 'John')
-	->update(array('email' => 'john@example2.com'));
-// Delete everything from a table
-DB::table('name')->delete();
-// Delete specific records
-DB::table('name')->where('id', '>', '10')->delete();
-DB::table('name')->truncate();
-                </pre>
+            <h6>Joins <a href="http://laravel.com/docs/5.0/queries#joins" title="Joins @ Laravel Docs"><i class="icon-file-text"></i></a></h6>
+            <pre class="prettyprint lang-php">
+// Basic Join Statement
+DB::table('users')
+            ->join('contacts', 'users.id', '=', 'contacts.user_id')
+            ->join('orders', 'users.id', '=', 'orders.user_id')
+            ->select('users.id', 'contacts.phone', 'orders.price')
+            ->get();
+// Left Join Statement
+DB::table('users')
+        ->leftJoin('posts', 'users.id', '=', 'posts.user_id')
+        ->get();
+// select * from users where name = 'John' or (votes > 100 and title <> 'Admin')
+DB::table('users')
+            ->where('name', '=', 'John')
+            ->orWhere(function($query)
+            {
+                $query->where('votes', '>', 100)
+                      ->where('title', '<>', 'Admin');
+            })
+            ->get();
+            </pre>
 
-                <h6>Aggregates</h6>
-                <pre class="prettyprint lang-php">DB::table('name')->count();
-DB::table('name')->max('column');
-DB::table('name')->min('column');
-DB::table('name')->avg('column');
-DB::table('name')->sum('column');
-DB::table('name')->increment('column');
-DB::table('name')->increment('column', $amount);
-DB::table('name')->decrement('column');
-DB::table('name')->decrement('column', $amount);
+            <h6>Aggregates <a href="http://laravel.com/docs/5.0/queries#aggregates" title="Aggregates @ Laravel Docs"><i class="icon-file-text"></i></a></h6>
+            <pre class="prettyprint lang-php">
+$users = DB::table('users')->count();
+$price = DB::table('orders')->max('price');
+$price = DB::table('orders')->min('price');
+$price = DB::table('orders')->avg('price');
+$total = DB::table('users')->sum('votes');
+
 DB::table('name')->remember(5)->get();
 DB::table('name')->remember(5, 'cache-key-name')->get();
 DB::table('name')->cacheTags('my-key')->remember(5)->get();
 DB::table('name')->cacheTags(array('my-first-key','my-second-key'))->remember(5)->get();
-                </pre>
+            </pre>
 
-                <h6>Raw Expressions</h6>
-                <pre class="prettyprint lang-php">
+            <h6>Raw Expressions <a href="http://laravel.com/docs/5.0/queries#raw-expressions" title="Raw Expressions @ Laravel Docs"><i class="icon-file-text"></i></a></h6>
+            <pre class="prettyprint lang-php">
+$users = DB::table('users')
+                     ->select(DB::raw('count(*) as user_count, status'))
+                     ->where('status', '<>', 1)
+                     ->groupBy('status')
+                     ->get();
 // return rows
 DB::select('select * from users where id = ?', array('value'));
 // return nr affected rows
@@ -510,10 +571,58 @@ DB::delete('delete from bar');
 DB::statement('update foo set bar=2');
 // raw expression inside a statement
 DB::table('name')->select(DB::raw('count(*) as count, column2'))->get();
+            </pre>
+
+            <h6>Inserts / Updates / Deletes / Unions / Pessimistic Locking</h6>
+            <pre class="prettyprint lang-php">       
+// Inserts            
+DB::table('users')->insert(
+    ['email' => 'john@example.com', 'votes' => 0]
+);
+$id = DB::table('users')->insertGetId(
+    ['email' => 'john@example.com', 'votes' => 0]
+);
+DB::table('users')->insert([
+    ['email' => 'taylor@example.com', 'votes' => 0],
+    ['email' => 'dayle@example.com', 'votes' => 0]
+]);
+// Updates
+DB::table('users')
+            ->where('id', 1)
+            ->update(['votes' => 1]);            
+DB::table('users')->increment('votes');
+DB::table('users')->increment('votes', 5);
+DB::table('users')->decrement('votes');
+DB::table('users')->decrement('votes', 5);
+DB::table('users')->increment('votes', 1, ['name' => 'John']);
+// Deletes
+DB::table('users')->where('votes', '<', 100)->delete();
+DB::table('users')->delete();
+DB::table('users')->truncate();
+// Unions
+// The unionAll() method is also available, and has the same method signature as union.
+$first = DB::table('users')->whereNull('first_name');
+$users = DB::table('users')->whereNull('last_name')->union($first)->get();
+// Pessimistic Locking
+DB::table('users')->where('votes', '>', 100)->sharedLock()->get();
+DB::table('users')->where('votes', '>', 100)->lockForUpdate()->get();
                 </pre>
 
-                <h4><a name="eloquent" href="#eloquent">Eloquent</a> <a href="http://laravel.com/docs/eloquent" title="Eloquent @ Laravel Docs"><i class="icon-file-text"></i></a></h4>
-                <pre class="prettyprint lang-php">Model::create(array('key' => 'value'));
+        <h4><a name="eloquent" href="#eloquent">Eloquent ORM</a> <a href="http://laravel.com/docs/eloquent" title="Eloquent @ Laravel Docs"><i class="icon-file-text"></i></a></h4>
+            <h6>Basic Usage <a href="http://laravel.com/docs/5.0/eloquent#basic-usage" title="Basic Usage @ Laravel Docs"><i class="icon-file-text"></i></a></h6>
+            <pre class="prettyprint lang-php">
+// Defining An Eloquent Model
+class User extends Model {}
+// generate Eloquent models
+php artisan make:model User
+// specify a custom table name
+class User extends Model {
+    protected $table = 'my_users';
+}
+            </pre>
+
+            <h6>More</h6>
+            <pre class="prettyprint lang-php">Model::create(array('key' => 'value'));
 // Find first matching record by attributes or create
 Model::firstOrCreate(array('key' => 'value'));
 // Find first record by attributes or instantiate
