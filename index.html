@@ -8,16 +8,16 @@
         <link rel="shortcut icon" href="assets/ico/favicon.png">
         <link rel="stylesheet" href="assets/css/page.css" />
         <meta name="description" content="Laravel Cheat Sheet , Codes , function , methods of laravel framework">
-        <title>Laravel 5 Cheat Sheet</title>
+        <title>Laravel 5(master) Cheat Sheet</title>
     </head>
     <body>
 
         <a href="#top" id="top-button" title="Top"><i class="icon-arrow-up"></i></a>
         <div class="fixed">            
             <nav class="top-bar" data-topbar>                
-                <div class="update-date"><span class="label">Last updated: 2015-05-12</span></div>
+                <div class="update-date"><span class="label">Last updated: 2015-05-21</span></div>
                 <ul class="title-area">
-                    <li class="name"><h1><a href="#">Laravel 5 Cheat Sheet</a></h1></li>
+                    <li class="name"><h1><a href="http://laravel.com/docs/master/">Laravel 5(master) Cheat Sheet</a></h1></li>
                     <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
                 </ul>
                 <section class="top-bar-section">
@@ -125,6 +125,8 @@ php artisan cache:table
 
 // Create a cache file for faster configuration loading
 php artisan config:cache
+// In program
+$exitCode = Artisan::call('config:cache');
 // Remove the configuration cache file
 php artisan config:clear
 
@@ -664,8 +666,9 @@ Model::all()->orderBy('column');
 Model::all()->orderBy('column','desc');
                 </pre>
 
-                <h6>Soft Delete</h6>
-                <pre class="prettyprint lang-php">Model::withTrashed()->where('cars', 2)->get();
+                <h6>Soft Delete <a href="http://laravel.com/docs/5.0/eloquent#soft-deleting" title="Soft Deleting @ Laravel Docs"><i class="icon-file-text"></i></a></h6>
+                <pre class="prettyprint lang-php">
+Model::withTrashed()->where('cars', 2)->get();
 // Include the soft deleted models in the results
 Model::withTrashed()->where('cars', 2)->restore();
 Model::where('cars', 2)->forceDelete();

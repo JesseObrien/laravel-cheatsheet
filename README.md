@@ -1,13 +1,15 @@
-## Laravel 5 Cheat Sheet
+## Laravel 5(master) Cheat Sheet
 
 Inpsired by [Laravel Cheat Sheets](https://github.com/jesseobrien/laravel-cheatsheet)
 
-Finally a cheat sheet for Laravel 5. Keep in mind this is a work in progress and will be fairly dynamic. It will follow the docs closely and I'll try to keep it up to date with new features being added.
+Finally a cheat sheet for Laravel 5(master). Keep in mind this is a work in progress and will be fairly dynamic. It will follow the docs closely and I'll try to keep it up to date with new features being added.
 
 **Live Version Here:**
 
-[Laravel 5 Cheat Sheets](http://www.linxiang.info/l5-cs/)
+[Laravel 5(master) Cheat Sheets](http://www.linxiang.info/l5-cs/)
 
+### New Feature
+* [Task Scheduling](http://laravel.com/docs/master/scheduling)
 
 ### Contributing
 
