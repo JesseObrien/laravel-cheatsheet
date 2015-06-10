@@ -8,16 +8,16 @@
         <link rel="shortcut icon" href="assets/ico/favicon.png">
         <link rel="stylesheet" href="assets/css/page.css" />
         <meta name="description" content="Laravel Cheat Sheet , Codes , function , methods of laravel framework">
-        <title>Laravel 5(master) Cheat Sheet</title>
+        <title>Laravel 5.1 LTS Cheat Sheet</title>
     </head>
     <body>
 
         <a href="#top" id="top-button" title="Top"><i class="icon-arrow-up"></i></a>
         <div class="fixed">            
             <nav class="top-bar" data-topbar>                
-                <div class="update-date"><span class="label">Last updated: 2015-05-21</span></div>
+                <div class="update-date"><span class="label">Last updated: 2015-06-10</span></div>
                 <ul class="title-area">
-                    <li class="name"><h1><a href="http://laravel.com/docs/master/">Laravel 5(master) Cheat Sheet</a></h1></li>
+                    <li class="name"><h1><a href="http://laravel.com/docs/master/">Laravel 5.1 LTS Cheat Sheet</a></h1></li>
                     <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
                 </ul>
                 <section class="top-bar-section">
@@ -55,6 +55,15 @@
                     </div>
                 </div>
                 <small id="searchHint">hint: keep tapping the search, it scrolls to the result</small>
+            </div>
+        </div>
+        
+        <div class="row full-width">
+            <div class="columns code-column">
+                <pre class="prettyprint lang-php">
+                // upgrade to laravel 5.1 LTS
+                composer global require "laravel/installer=~1.1"
+                </pre>
             </div>
         </div>
 
@@ -159,6 +168,7 @@ make:console [--command[="..."]] name
 // Create a new resourceful controller
 // --plain      Generate an empty controller class.
 php artisan make:controller [--plain] name
+php artisan make:controller App\\Admin\\Http\\Controllers\\DashboardController
 // Create a new event class
 php artisan make:event name
 // Create a new middleware class
