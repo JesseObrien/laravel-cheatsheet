@@ -356,7 +356,7 @@ DB::table('name')->join('table', 'name.id', '=', 'table.id')
 DB::table('name')->insertGetId(array('name' => 'John', 'email' => 'john@example.com'));
 // Batch insert
 DB::table('name')->insert(array(
-	array('name' => 'John', 'email' => 'john@example.com')
+	array('name' => 'John', 'email' => 'john@example.com'),
 	array('name' => 'James', 'email' => 'james@example.com')
 ));
 // Update an entry
