@@ -1358,6 +1358,29 @@ SSH::task($taskName, function($line) // execute
                 <pre class="prettyprint lang-php">SSH::put($localFile, $remotePath);
 SSH::putString($string, $remotePath);
                 </pre>
+
+                <h6>Filesystem/Cloud Storage</h6>
+                <pre class="prettyprint lang-php">
+Storage::disk('s3');
+Storage::disk('local')->put('file.txt', 'Contents');
+Storage::disk('local')->get('file.jpg');
+Storage::disk('s3')->exists('file.jpg');
+Storage::get('file.jpg');
+Storage::put('file.jpg', $contents);
+Storage::size('file1.jpg');
+Storage::lastModified('file1.jpg');
+Storage::copy('old/file1.jpg', 'new/file1.jpg');
+Storage::move('old/file1.jpg', 'new/file1.jpg');
+Storage::prepend('file.log', 'Prepended Text');
+Storage::append('file.log', 'Appended Text');
+Storage::delete(['file1.jpg', 'file2.jpg']);
+Storage::files($directory);
+Storage::allFiles($directory);
+Storage::directories($directory);
+Storage::allDirectories($directory);
+Storage::makeDirectory($directory);
+Storage::deleteDirectory($directory);
+                </pre>
             </div>
 
         </div>
