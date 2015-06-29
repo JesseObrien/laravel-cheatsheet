@@ -356,7 +356,7 @@ DB::table('name')->join('table', 'name.id', '=', 'table.id')
 DB::table('name')->insertGetId(array('name' => 'John', 'email' => 'john@example.com'));
 // Batch insert
 DB::table('name')->insert(array(
-	array('name' => 'John', 'email' => 'john@example.com')
+	array('name' => 'John', 'email' => 'john@example.com'),
 	array('name' => 'James', 'email' => 'james@example.com')
 ));
 // Update an entry
@@ -1270,6 +1270,7 @@ str_finish('foo/bar', '/');
 str_is('foo*', 'foobar');
 str_plural('car');
 str_random(25);
+str_limit($value, $limit = 100, $end = '...')
 str_singular('cars');
 // Result: FooBar
 studly_case('foo_bar');
@@ -1356,6 +1357,29 @@ SSH::task($taskName, function($line) // execute
                 <h6>SFTP Uploads</h6>
                 <pre class="prettyprint lang-php">SSH::put($localFile, $remotePath);
 SSH::putString($string, $remotePath);
+                </pre>
+
+                <h6>Filesystem/Cloud Storage</h6>
+                <pre class="prettyprint lang-php">
+Storage::disk('s3');
+Storage::disk('local')->put('file.txt', 'Contents');
+Storage::disk('local')->get('file.jpg');
+Storage::disk('s3')->exists('file.jpg');
+Storage::get('file.jpg');
+Storage::put('file.jpg', $contents);
+Storage::size('file1.jpg');
+Storage::lastModified('file1.jpg');
+Storage::copy('old/file1.jpg', 'new/file1.jpg');
+Storage::move('old/file1.jpg', 'new/file1.jpg');
+Storage::prepend('file.log', 'Prepended Text');
+Storage::append('file.log', 'Appended Text');
+Storage::delete(['file1.jpg', 'file2.jpg']);
+Storage::files($directory);
+Storage::allFiles($directory);
+Storage::directories($directory);
+Storage::allDirectories($directory);
+Storage::makeDirectory($directory);
+Storage::deleteDirectory($directory);
                 </pre>
             </div>
 
