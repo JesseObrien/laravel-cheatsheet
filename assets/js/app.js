@@ -9,7 +9,7 @@ $(function(){
 	prettyPrint();
 
 	// Shine up the HTML:: calls
-	var $html_elements = $("span.pln:contains('HTML')").removeClass('pln').addClass('typ');
+	var $html_elements = $("span.pln:contains('HTML')").addClass('typ');
 	var $url_elements = $("span.pln:contains('URL')").removeClass('pln').addClass('typ');
 	var $url_elements = $("span.pln:contains('SSH')").removeClass('pln').addClass('typ');
 	var $url_elements = $("span.pln:contains('DB')").addClass('typ');
