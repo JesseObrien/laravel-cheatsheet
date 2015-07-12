@@ -1282,16 +1282,8 @@ trans('foo.bar');
 trans_choice('foo.bar', $count);
                 </pre>
                 <h6>URLs and Links</h6>
-                <pre class="prettyprint lang-php">action('FooController@method', $parameters);
-link_to('foo/bar', $title, $attributes, $secure);
-link_to_asset('img/foo.jpg', $title, $attributes, $secure);
-link_to_route('route.name', $title, $parameters, $attributes);
-link_to_action('FooController@method', $title, $params, $attrs);
-// HTML Link
-asset('img/photo.jpg', $title, $attributes);
-// HTTPS link
-secure_asset('img/photo.jpg', $title, $attributes);
-secure_url('path', $parameters);
+                <pre class="prettyprint lang-php">
+action('FooController@method', $parameters);
 route($route, $parameters, $absolute = true);
 url('path', $parameters = array(), $secure = null);
                 </pre>
