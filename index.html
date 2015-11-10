@@ -336,6 +336,7 @@ DB::table('name')->distinct()->get();
 DB::table('name')->select('column as column_alias')->get();
 DB::table('name')->where('name', '=', 'John')->get();
 DB::table('name')->whereBetween('column', array(1, 100))->get();
+DB::table('name')->orWhereBetween('column', array(200, 300))->get();
 DB::table('name')->whereIn('column', array(1, 2, 3))->get();
 DB::table('name')->whereNotIn('column', array(1, 2, 3))->get();
 DB::table('name')->whereNull('column')->get();
