@@ -1245,6 +1245,8 @@ View::creator('viewname', function($view){});
 {{ $var }}
 // Echo escaped content
 {{{ $var }}}
+// Echo unescaped content; 5.0 feature
+{!! $var !!}
 {{-- Blade Comment --}}
 // Echoing Data After Checking For Existence
 {{{ $name or 'Default' }}}
