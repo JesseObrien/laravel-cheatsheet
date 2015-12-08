@@ -582,6 +582,8 @@ $table->timestamps();
 $table->nullableTimestamps();
 
 // Others
+$table->json('options');
+$table->jsonb('options');
 $table->binary('data');
 $table->boolean('confirmed');
 $table->softDeletes();
