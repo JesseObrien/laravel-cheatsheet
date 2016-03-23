@@ -73,8 +73,8 @@
 
                 <h4><a class="l5update" name="artisan" href="#artisan">Artisan</a> <a href="http://laravel.com/docs/artisan" title="Artisan CLI @ Laravel Docs"><i class="icon-file-text"></i></a></h4>
                 <pre class="prettyprint lang-php">
-// Added in 5.1.11 - http://laravel.com/docs/5.1/authorization#creating-policies                
-php artisan make:policy PostPolicy                     
+// Added in 5.1.11:http://laravel.com/docs/5.1/authorization#creating-policies                
+php artisan make:policy PostPolicy                
 // Displays help for a given command
 php artisan --help OR -h
 // Do not output any message
@@ -281,41 +281,32 @@ composer update
 composer dump-autoload [--optimize]
 composer self-update
                 </pre>
-                <h4><a name="Configuration" href="#Configuration">Configuration</a> <a href="http://laravel.com/docs/5.1#basic-configuration" title="Configuration Docs"><i class="icon-file-text"></i></a></h4>
+                <h4><a name="Configuration" href="#Configuration">Configuration</a> <a href="http://laravel.com/docs/configuration" title="Configuration Docs"><i class="icon-file-text"></i></a></h4>
                 <pre class="prettyprint lang-php">
-config('app.timezone');
+Config::get('app.timezone');
 //get with Default value
-config('app.timezone', 'UTC');
+Config::get('app.timezone', 'UTC');
 //set Configuration
-config(['app.timezone' => 'America/Chicago']);
+Config::set('database.default', 'sqlite');
                 </pre>
 
 
 
-                <h4><a name="routing" href="#routing">Routing</a> <a href="http://laravel.com/docs/routing" title="Routing @ Laravel Docs"><i class="icon-file-text"></i></a> </h4>
-                <pre class="prettyprint lang-php">
-Route::get('foo', function(){});
+                <h4><a name="routing" href="#routing">Routing</a> <a href="http://laravel.com/docs/routing" title="Routing @ Laravel Docs"><i class="icon-file-text"></i></a> <a href="http://laravel.com/docs/helpers#routing" title="Routing Helpers @ Laravel Docs"><i class="icon-file-text"></i></a> </h4>
+                <pre class="prettyprint lang-php">Route::get('foo', function(){});
 Route::get('foo', 'ControllerName@function');
 Route::controller('foo', 'FooController');
                 </pre>
 
                 <h6>RESTful Controllers <a href="http://laravel.com/docs/controllers#restful-resource-controllers" title="RESTful Controllers @ Laravel Docs"><i class="icon-file-text"></i></a></h6>
-                <pre class="prettyprint lang-php">
-Route::resource('posts','PostsController');
+                <pre class="prettyprint lang-php">Route::resource('posts','PostsController');
 //Specify a subset of actions to handle on the route
 Route::resource('photo', 'PhotoController',['only' => ['index', 'show']]);
 Route::resource('photo', 'PhotoController',['except' => ['update', 'destroy']]);
-//Naming Resource Routes
-Route::resource('photo', 'PhotoController',['names' => ['create' => 'photo.build']]);
-//Nested Resources - url:photos/{photos}/comments/{comments}
-Route::resource('photos.comments', 'PhotoCommentController');
-
                 </pre>
 
                 <h6>Triggering Errors <a href="http://laravel.com/docs/routing#throwing-404-errors" title="throwing-404-errors @ Laravel Docs"><i class="icon-file-text"></i></a></h6>
-                <pre class="prettyprint lang-php">
-abort(404);
-abort(403, 'Unauthorized action.');
+                <pre class="prettyprint lang-php">App::abort(404);
 $handler->missing(...) in ErrorServiceProvider::boot();
 throw new NotFoundHttpException;
                 </pre>
@@ -337,7 +328,10 @@ Route::resource('foo', 'FooController');
 Route::match(['get', 'post'], '/', function(){});
                 </pre>
 
-                <h6>Regular Expression Constraints <a href="http://laravel.com/docs/5.1/routing#parameters-regular-expression-constraints" title="HTTP Middleware @ Laravel Docs"><i class="icon-file-text"></i></a></h6>
+                <h6>Secure Routes(TBD)</h6>
+                <pre class="prettyprint lang-php">Route::get('foo', array('https', function(){}));</pre>
+
+                <h6>Route Constraints</h6>
                 <pre class="prettyprint lang-php">Route::get('foo/{bar}', function($bar){})
 	->where('bar', '[0-9]+');
 Route::get('foo/{bar}/{baz}', function($bar, $baz){})
@@ -347,18 +341,10 @@ Route::get('foo/{bar}/{baz}', function($bar, $baz){})
 			Route::pattern('bar', '[0-9]+')
                 </pre>
 
-                <h6>HTTP Middleware <a href="http://laravel.com/docs/5.1/routing#route-group-middleware" title="HTTP Middleware @ Laravel Docs"><i class="icon-file-text"></i></a></h6>
+                <h6>HTTP Middleware <a href="http://laravel.com/docs/middleware" title="HTTP Middleware @ Laravel Docs"><i class="icon-file-text"></i></a></h6>
                 <pre class="prettyprint lang-php">
 // Assigning Middleware To Routes
-Route::group(['middleware' => 'auth'], function () {
-    Route::get('/', function ()    {
-        // Uses Auth Middleware
-    });
-
-    Route::get('user/profile', function () {
-        // Uses Auth Middleware
-    });
-});
+Route::get('admin/profile', ['middleware' => 'auth', function(){}]);
                 </pre>
 
                 <h6>Named Routes</h6>
@@ -390,7 +376,7 @@ Route::group(array('namespace' => 'Foo\Bar'), function(){})
 Route::group(array('domain' => '{sub}.example.com'), function(){});
                 </pre>
 
-                <h4><a name="app" href="#app">Environment Configuration</a> <a href="http://laravel.com/docs/5.1/installation#configuration" title="Environment Configuration @ Laravel Docs"><i class="icon-file-text"></i></a></h4>
+                <h4><a name="app" href="#app">Environment Configuration</a> <a href="http://laravel.com/docs/configuration#environment-configuration" title="Environment Configuration @ Laravel Docs"><i class="icon-file-text"></i></a></h4>
                 <pre class="prettyprint lang-php">
 $environment = app()->environment();
 $environment = App::environment();
