@@ -1279,6 +1279,7 @@ Form::textarea('name');
 Form::textarea('name', $value);
 Form::textarea('name', $value, array('class' => 'name'));
 Form::hidden('foo', $value);
+Form::number('name', 'value');
 Form::password('password');
 Form::password('password', array('placeholder' => 'Password'));
 Form::email('name', $value, array());
@@ -1294,6 +1295,8 @@ Form::select('name', array('key' => 'value'), 'key', array('class' => 'name'));
 Form::selectRange('range', 1, 10);
 Form::selectYear('year', 2011, 2015);
 Form::selectMonth('month');
+// be sure Carbon is installed http://carbon.nesbot.com/#gettingstarted
+Form::date('name', \Carbon\Carbon::now());
 Form::submit('Submit!', array('class' => 'name'));
 Form::button('name', array('class' => 'name'));
 Form::macro('fooField', function()
