@@ -1020,6 +1020,8 @@ View::creator('viewname', function($view){});
 {{-- Blade Comment --}}
 // Echoing Data After Checking For Existence
 {{{ $name or 'Default' }}}
+// Echo HTML content
+{!! $html or '<strong>Foo</strong>' !!}
 // Displaying Raw Text With Curly Braces
 @{{ This will not be processed by Blade }}
                 </pre>
