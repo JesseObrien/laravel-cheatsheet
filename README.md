@@ -1,4 +1,4 @@
-## Laravel 5.1 LTS Cheat Sheet
+## Laravel 5.3 LTS Cheat Sheet
 
 Inpsired by [Laravel Cheat Sheets](https://github.com/jesseobrien/laravel-cheatsheet)
 
@@ -6,7 +6,7 @@ Finally a cheat sheet for Laravel 5(master). Keep in mind this is a work in prog
 
 **Live Version Here:**
 
-[Laravel 5.1 LTS Cheat Sheets](http://www.linxiang.info/l5-cs/)
+[Laravel 5.3 LTS Cheat Sheets](http://www.linxiang.info/l5-cs/)
 
 ### New Feature
 * [Task Scheduling](http://laravel.com/docs/master/scheduling)

@@ -8,16 +8,16 @@
         <link rel="shortcut icon" href="assets/ico/favicon.png">
         <link rel="stylesheet" href="assets/css/page.css" />
         <meta name="description" content="Laravel Cheat Sheet , Codes , function , methods of laravel framework">
-        <title>Laravel 5.1 LTS Cheat Sheet</title>
+        <title>Laravel 5.3 LTS Cheat Sheet</title>
     </head>
     <body>
 
         <a href="#top" id="top-button" title="Top"><i class="icon-arrow-up"></i></a>
         <div class="fixed">            
             <nav class="top-bar" data-topbar>                
-                <div class="update-date"><span class="label">Last updated: 2015-12-05</span></div>
+                <div class="update-date"><span class="label">Last updated: 2016-10-14</span></div>
                 <ul class="title-area">
-                    <li class="name"><h1><a href="http://laravel.com/docs/master/">Laravel 5.1 LTS Cheat Sheet</a></h1></li>
+                    <li class="name"><h1><a href="http://laravel.com/docs/master/">Laravel 5.3 LTS Cheat Sheet</a></h1></li>
                     <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
                 </ul>
                 <section class="top-bar-section">
@@ -73,7 +73,7 @@
 
                 <h4><a class="l5update" name="artisan" href="#artisan">Artisan</a> <a href="http://laravel.com/docs/artisan" title="Artisan CLI @ Laravel Docs"><i class="icon-file-text"></i></a></h4>
                 <pre class="prettyprint lang-php">
-// Added in 5.1.11:http://laravel.com/docs/5.1/authorization#creating-policies                
+// Generating Policies               
 php artisan make:policy PostPolicy                
 // Displays help for a given command
 php artisan --help OR -h
@@ -248,7 +248,8 @@ php artisan queue:subscribe [--type[="..."]] queue url
 // --tries      Number of times to attempt a job before logging it failed (default: 0)
 php artisan queue:work [--queue[="..."]] [--daemon] [--delay[="..."]] [--force] [--memory[="..."]] [--sleep[="..."]] [--tries[="..."]] [connection]
 
-// Create a route cache file for faster route registration
+// Closure based routes cannot be cached. To use route caching, you must convert any Closure routes to controller classes.
+// Create a route cache file for faster route registration[For production]
 php artisan route:cache
 // Remove the route cache file
 php artisan route:clear
@@ -348,7 +349,11 @@ Route::get('admin/profile', ['middleware' => 'auth', function(){}]);
                 </pre>
 
                 <h6>Named Routes</h6>
-                <pre class="prettyprint lang-php">Route::currentRouteName();
+                <pre class="prettyprint lang-php">
+$route = Route::current();
+$name = Route::currentRouteName();
+$action = Route::currentRouteAction();
+
 Route::get('foo/bar', array('as' => 'foobar', function(){}));
 Route::get('user/profile', [
     'as' => 'profile', 'uses' => 'UserController@showProfile'
@@ -1264,6 +1269,7 @@ Form::open(array('action' => 'FooController@method'));
 Form::open(array('action' => array('FooController@method', $parameter)));
 Form::open(array('url' => 'foo/bar', 'files' => true));
 Form::close();
+{{ method_field('PUT') }}
 Form::token();
 Form::model($foo, array('route' => array('foo.bar', $foo->bar)));
 
