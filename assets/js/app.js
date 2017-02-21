@@ -4,6 +4,11 @@ $(function(){
 	$('.comments-toggle').on('click', function(event){
 		$('span.com').toggle();
 	});
+	
+	// Allow the user to toggle layout
+	$('.layout-toggle').on('click', function(event){
+		$('.columns.code-column').toggleClass('large-4');
+	});
 
 	// Call prettprint manually
 	prettyPrint();
