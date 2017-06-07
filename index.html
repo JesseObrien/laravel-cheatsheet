@@ -424,6 +424,9 @@ Model::findOrFail(1);
 Model::findOrFail(array('first', 'last'));
 Model::where('foo', '=', 'bar')->get();
 Model::where('foo', '=', 'bar')->first();
+// Find using relations
+Model::whereHas('relation')->get();
+Model::with('relation')->where('relation.foo', 'bar')->get();
 // dynamic
 Model::whereFoo('bar')->first();
 // Throw an exception if the lookup fails
