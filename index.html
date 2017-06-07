@@ -445,8 +445,8 @@ Model::with('relation')->get();
 Model::all()->take(10);
 Model::all()->skip(10);
 // Default Eloquent sort is ascendant
-Model::all()->orderBy('column');
-Model::all()->orderBy('column','desc');
+Model::orderBy('column')->get();
+Model::orderBy('column','desc')->get();
                 </pre>
 
                 <h6>Soft Delete</h6>
@@ -1000,15 +1000,15 @@ View::creator('viewname', function($view){});
 @include('view.name', array('key' => 'value'));
 @lang('messages.name')
 @choice('messages.name', 1);
-@if
+@if ( $foo == $bar )
 @else
 @elseif
 @endif
 @unless
 @endunless
-@for
+@for ( $i = 0 ; $i < 100 ; $i++ )
 @endfor
-@foreach
+@foreach ( $vars as $var )
 @endforeach
 @while
 @endwhile
