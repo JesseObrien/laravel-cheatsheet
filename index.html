@@ -580,8 +580,8 @@ $table->date('created_at');
 $table->dateTime('created_at');
 $table->time('sunrise');
 $table->timestamp('added_on');
-$table->timestamps();
 // Adds created_at and updated_at columns
+$table->timestamps();
 $table->nullableTimestamps();
 
 // Others
@@ -589,13 +589,13 @@ $table->json('options');
 $table->jsonb('options');
 $table->binary('data');
 $table->boolean('confirmed');
-$table->softDeletes();
 // Adds deleted_at column for soft deletes
+$table->softDeletes();
 $table->enum('choices', array('foo', 'bar'));
-$table->rememberToken();
 // Adds remember_token as VARCHAR(100) NULL
-$table->morphs('parent');
+$table->rememberToken();
 // Adds INTEGER parent_id and STRING parent_type
+$table->morphs('parent');
 ->nullable()
 ->default($value)
 ->unsigned()
