@@ -818,6 +818,10 @@ Hash::needsRehash($hashedPassword);
                 </pre>
                 <h6>Auth</h6>
                 <pre class="prettyprint lang-php">// Determine if the current user is authenticated
+Auth::user()->getAuthIdentifier();
+// Get ID of Authenticated User
+Auth::user()->getAuthIdentifierName();
+// Get name of Authenticated User
 Auth::check();
 // Get the currently authenticated user
 Auth::user();
