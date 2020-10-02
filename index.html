@@ -205,6 +205,7 @@ throw new NotFoundHttpException;
                 <h6>Route Parameters</h6>
                 <pre class="prettyprint lang-php">Route::get('foo/{bar}', function($bar){});
 Route::get('foo/{bar?}', function($bar = 'bar'){});
+Route::get('foo/{bar}', [Controller::class, 'methodIndex']);
                 </pre>
 
                 <h6>HTTP Verbs</h6>
